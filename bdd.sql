@@ -45,7 +45,6 @@ CREATE TABLE echanges (
 CREATE TABLE images_objets (
     image_id SERIAL PRIMARY KEY,
     objet_id INTEGER REFERENCES objets(objet_id),
-    image_data BYTEA,
     filename TEXT,
     date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
