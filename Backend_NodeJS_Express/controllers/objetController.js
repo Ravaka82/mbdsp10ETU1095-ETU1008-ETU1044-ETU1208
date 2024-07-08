@@ -68,6 +68,20 @@ const deleteObjet = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const findObjetById = async (req, res) => {
+    try {
+        const objet = await Objet.findById(req.params.id)
+            .populate('categorie_id', 'nom'); 
+
+        if (!objet) {
+            return res.status(404).json({ message: 'Objet non trouvé' });
+        }
+
+        res.json(objet);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 
 module.exports = {
@@ -75,4 +89,5 @@ module.exports = {
     createObjet,
     updateObjet,
     deleteObjet,
+    findObjetById,
 };
