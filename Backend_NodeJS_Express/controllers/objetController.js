@@ -125,6 +125,40 @@ const RechercheObjetsParTitre = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+//Recherche avance
+const rechercheAvanceObjets = async (req, res) => {
+    try {
+        const { nomCategorie,titre, statut } = req.body;
+        let query = {};
+
+        if (nomCategorie) {
+            const categorie = await Categorie.findOne({ nom: nomCategorie });
+            if (categorie) {
+                query.categorie_id = categorie._id;
+            } else {
+                return res.status(404).json({ message: 'Catégorie non trouvée' });
+            }
+        }
+
+        if (titre) {
+            query.titre = new RegExp(titre, 'i');
+
+        if (statut) {
+            query.statut = statut;
+        }
+
+        const objets = await Objet.find(query).populate('categorie_id', 'nom');
+
+        if (objets.length === 0) {
+            return res.status(404).json({ message: 'Aucun objet trouvé pour les critères donnés' });
+        }
+
+        res.json(objets);
+    } 
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 module.exports = {
     getAllObjets,
     createObjet,
@@ -133,4 +167,5 @@ module.exports = {
     findObjetById,
     getObjetParCategorie,
     RechercheObjetsParTitre,
+    rechercheAvanceObjets,
 };

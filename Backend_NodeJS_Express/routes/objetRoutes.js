@@ -9,4 +9,5 @@ router.delete('/:id', objetController.deleteObjet);
 router.get('/DetailsObjet/:id', objetController.findObjetById);
 router.get('/FindObjetParCategorie/:nomCategorie', objetController.getObjetParCategorie);
 router.get('/RechercheSimple', objetController.RechercheObjetsParTitre);
+router.post('/rechercheAvance', objetController.rechercheAvanceObjets);
 module.exports = router;
