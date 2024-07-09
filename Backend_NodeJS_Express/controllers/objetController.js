@@ -103,7 +103,28 @@ const getObjetParCategorie = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+// Recherche simple
+const RechercheObjetsParTitre = async (req, res) => {
+    try {
+        const { nom } = req.query;
 
+        if (!nom) {
+            return res.status(400).json({ message: 'Nom de l\'objet requis' });
+        }
+
+        const regex = new RegExp(nom, 'i');
+
+        const objets = await Objet.find({ titre: regex }).populate('categorie_id', 'nom');
+
+        if (objets.length === 0) {
+            return res.status(404).json({ message: 'Aucun objet trouvé' });
+        }
+
+        res.json(objets);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 module.exports = {
     getAllObjets,
     createObjet,
@@ -111,4 +132,5 @@ module.exports = {
     deleteObjet,
     findObjetById,
     getObjetParCategorie,
+    RechercheObjetsParTitre,
 };
