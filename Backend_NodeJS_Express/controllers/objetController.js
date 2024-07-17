@@ -19,7 +19,7 @@ const createObjet = async (req, res) => {
     try {
         const utilisateur = await Utilisateur.findById(utilisateur_id);
         if (!utilisateur) {
-            return res.status(404).json({ message: 'Utilisateur not found' });
+            return res.status(404).json({ message: 'Utilisateur not found' });nen
         }
 
 

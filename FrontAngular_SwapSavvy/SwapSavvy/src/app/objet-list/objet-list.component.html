@@ -1,6 +1,7 @@
 <div class="cards-container">
   <div *ngFor="let objet of objets" class="example-card">
     <mat-card>
+      <!-- Card Content -->
       <mat-card-content>
         <h2>{{ objet.titre }}</h2>
         <p>{{ objet.description }}</p>
@@ -8,6 +9,11 @@
           Statut: {{ objet.statut === 'disponible' ? 'Disponible' : 'Non disponible' }}
         </p>
       </mat-card-content>
+
+      <!-- Card Actions -->
+      <mat-card-actions>
+        <button mat-flat-button color="warn" (click)="deleteObjet(objet._id)">Supprimer</button>
+      </mat-card-actions>
     </mat-card>
   </div>
 </div>

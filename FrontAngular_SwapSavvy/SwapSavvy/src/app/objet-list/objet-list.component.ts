@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-object-list',
@@ -32,7 +33,8 @@ export class ObjetListComponent implements OnInit {
 
   constructor(
     private objetService: ObjetService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,14 +44,32 @@ export class ObjetListComponent implements OnInit {
   fetchObjets() {
     this.loading = true;
     this.objetService.getObjets().subscribe(
-      (data) => {
+      data => {
         this.objets = data;
         this.loading = false;
       },
-      (error) => {
+      error => {
         console.error('Error fetching objets:', error);
         this.loading = false;
-        this.snackBar.open('Erreur lors du chargement des objets.', 'Fermer', {
+      }
+    );
+  }
+
+  deleteObjet(id: string): void {
+    this.loading = true;
+    this.objetService.deleteObjet(id).subscribe(
+      () => {
+        this.snackBar.open('Objet supprimé avec succès.', 'Fermer', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'end'
+        });
+        this.fetchObjets();
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de l\'objet : ', error);
+        this.loading = false;
+        this.snackBar.open('Erreur lors de la suppression de l\'objet.', 'Fermer', {
           duration: 3000,
           verticalPosition: 'top',
           horizontalPosition: 'end'

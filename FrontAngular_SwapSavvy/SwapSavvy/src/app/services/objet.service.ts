@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ObjetService {
+
   private apiUrl = 'http://localhost:3000/api/objets';
 
   constructor(private http: HttpClient) { }
@@ -24,5 +25,8 @@ export class ObjetService {
 
   deleteObjet(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+  getObjetById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 }
