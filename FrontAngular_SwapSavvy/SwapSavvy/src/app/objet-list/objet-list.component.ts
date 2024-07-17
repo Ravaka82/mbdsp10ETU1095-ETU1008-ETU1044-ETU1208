@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-object-list',
@@ -22,6 +23,7 @@ import { Router } from '@angular/router';
     MatCardModule,
     CommonModule,
     MatSelectModule,
+    RouterModule
 
   ],
   templateUrl: './objet-list.component.html',

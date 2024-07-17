@@ -72,10 +72,10 @@ export class ObjetUpdateComponent implements OnInit {
 
   fetchUtilisateurs() {
     this.utilisateurService.getUtilisateurs().subscribe(
-      (data: any[]) => { // Déclarer explicitement le type de data
+      (data: any[]) => {
         this.utilisateurs = data;
       },
-      (error: any) => { // Déclarer explicitement le type de error
+      (error: any) => {
         console.error('Error fetching utilisateurs:', error);
       }
     );
@@ -83,10 +83,10 @@ export class ObjetUpdateComponent implements OnInit {
 
   fetchCategories() {
     this.categorieService.getCategories().subscribe(
-      (data: any[]) => { // Déclarer explicitement le type de data
+      (data: any[]) => {
         this.categories = data;
       },
-      (error: any) => { // Déclarer explicitement le type de error
+      (error: any) => {
         console.error('Error fetching categories:', error);
       }
     );
@@ -107,7 +107,7 @@ export class ObjetUpdateComponent implements OnInit {
               horizontalPosition: 'end'
             });
           },
-          (error: any) => { // Déclarer explicitement le type de error
+          (error: any) => {
             console.error('Erreur lors de la mise à jour de l\'objet : ', error);
             this.loading = false;
             this.snackBar.open('Erreur lors de la mise à jour de l\'objet.', 'Fermer', {

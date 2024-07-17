@@ -54,13 +54,11 @@
   object-fit: cover;
 }
 
-.rendu {
-  color: green;
-}
-
-.nonrendu {
+.status {
   color: red;
   background-color: yellow;
   border: 2px dashed purple;
   padding: 5px;
 }
+
+

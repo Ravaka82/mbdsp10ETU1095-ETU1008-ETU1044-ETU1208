@@ -19,6 +19,10 @@ export class ObjetService {
     return this.http.post<any>(this.apiUrl, objet);
   }
 
+  getObjetById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/DetailsObjet/${id}`);
+  }
+
   updateObjet(id: string, objet: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, objet);
   }
@@ -26,7 +30,5 @@ export class ObjetService {
   deleteObjet(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
-  getObjetById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
+
 }
