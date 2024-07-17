@@ -1,9 +1,14 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors'); 
+
+require('dotenv').config();
+
 const app = express();
 const imageRoutes = require('./routes/imageRoutes');
 const objetRoutes = require('./routes/objetRoutes');
+const utilisateurRoutes = require('./routes/utilisateurRoutes');
+const categorieRoutes = require('./routes/categorieRoutes');
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log('Connected to MongoDB');
@@ -14,9 +19,12 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
 app.use(express.json());
 
 
+app.use(cors());
+
 app.use('/api/images', imageRoutes);
 app.use('/api/objets', objetRoutes);
-
+app.use('/api/utilisateurs', utilisateurRoutes);
+app.use('/api/categories', categorieRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
