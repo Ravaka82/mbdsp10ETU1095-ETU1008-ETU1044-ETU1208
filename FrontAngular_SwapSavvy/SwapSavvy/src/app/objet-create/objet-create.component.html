@@ -1,0 +1,41 @@
+<form [formGroup]="objetForm" (ngSubmit)="createObjet()" class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Utilisateur</mat-label>
+    <mat-select formControlName="utilisateur_id" required>
+      <mat-option *ngFor="let utilisateur of utilisateurs" [value]="utilisateur._id">
+        {{ utilisateur.nom }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Catégorie</mat-label>
+    <mat-select formControlName="categorie_id" required>
+      <mat-option *ngFor="let categorie of categories" [value]="categorie._id">
+        {{ categorie.nom }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Titre" formControlName="titre" required>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Statut</mat-label>
+    <mat-select formControlName="statut">
+      <mat-option value="disponible">Disponible</mat-option>
+      <mat-option value="réservé">Réservé</mat-option>
+      <mat-option value="échangé">Échangé</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" [disabled]="loading">
+    <span *ngIf="!loading">Créer</span>
+    <span *ngIf="loading">Chargement...</span>
+  </button>
+</form>
