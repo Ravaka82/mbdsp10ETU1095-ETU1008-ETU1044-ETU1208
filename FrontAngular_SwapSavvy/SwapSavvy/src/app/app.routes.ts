@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 //import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -27,6 +26,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {NgFor} from '@angular/common';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
   //{ path: 'signup', component: SignupComponent },
 ];
