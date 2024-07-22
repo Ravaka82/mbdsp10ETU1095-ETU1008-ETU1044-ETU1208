@@ -12,8 +12,7 @@ const uri = 'mongodb+srv://nandrianinaomega:OXhB6mZhekyTqMvJ@tpt-mbds-p10.xb170x
 
 const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
+    useUnifiedTopology: true
 };
 
 mongoose.connect(uri, options).then(() => {
