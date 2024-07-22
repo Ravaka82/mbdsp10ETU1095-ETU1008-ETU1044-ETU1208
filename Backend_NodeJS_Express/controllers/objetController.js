@@ -1,6 +1,9 @@
 const Objet = require('../models/objetModel');
 const Utilisateur = require('../models/utilisateurModel');
 const Categorie = require('../models/categorieModel');
+const Image = require('../models/imageModel');
+const streamifier = require('streamifier');
+const cloudinary = require('cloudinary').v2;
 
 
 const getAllObjets = async (req, res) => {
@@ -12,6 +15,36 @@ const getAllObjets = async (req, res) => {
     }
 };
 
+const getAllImageObject = async (req, res)=> {
+    try{
+        const images = await Image.find();
+        res.json(images);
+    }catch(err){
+        res.status(500).json({message: err.message});
+    }
+}
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true
+});
+
+const streamUpload = (file) => {
+    return new Promise((resolve, reject) => {
+        let stream = cloudinary.uploader.upload_stream(
+            (error, result) => {
+                if (result) {
+                    resolve(result);
+                } else {
+                    reject(error);
+                }
+            }
+        );
+        streamifier.createReadStream(file.buffer).pipe(stream);
+    });
+};
 
 const createObjet = async (req, res) => {
     const { utilisateur_id, categorie_id, titre, description, statut } = req.body;
@@ -28,12 +61,19 @@ const createObjet = async (req, res) => {
             return res.status(404).json({ message: 'Categorie not found' });
         }
 
+        let image_url = '';
+        if (req.file) {
+            const result = await streamUpload(req.file);
+            image_url = result.secure_url;
+        }
+
         const objet = new Objet({
             utilisateur_id,
             categorie_id,
             titre,
             description,
-            statut
+            statut,
+            image_url
         });
 
         const newObjet = await objet.save();
@@ -168,4 +208,5 @@ module.exports = {
     getObjetParCategorie,
     RechercheObjetsParTitre,
     rechercheAvanceObjets,
+    getAllImageObject
 };
