@@ -34,6 +34,7 @@ export class ObjetCreateComponent implements OnInit {
   loading: boolean = false;
   utilisateurs: any[] = [];
   categories: any[] = [];
+  selectedFile!: File;
 
   constructor(
     private fb: FormBuilder,
@@ -50,10 +51,11 @@ export class ObjetCreateComponent implements OnInit {
       categorie_id: [''],
       titre: [''],
       description: [''],
-      statut: ['disponible']
+      statut: ['disponible'],
+      image: ['']
     });
 
-    // Fetch users and categories data
+ 
     this.fetchUtilisateurs();
     this.fetchCategories();
   }
@@ -80,10 +82,24 @@ export class ObjetCreateComponent implements OnInit {
     );
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   createObjet(): void {
     this.loading = true;
     if (this.objetForm.valid) {
-      this.objetService.createObjet(this.objetForm.value).subscribe(
+      const formData = new FormData();
+      formData.append('utilisateur_id', this.objetForm.get('utilisateur_id')?.value);
+      formData.append('categorie_id', this.objetForm.get('categorie_id')?.value);
+      formData.append('titre', this.objetForm.get('titre')?.value);
+      formData.append('description', this.objetForm.get('description')?.value);
+      formData.append('statut', this.objetForm.get('statut')?.value);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+
+      this.objetService.createObjet(formData).subscribe(
         () => {
           this.loading = false;
           this.router.navigate(['/']);

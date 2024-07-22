@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
@@ -31,16 +31,24 @@ import { RouterModule } from '@angular/router';
 })
 export class ObjetListComponent implements OnInit {
   objets: any[] = [];
+  images: Map<string, string> = new Map();
   loading: boolean = false;
+  objetForm: FormGroup;
 
   constructor(
     private objetService: ObjetService,
     private snackBar: MatSnackBar,
-    private router: Router
-  ) { }
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.objetForm = this.fb.group({
+      image: ['']
+    });
+  }
 
   ngOnInit(): void {
     this.fetchObjets();
+    this.fetchImageObjects();
   }
 
   fetchObjets() {
@@ -55,6 +63,25 @@ export class ObjetListComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  fetchImageObjects() {
+    this.objetService.getImageObjet().subscribe(
+      data => {
+        data.forEach((image: any) => {
+          this.images.set(image.objet_id, image.filename);
+        });
+        this.loading = false;
+      },
+      error => {
+        console.error('Error fetching image objets:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  getImageForObjet(objetId: string): string | undefined {
+    return this.images.get(objetId);
   }
 
   deleteObjet(id: string): void {
@@ -76,6 +103,24 @@ export class ObjetListComponent implements OnInit {
           verticalPosition: 'top',
           horizontalPosition: 'end'
         });
+      }
+    );
+  }
+
+  onFileSelected(event: any, objetId: string) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+
+    this.objetService.uploadImage(formData, objetId).subscribe(
+      (data: any) => {
+        // Mettre à jour l'objet avec l'image
+        this.images.set(objetId, data.filename); // Mettre à jour l'image dans le map
+        this.snackBar.open('Image téléchargée avec succès.', 'Fermer', { duration: 3000 });
+      },
+      (error: any) => {
+        console.error('Erreur lors du téléchargement de l\'image : ', error);
+        this.snackBar.open('Erreur lors du téléchargement de l\'image.', 'Fermer', { duration: 3000 });
       }
     );
   }

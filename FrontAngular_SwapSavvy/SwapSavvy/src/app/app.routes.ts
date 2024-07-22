@@ -9,4 +9,5 @@ export const routes: Routes = [
   { path: 'list', component: ObjetListComponent },
   { path: 'update/:id', component: ObjetUpdateComponent },
   { path: '', redirectTo: '/list', pathMatch: 'full' }
+  
 ];

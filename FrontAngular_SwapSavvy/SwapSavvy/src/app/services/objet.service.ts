@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class ObjetService {
 
   private apiUrl = 'http://localhost:3000/api/objets';
+  private apiUrlImage = 'http://localhost:3000/api/images';
+
 
   constructor(private http: HttpClient) { }
 
@@ -27,8 +29,15 @@ export class ObjetService {
     return this.http.put<any>(`${this.apiUrl}/${id}`, objet);
   }
 
+  getImageObjet(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/FindAllImageObject}`);
+  }
+
   deleteObjet(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+  uploadImage(formData: FormData, objetId: string) {
+    return this.http.post<any>(`${this.apiUrlImage}/upload/${objetId}`, formData);
   }
 
 }

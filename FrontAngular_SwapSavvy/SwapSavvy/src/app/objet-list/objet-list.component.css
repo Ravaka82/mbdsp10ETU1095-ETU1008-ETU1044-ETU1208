@@ -12,10 +12,12 @@
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease;
+
 }
 
 .example-card:hover {
   transform: translateY(-5px);
+
 }
 
 .mat-card {
@@ -60,5 +62,18 @@
   border: 2px dashed purple;
   padding: 5px;
 }
+.title{
+  padding-left: 850px;
+  margin-top: 30px;
+  font-weight: bold;
+}
+.mat-mdc-card-content{
+  background-color: #d7e3ff;
+}
+.bt-action{
+  margin-left:10px;
+  gap:20px;
+}
+
 
 
