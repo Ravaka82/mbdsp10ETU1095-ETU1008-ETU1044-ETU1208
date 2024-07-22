@@ -9,7 +9,7 @@ export class AuthService {
   loggedIn = false;
 
   constructor( private http:HttpClient) { }
-  private uri_api = environment.apiURI+'/api/auth';
+  private uri_api = environment.BASE_URL+'/api/auth';
   // théoriquement, on devrait passer en paramètre le login
   // et le password, cette méthode devrait faire une requête
   // vers un Web Service pour vérifier que c'est ok, renvoyer

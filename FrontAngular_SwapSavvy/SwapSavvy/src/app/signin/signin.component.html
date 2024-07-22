@@ -22,7 +22,10 @@
             </div>
 
             <button type="submit" class="btn custom-color-btn btn-block connect-btn">Se connecter</button>
-            <p class="error-message" *ngIf="error">{{ error }}</p>
+            @if(error){
+              <p class="error-message">{{ error }}</p>
+            }
+
           </form>
         </div>
         <div class="card-footer text-center">
