@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-//import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -28,5 +28,5 @@ import {NgFor} from '@angular/common';
 export const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
-  //{ path: 'signup', component: SignupComponent },
+  { path: 'signup', component: SignupComponent },
 ];

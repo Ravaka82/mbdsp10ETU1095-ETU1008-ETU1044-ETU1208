@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.dev';
+import { User } from '../objets/objets.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +24,7 @@ export class AuthService {
    let token :any='';
      token = localStorage.getItem("token");
 
-    return this.http.get<UserActivation>(this.uri_api + '/me');
+    return this.http.get<User>(this.uri_api + '/me');
   }
   //renvoi  l'user qui est dans le storage
   getStockedUser (){
@@ -62,4 +63,10 @@ export class AuthService {
     // on renvoie la promesse qui dit si on est admin ou pas
     return isUserAdminPromise;
   }
+
+  // Ajout de la méthode signup
+  signup(user: any): Observable<any> {
+    return this.http.post<any>(this.uri_api + '/signup', user);
+  }
+
 }

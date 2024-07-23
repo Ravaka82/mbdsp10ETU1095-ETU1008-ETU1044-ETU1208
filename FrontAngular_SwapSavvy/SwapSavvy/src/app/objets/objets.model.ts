@@ -11,6 +11,7 @@ export class User {
   ville?: string;
   code_postal?: string;
   date_creation?: Date;
+  date_modification?: Date;
 }
 
 
