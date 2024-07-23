@@ -8,6 +8,8 @@ let user = require('./routes/user');
 let middleware = require('./utils/tokenVerify');
 mongoose.Promise = global.Promise;
 
+const objetRoutes = require('./routes/objetRoutes');
+
 const uri = 'mongodb+srv://nandrianinaomega:OXhB6mZhekyTqMvJ@tpt-mbds-p10.xb170xn.mongodb.net/?retryWrites=true&w=majority&appName=tpt-mbds-p10';
 
 const options = {
@@ -37,6 +39,7 @@ app.use(express.json());
 
 
 app.use('/api/images', imageRoutes);
+app.use('/api/objets', objetRoutes);
 
 const PORT = process.env.PORT || 3000;
 
