@@ -35,10 +35,6 @@ function roleAdmin(req, res, next) {
       if (err){
           return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
       }
-      
-      if (decoded.role !== 1) {
-        return res.status(403).send({ auth: false, message: 'Accès refusé. Rôle insuffisant.' });
-      }
       //
       req.userId = decoded.id;
       next();
