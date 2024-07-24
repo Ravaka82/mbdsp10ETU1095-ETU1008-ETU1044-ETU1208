@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const imageRoutes = require('./routes/imageRoutes');
+const objetRoutes = require('./routes/objetRoutes');
 let bodyParser = require('body-parser');
 let user = require('./routes/user');
 let middleware = require('./utils/tokenVerify');
@@ -37,6 +38,8 @@ app.use(express.json());
 
 
 app.use('/api/images', imageRoutes);
+app.use('/api/objets', objetRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 
