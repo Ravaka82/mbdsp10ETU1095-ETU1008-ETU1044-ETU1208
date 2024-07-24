@@ -2,17 +2,17 @@
 <br><br>
 <div class="cards-container">
   <div *ngFor="let objet of objets" class="example-card">
-    <mat-card>
-      <mat-card-content>
-        <h2>{{ objet.titre }}</h2>
+    <mat-card style="background-color: #d7e3ff;">
+      <mat-card-content >
+        <h2 class="title_2">{{ objet.titre }}</h2>
         <p>{{ objet.description }}</p>
         <p>Statut: {{ objet.statut }}</p>
         <p>Image: </p>
         <ng-container>
-          <img [src]=objet.image_url alt="Image de l'objet" style="width:265px;height:288px">
+          <img [src]=objet.image_url alt="Image de l'objet" style="width:305px;height:255px;margin-left:-18px">
         </ng-container>
       </mat-card-content>
-      <mat-card-actions class="bt-action">
+      <mat-card-actions class="bt-action" >
         <button mat-flat-button color="primary" [routerLink]="['/update', objet._id]">Mettre à jour</button>
         <button mat-flat-button color="warn" (click)="deleteObjet(objet._id)">Supprimer</button>
       </mat-card-actions>

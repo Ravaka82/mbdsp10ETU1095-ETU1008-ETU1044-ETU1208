@@ -63,13 +63,17 @@
   padding: 5px;
 }
 .title{
-  padding-left: 850px;
+  padding-left: 750px;
   margin-top: 30px;
   font-weight: bold;
 }
-.mat-mdc-card-content{
-  background-color: #d7e3ff;
+.title_2{
+  font-weight: bold;
+  color:  purple;;
 }
+/* .mat-mdc-card-content{
+  background-color: whitesmoke;
+} */
 .bt-action{
   margin-left:10px;
   gap:20px;
