@@ -10,7 +10,7 @@ const upload = multer({ storage: storage });
 
 router.get('/', objetController.getAllObjets);
 router.post('/', upload.single('image'), objetController.createObjet);
-router.put('/:id', objetController.updateObjet);
+router.put('/:id', upload.single('image'), objetController.updateObjet);
 router.delete('/:id', objetController.deleteObjet);
 router.get('/DetailsObjet/:id', objetController.findObjetById);
 router.get('/FindObjetParCategorie/:nomCategorie', objetController.getObjetParCategorie);

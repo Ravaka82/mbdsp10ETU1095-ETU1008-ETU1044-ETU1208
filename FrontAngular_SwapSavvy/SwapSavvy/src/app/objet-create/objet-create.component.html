@@ -42,8 +42,6 @@
         <mat-label>Choisi l'image de l'objet : </mat-label><br><br>
         <input type="file" (change)="onFileSelected($event)">
 
-
-
       <div class="actions">
         <button mat-flat-button color="primary" type="submit" [disabled]="loading">
           <span *ngIf="!loading">Créer</span>

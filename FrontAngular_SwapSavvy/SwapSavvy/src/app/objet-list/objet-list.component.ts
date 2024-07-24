@@ -48,7 +48,6 @@ export class ObjetListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchObjets();
-    this.fetchImageObjects();
   }
 
   fetchObjets() {
@@ -65,20 +64,6 @@ export class ObjetListComponent implements OnInit {
     );
   }
 
-  fetchImageObjects() {
-    this.objetService.getImageObjet().subscribe(
-      data => {
-        data.forEach((image: any) => {
-          this.images.set(image.objet_id, image.filename);
-        });
-        this.loading = false;
-      },
-      error => {
-        console.error('Error fetching image objets:', error);
-        this.loading = false;
-      }
-    );
-  }
 
   getImageForObjet(objetId: string): string | undefined {
     return this.images.get(objetId);
