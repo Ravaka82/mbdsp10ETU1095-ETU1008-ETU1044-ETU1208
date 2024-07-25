@@ -47,7 +47,11 @@ export class ObjetListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchObjets();
+    if (history.state && history.state.objets) {
+      this.objets = history.state.objets;
+    } else {
+      this.fetchObjets();
+    }
   }
 
   fetchObjets() {
@@ -63,7 +67,6 @@ export class ObjetListComponent implements OnInit {
       }
     );
   }
-
 
   getImageForObjet(objetId: string): string | undefined {
     return this.images.get(objetId);

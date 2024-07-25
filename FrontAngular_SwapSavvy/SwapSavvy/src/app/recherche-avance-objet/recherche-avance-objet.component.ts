@@ -45,14 +45,11 @@ export class RechercheAvanceObjetComponent implements OnInit {
       categorie_id: [''],
       titre: [''],
       nomCategorie: [''],
-      statut: ['']        
-
+      statut: ['']
     });
-
 
     this.fetchCategories();
   }
-
 
   fetchCategories() {
     this.categorieService.getCategories().subscribe(
@@ -60,39 +57,33 @@ export class RechercheAvanceObjetComponent implements OnInit {
         this.categories = data;
       },
       error => {
-        console.error('Error fetching categories:', error);
+        console.error('Erreur de récupération des catégories:', error);
       }
     );
   }
+
   recherche(): void {
     this.loading = true;
-    if (this.objetForm.valid) {
-      const formData = new FormData();
-      const nomCategorie= this.objetForm.get('nomCategorie')?.value;
-      const titre= this.objetForm.get('titre')?.value;
-      const statut= this.objetForm.get('statut')?.value;
-      console.log(nomCategorie);
-      console.log(titre);
-      console.log(statut);
+      const nomCategorie = this.objetForm.get('nomCategorie')?.value;
+      const titre = this.objetForm.get('titre')?.value;
+      const statut = this.objetForm.get('statut')?.value;
 
-      this.objetService.rechercheAvanceObjets(nomCategorie,titre,statut).subscribe(
+      this.objetService.rechercheAvanceObjets(nomCategorie, titre, statut).subscribe(
         data => {
           this.objets = data;
           this.loading = false;
-          this.router.navigate(['list']);
-
+          console.log('Réponse:', data);
+          this.router.navigate(['/list'], { state: { objets: data } });
         },
         error => {
-          console.error('Error fetching objects', error);
+          console.error('Erreur:', error);
           this.loading = false;
-          this.snackBar.open('Aucun objet', 'Fermer', {
+          this.snackBar.open('Erreur lors de la recherche', 'Fermer', {
             duration: 3000,
             verticalPosition: 'top',
             horizontalPosition: 'end'
           });
         }
       );
-    }
   }
-
 }
