@@ -3,11 +3,20 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../objets/objets.model';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css'
 })
@@ -33,7 +42,7 @@ export class SigninComponent {
         (d:any)=>{
           // this.nom =d.nom;
           localStorage.setItem('user',  JSON.stringify(d));
-          this.router.navigate(['/accueil']);
+          this.router.navigate(['/list']);
         },
         (err:any) => {
 
@@ -43,7 +52,7 @@ export class SigninComponent {
 
         }
       );
-         this.router.navigate(['/accueil']);
+         this.router.navigate(['/list']);
       },
       (err:any) => {
         if (err.status === 404) {
