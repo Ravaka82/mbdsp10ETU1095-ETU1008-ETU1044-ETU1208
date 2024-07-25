@@ -34,6 +34,8 @@ export class ObjetUpdateComponent implements OnInit {
   loading: boolean = false;
   utilisateurs: any[] = [];
   categories: any[] = [];
+  selectedFile: File | null = null;
+  currentImageUrl: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -59,6 +61,7 @@ export class ObjetUpdateComponent implements OnInit {
       this.objetService.getObjetById(id).subscribe(
         (data: any) => {
           this.objetForm.patchValue(data);
+          this.currentImageUrl = data.image_url;
         },
         (error: any) => {
           console.error('Error fetching objet:', error);
@@ -92,12 +95,28 @@ export class ObjetUpdateComponent implements OnInit {
     );
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   updateObjet(): void {
     if (this.objetForm.valid) {
       this.loading = true;
       const id = this.route.snapshot.paramMap.get('id');
       if (id) {
-        this.objetService.updateObjet(id, this.objetForm.value).subscribe(
+        const formData = new FormData();
+
+        Object.keys(this.objetForm.value).forEach(key => {
+          if (key !== 'image') {
+            formData.append(key, this.objetForm.value[key]);
+          }
+        });
+
+        if (this.selectedFile) {
+          formData.append('image', this.selectedFile);
+        }
+
+        this.objetService.updateObjet(id, formData).subscribe(
           () => {
             this.loading = false;
             this.router.navigate(['/']);

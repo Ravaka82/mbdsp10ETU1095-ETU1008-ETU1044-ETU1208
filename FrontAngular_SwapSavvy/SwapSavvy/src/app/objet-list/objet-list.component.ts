@@ -65,7 +65,6 @@ export class ObjetListComponent implements OnInit {
   }
 
 
-
   getImageForObjet(objetId: string): string | undefined {
     return this.images.get(objetId);
   }
