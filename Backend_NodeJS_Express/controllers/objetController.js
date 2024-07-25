@@ -52,7 +52,7 @@ const createObjet = async (req, res) => {
     try {
         const utilisateur = await Utilisateur.findById(utilisateur_id);
         if (!utilisateur) {
-            return res.status(404).json({ message: 'Utilisateur not found' });nen
+            return res.status(404).json({ message: 'Utilisateur not found' });
         }
 
 
@@ -83,14 +83,35 @@ const createObjet = async (req, res) => {
     }
 };
 
-
 const updateObjet = async (req, res) => {
     try {
-        const objet = await Objet.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!objet) {
+        const { utilisateur_id, categorie_id, titre, description, statut } = req.body;
+
+        let updateData = {
+            utilisateur_id,
+            categorie_id,
+            titre,
+            description,
+            statut,
+            date_modification: Date.now(),
+        };
+
+        if (req.file) {
+            const result = await streamUpload(req.file);
+            updateData.image_url = result.secure_url;
+        }
+
+        const updatedObjet = await Objet.findByIdAndUpdate(
+            req.params.id, 
+            updateData,    
+            { new: true, runValidators: true } 
+        );
+
+        if (!updatedObjet) {
             return res.status(404).json({ message: 'Objet not found' });
         }
-        res.json(objet);
+
+        res.status(200).json(updatedObjet);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
