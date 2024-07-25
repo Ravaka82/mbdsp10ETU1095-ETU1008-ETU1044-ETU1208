@@ -78,7 +78,7 @@ export class RechercheAvanceObjetComponent implements OnInit {
         error => {
           console.error('Erreur:', error);
           this.loading = false;
-          this.snackBar.open('Erreur lors de la recherche', 'Fermer', {
+          this.snackBar.open('Aucun objet', 'Fermer', {
             duration: 3000,
             verticalPosition: 'top',
             horizontalPosition: 'end'
