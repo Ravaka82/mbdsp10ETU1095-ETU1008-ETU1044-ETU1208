@@ -77,6 +77,10 @@
   margin-left:10px;
   gap:20px;
 }
-
+.full-width {
+ height: 54px;
+ margin-left: 20px;
+ width: 150px;
+}
 
 

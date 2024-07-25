@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -43,5 +43,8 @@ export class ObjetService {
     const body = { nomCategorie, titre, statut };
     return this.http.post<any>(`${this.apiUrl}/rechercheAvance`, body);
   }
-
+  rechercheSimple(nom: string){
+    let params = new HttpParams().set('nom', nom);
+    return this.http.get<any>(`${this.apiUrl}/RechercheSimple`, { params });
+  }
 }

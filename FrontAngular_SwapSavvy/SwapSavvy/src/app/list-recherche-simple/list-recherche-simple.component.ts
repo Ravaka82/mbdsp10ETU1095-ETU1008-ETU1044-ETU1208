@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-object-list',
+  selector: 'app-list-recherche-simple',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -26,10 +26,10 @@ import { RouterModule } from '@angular/router';
     RouterModule
 
   ],
-  templateUrl: './objet-list.component.html',
-  styleUrl: './objet-list.component.css'
+  templateUrl: './list-recherche-simple.component.html',
+  styleUrl: './list-recherche-simple.component.css'
 })
-export class ObjetListComponent implements OnInit {
+export class ListRechercheSimpleComponent implements OnInit {
   objets: any[] = [];
   images: Map<string, string> = new Map();
   loading: boolean = false;
@@ -139,3 +139,5 @@ export class ObjetListComponent implements OnInit {
       );
   }
 }
+
+
