@@ -189,7 +189,7 @@ const RechercheObjetsParTitre = async (req, res) => {
 //Recherche avance
 const rechercheAvanceObjets = async (req, res) => {
     try {
-        const { nomCategorie,titre, statut } = req.body;
+        const { nomCategorie, titre, statut } = req.body;
         let query = {};
 
         if (nomCategorie) {
@@ -203,6 +203,7 @@ const rechercheAvanceObjets = async (req, res) => {
 
         if (titre) {
             query.titre = new RegExp(titre, 'i');
+        }
 
         if (statut) {
             query.statut = statut;
@@ -215,11 +216,11 @@ const rechercheAvanceObjets = async (req, res) => {
         }
 
         res.json(objets);
-    } 
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
+
 module.exports = {
     getAllObjets,
     createObjet,

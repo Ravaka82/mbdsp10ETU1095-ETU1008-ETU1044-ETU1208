@@ -43,7 +43,10 @@ export class RechercheAvanceObjetComponent implements OnInit {
     this.objetForm = this.fb.group({
       utilisateur_id: [''],
       categorie_id: [''],
-      titre: ['']
+      titre: [''],
+      nomCategorie: [''],
+      statut: ['']        
+
     });
 
 
@@ -68,6 +71,8 @@ export class RechercheAvanceObjetComponent implements OnInit {
       const nomCategorie= this.objetForm.get('nomCategorie')?.value;
       const titre= this.objetForm.get('titre')?.value;
       const statut= this.objetForm.get('statut')?.value;
+      console.log(nomCategorie);
+      console.log(titre);
       console.log(statut);
 
       this.objetService.rechercheAvanceObjets(nomCategorie,titre,statut).subscribe(
@@ -75,7 +80,7 @@ export class RechercheAvanceObjetComponent implements OnInit {
           this.objets = data;
           this.loading = false;
           this.router.navigate(['list']);
-         
+
         },
         error => {
           console.error('Error fetching objects', error);
