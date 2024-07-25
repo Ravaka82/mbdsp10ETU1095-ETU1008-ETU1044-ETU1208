@@ -39,5 +39,9 @@ export class ObjetService {
   uploadImage(formData: FormData, objetId: string) {
     return this.http.post<any>(`${this.apiUrlImage}/upload/${objetId}`, formData);
   }
+  rechercheAvanceObjets(nomCategorie: string, titre: string, statut: string): Observable<any> {
+    const body = { nomCategorie, titre, statut };
+    return this.http.post<any>(`${this.apiUrl}/rechercheAvance`, body);
+  }
 
 }
