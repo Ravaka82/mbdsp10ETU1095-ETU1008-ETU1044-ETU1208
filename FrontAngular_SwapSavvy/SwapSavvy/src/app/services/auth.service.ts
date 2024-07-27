@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.dev';
 import { User } from '../objets/objets.model';
 @Injectable({
@@ -17,14 +17,15 @@ export class AuthService {
   // un token d'authentification JWT etc.
   // elle devrait renvoyer un Observable etc.
   logIn(user:any):Observable<any>  {
-    return this.http.post<any>(this.uri_api + '/signin', user);
+    return this.http.post<any>(this.uri_api + '/login', user);
   }
   //requete qui renvoie l ' user connecté selon token
   getUserLogged():Observable<any>  {
    let token :any='';
      token = localStorage.getItem("token");
-
-    return this.http.get<User>(this.uri_api + '/me');
+     console.log(token);
+     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<User>(this.uri_api + '/me',{ headers });
   }
   //renvoi  l'user qui est dans le storage
   getStockedUser (){
@@ -66,7 +67,7 @@ export class AuthService {
 
   // Ajout de la méthode signup
   signup(user: any): Observable<any> {
-    return this.http.post<any>(this.uri_api + '/signup', user);
+    return this.http.post<any>(this.uri_api + '/register', user);
   }
 
 }

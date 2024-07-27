@@ -47,7 +47,7 @@ export class SignupComponent {
       if (result.error) this.inscriptionError = result.error ;
       else {
         localStorage.setItem('signin', JSON.stringify(result)) ;
-        this.router.navigate(['user']) ;
+        this.router.navigate(['/signin']) ;
       }
     }) ;
   }

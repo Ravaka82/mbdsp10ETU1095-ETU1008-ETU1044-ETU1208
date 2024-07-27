@@ -7,11 +7,6 @@ export class User {
   prenom?: string;
   email?: string;
   mot_de_passe?: string;
-  adresse?: string;
-  ville?: string;
-  code_postal?: string;
-  date_creation?: Date;
-  date_modification?: Date;
 }
 
 
