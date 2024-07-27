@@ -6,8 +6,14 @@ const bodyParser = require('body-parser'); // Don't forget to require body-parse
 require('dotenv').config();
 
 const app = express();
+const cors = require('cors');
 const imageRoutes = require('./routes/imageRoutes');
 const objetRoutes = require('./routes/objetRoutes');
+
+let user = require('./routes/utilisateurRoutes');
+let middleware = require('./utils/tokenVerify');
+mongoose.Promise = global.Promise;
+
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
 
@@ -25,12 +31,12 @@ mongoose.connect(uri, options).then(() => {
     console.error('Error connecting to MongoDB:', err.message);
 });
 
-// Use the cors middleware
+
 app.use(cors({
-    origin: '*', // Replace '*' with your frontend URL for better security
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-    credentials: true
+  origin: '*', // Replace '*' with your frontend URL for better security
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+  credentials: true
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,6 +50,11 @@ app.use('/api/utilisateurs', utilisateurRoutes);
 app.use('/api/categories', categorieRoutes);
 
 const PORT = process.env.PORT || 3000;
+
+const prefix = '/api';
+
+app.use(prefix + '/auth',user);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

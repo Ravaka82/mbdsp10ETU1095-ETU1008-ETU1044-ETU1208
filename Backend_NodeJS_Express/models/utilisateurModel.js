@@ -17,17 +17,6 @@ const utilisateurSchema = new mongoose.Schema({
     mot_de_passe: {
         type: String,
         required: true
-    },
-    adresse: String,
-    ville: String,
-    code_postal: String,
-    date_creation: {
-        type: Date,
-        default: Date.now
-    },
-    date_modification: {
-        type: Date,
-        default: Date.now
     }
 });
 
