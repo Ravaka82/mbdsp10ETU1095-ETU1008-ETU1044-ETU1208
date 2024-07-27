@@ -1,4 +1,7 @@
 const Utilisateur = require('../models/utilisateurModel');
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
+var config = require('../config');
 
 const getAllUtilisateurs = async (req, res) => {
     try {
@@ -45,10 +48,99 @@ const getUtilisateurById = async (req, res, next) => {
         return res.status(500).json({ message: err.message });
     }
 };
+async function inscription(req, res) {
+    try {
+      if (!req.body.nom || !req.body.prenom || !req.body.email || !req.body.mot_de_passe) {
+        return res.status(400).send("All fields are required.");
+      }
+  
+      const hashedPassword = await bcrypt.hash(req.body.mot_de_passe, 8);
+      const user = await Utilisateur.create({
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        email: req.body.email,
+        mot_de_passe: hashedPassword
+      });
+  
+      const token = jwt.sign({ id: user._id }, config.secret, {
+        expiresIn: 86400 
+      });
 
+      res.status(200).send({ auth: true, token: token });
+    } catch (err) {
+     
+      console.error(err);
+      res.status(500).send("There was a problem registering the user.");
+    }
+  }
+
+  async function getUserConnected(req, res, next) {
+    try {
+      const authHeader = req.headers.authorization;
+  
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).send({ auth: false, message: 'No token provided.' });
+      }
+  
+      const token = authHeader.split(' ')[1];
+  
+      if (!token) {
+        return res.status(401).send({ auth: false, message: 'No token provided.' });
+      }
+  
+      const decoded = jwt.verify(token, config.secret);
+  
+      const user = await Utilisateur.findById(decoded.id, { mot_de_passe: 0 }); // Exclude password from the result
+  
+      if (!user) {
+        return res.status(404).send("No user found.");
+      }
+  
+      res.status(200).send(user);
+    } catch (err) {
+      console.error(err);
+      if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
+        return res.status(401).send({ auth: false, message: 'Failed to authenticate token.' });
+      }
+      res.status(500).send("There was a problem finding the user.");
+    }
+  }
+  async function login(req, res) {
+    try {
+      // Find user by email
+      const user = await Utilisateur.findOne({ email: req.body.email });
+  
+      // Check if user exists
+      if (!user) {
+        return res.status(404).send('No user found.');
+      }
+  
+      // Validate password
+      const passwordIsValid = await bcrypt.compare(req.body.mot_de_passe, user.mot_de_passe);
+      if (!passwordIsValid) {
+        return res.status(401).send({ auth: false, token: null });
+      }
+  
+      // Create token
+      const token = jwt.sign({ id: user._id }, config.secret, {
+        expiresIn: 86400 // expires in 24 hours
+      });
+  
+      // Send response
+      res.status(200).send({ auth: true, token: token });
+    } catch (err) {
+      // Handle errors
+      console.error(err);
+      res.status(500).send('Error on the server.');
+    }
+  }
+  function logout(req, res) {
+    res.status(200).send({ auth: false, token: null });
+}
 module.exports = {
     getAllUtilisateurs,
     getUtilisateur,
     createUtilisateur,
-    getUtilisateurById
+    getUtilisateurById,
+    getUserConnected,inscription,login,logout
 };
