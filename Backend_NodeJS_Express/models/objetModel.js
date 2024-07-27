@@ -28,6 +28,9 @@ const objetSchema = new mongoose.Schema({
         type: String,
         enum: ['disponible', 'réservé', 'échangé'],
         default: 'disponible'
+    },
+    image_url: {
+        type: String
     }
 });
 
