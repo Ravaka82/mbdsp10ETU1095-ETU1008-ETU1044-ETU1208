@@ -1,0 +1,38 @@
+<mat-card *ngIf="objetForm" class="example-card">
+    <mat-card-title>Recherche Avance</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="objetForm" (ngSubmit)="recherche()">
+
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Catégorie</mat-label>
+          <mat-select formControlName="nomCategorie" required>
+            <mat-option *ngFor="let categorie of categories" [value]="categorie.nom">
+              {{ categorie.nom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Titre</mat-label>
+          <input matInput formControlName="titre">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Statut</mat-label>
+          <mat-select formControlName="statut">
+            <mat-option value="disponible">Disponible</mat-option>
+            <mat-option value="réservé">Réservé</mat-option>
+            <mat-option value="échangé">Échangé</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="actions">
+          <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+            <span *ngIf="!loading">rechercher</span>
+            <span *ngIf="loading">Chargement...</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
