@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center vh-100">
+    <div class="col-md-6">
+      <mat-card>
+        <mat-card-header>
+          <div class="mat-card-avatar">
+            <img src="./assets/img/logo1.png" alt="Logo" class="img-fluid" style="max-width: 200px;">
+          </div>
+          <mat-card-title class="text-center">Connexion</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form (ngSubmit)="login()">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Adresse email</mat-label>
+              <input matInput type="text" id="username" name="username" [(ngModel)]="email" placeholder="Entrez votre email" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Mot de passe</mat-label>
+              <input matInput type="password" id="password" name="password" [(ngModel)]="mot_de_passe" placeholder="Entrez votre mot de passe" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" class="full-width">Se connecter</button>
+            <div *ngIf="error" class="error-message">
+              {{ error }}
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-footer class="text-center">
+          <a href="#" class="forgot-password-link">Mot de passe oublié ?</a>
+        </mat-card-footer>
+        <mat-card-footer class="text-right">
+          <a href="signup" class="forgot-password-link">S'inscrire</a>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+</div>

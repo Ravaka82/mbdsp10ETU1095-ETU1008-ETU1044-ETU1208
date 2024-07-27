@@ -6,9 +6,14 @@ const bodyParser = require('body-parser'); // Don't forget to require body-parse
 require('dotenv').config();
 
 const app = express();
+const cors = require('cors');
 const imageRoutes = require('./routes/imageRoutes');
 const objetRoutes = require('./routes/objetRoutes');
-const utilisateurRoutes = require('./routes/utilisateurRoutes');
+
+let user = require('./routes/utilisateurRoutes');
+let middleware = require('./utils/tokenVerify');
+mongoose.Promise = global.Promise;
+
 const categorieRoutes = require('./routes/categorieRoutes');
 
 const uri = 'mongodb+srv://ravaka:ravaka@cluster0.o8xl4n2.mongodb.net/transversale?retryWrites=true&w=majority&appName=Cluster0'; 
@@ -44,6 +49,12 @@ app.use('/api/utilisateurs', utilisateurRoutes);
 app.use('/api/categories', categorieRoutes);
 
 const PORT = process.env.PORT || 3000;
+
+const prefix = '/api';
+
+app.use(prefix + '/auth',user);
+  
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
