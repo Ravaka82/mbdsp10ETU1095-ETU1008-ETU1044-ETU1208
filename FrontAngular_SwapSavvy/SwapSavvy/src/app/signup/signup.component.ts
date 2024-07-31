@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Component } from '@angular/core';
@@ -12,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
   selector: 'app-signup',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     MatButtonModule,
     RouterLink,

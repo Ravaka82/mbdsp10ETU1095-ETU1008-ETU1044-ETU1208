@@ -6,7 +6,6 @@ const bodyParser = require('body-parser'); // Don't forget to require body-parse
 require('dotenv').config();
 
 const app = express();
-const cors = require('cors');
 const imageRoutes = require('./routes/imageRoutes');
 const objetRoutes = require('./routes/objetRoutes');
 

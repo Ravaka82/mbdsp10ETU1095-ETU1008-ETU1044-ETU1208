@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../objets/objets.model';
@@ -12,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-signin',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     MatCardModule,
     MatFormFieldModule,
