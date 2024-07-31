@@ -37,7 +37,7 @@
   width: 100%;
 } */
 
-.card {
+/*.card {
   width: 120%;
   max-width: 700px;
   height: 650px;
@@ -47,7 +47,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+}*/
 
 .connect-btn {
   transition: background-color 0.3s;
@@ -66,3 +66,37 @@
 .forgot-password-link {
   color: rgb(89, 15, 138);
 }
+
+.login-card {
+  width: 200%;
+  max-width: 600px; /* Ajuste la largeur maximale */
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  margin: auto;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
