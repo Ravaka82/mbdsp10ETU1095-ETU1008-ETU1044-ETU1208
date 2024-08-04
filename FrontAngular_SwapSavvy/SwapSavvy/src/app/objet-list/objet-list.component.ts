@@ -138,4 +138,8 @@ export class ObjetListComponent implements OnInit {
         }
       );
   }
+
+  onSelectObjet(){
+
+  }
 }

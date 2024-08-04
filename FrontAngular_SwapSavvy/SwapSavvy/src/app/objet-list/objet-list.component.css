@@ -3,6 +3,9 @@
   flex-wrap: wrap;
   gap: 25px;
 }
+.title1 {
+  text-align: center;
+}
 
 .example-card {
   width: 300px; /* Définir une largeur fixe pour toutes les cartes */

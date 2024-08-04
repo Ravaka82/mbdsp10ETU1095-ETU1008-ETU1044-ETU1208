@@ -1,4 +1,5 @@
-<h1 class="title">Listes des objets</h1>
+<h1 class="title1"><strong>Liste des objets</strong></h1>
+<h2>Sélectionnez le(s) objet(s) que vous souhaitiez échanger</h2>
 <br><br>
 <form [formGroup]="objetForm" (ngSubmit)="rechercheSimple()">
 <mat-form-field appearance="outline">
@@ -18,6 +19,11 @@
         <ng-container>
           <img [src]=objet.image_url alt="Image de l'objet" style="width:305px;height:255px;margin-left:-18px">
         </ng-container>
+        <div style="margin-top: 15px;">
+          <button mat-flat-button color="primary" (click)="onSelectObjet()">
+            <i class="material-icons">check</i> Sélectionner cet objet
+          </button>
+        </div>
       </mat-card-content>
       <mat-card-actions class="bt-action" >
         <button mat-flat-button color="primary" [routerLink]="['/update', objet._id]">Mettre à jour</button>
