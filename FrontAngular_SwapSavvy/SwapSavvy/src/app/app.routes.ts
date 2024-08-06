@@ -7,12 +7,14 @@ import { RechercheAvanceObjetComponent } from './recherche-avance-objet/recherch
 import { ListRechercheSimpleComponent } from './list-recherche-simple/list-recherche-simple.component';
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
+import { DemandeEchangeComponent } from './demande-echange/demande-echange.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'create', component: ObjetCreateComponent },
   { path: 'list', component: ObjetListComponent },
+  { path: 'demandeEchange/:id', component: DemandeEchangeComponent },
   { path: 'update/:id', component: ObjetUpdateComponent },
 
   { path: 'DetailObjet/:id', component: DetailsObjetComponent },

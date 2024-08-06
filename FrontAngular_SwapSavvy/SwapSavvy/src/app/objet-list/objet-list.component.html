@@ -20,7 +20,7 @@
           <img [src]=objet.image_url alt="Image de l'objet" style="width:305px;height:255px;margin-left:-18px">
         </ng-container>
         <div style="margin-top: 15px;">
-          <button mat-flat-button color="primary" (click)="onSelectObjet()">
+          <button mat-flat-button color="primary" [routerLink]="['/demandeEchange', objet._id]">
             <i class="material-icons">check</i> Sélectionner cet objet
           </button>
         </div>
