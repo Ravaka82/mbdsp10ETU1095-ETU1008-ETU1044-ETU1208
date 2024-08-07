@@ -31,9 +31,12 @@ import { RouterModule } from '@angular/router';
 })
 export class ObjetListComponent implements OnInit {
   objets: any[] = [];
+  objetsUser: any[] = [];
+  objetsAll: any[] = [];
   images: Map<string, string> = new Map();
   loading: boolean = false;
   objetForm: FormGroup;
+  user: any;
 
   constructor(
     private objetService: ObjetService,
@@ -42,16 +45,19 @@ export class ObjetListComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.objetForm = this.fb.group({
-      image: [''],
       nom: ['']
     });
   }
 
   ngOnInit(): void {
-    if (history.state && history.state.objets) {
-      this.objets = history.state.objets;
+    this.fetchObjets();
+    const user = localStorage.getItem('user');
+    console.log('Données stockées dans localStorage :', user);
+    if (user) {
+      this.user = JSON.parse(user);
+      console.log('Utilisateur récupéré :', this.user);
     } else {
-      this.fetchObjets();
+      console.error('Aucun utilisateur trouvé dans localStorage');
     }
   }
 
@@ -59,7 +65,22 @@ export class ObjetListComponent implements OnInit {
     this.loading = true;
     this.objetService.getObjets().subscribe(
       data => {
-        this.objets = data;
+        console.log('Objets récupérés :', data);
+
+
+        this.objetsUser = [];
+        this.objetsAll = [];
+
+        for (const objet of data) {
+          if (objet.utilisateur_id._id === this.user._id) {
+            this.objetsUser.push(objet);
+          } else {
+            this.objetsAll.push(objet);
+          }
+        }
+
+        console.log('Objets de l\'utilisateur :', this.objetsUser);
+        console.log('Objets de tous les utilisateurs :', this.objetsAll);
         this.loading = false;
       },
       error => {
@@ -69,9 +90,8 @@ export class ObjetListComponent implements OnInit {
     );
   }
 
-  getImageForObjet(objetId: string): string | undefined {
-    return this.images.get(objetId);
-  }
+
+
 
   deleteObjet(id: string): void {
     this.loading = true;
@@ -96,50 +116,28 @@ export class ObjetListComponent implements OnInit {
     );
   }
 
-  onFileSelected(event: any, objetId: string) {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
-
-    this.objetService.uploadImage(formData, objetId).subscribe(
-      (data: any) => {
-        // Mettre à jour l'objet avec l'image
-        this.images.set(objetId, data.filename); // Mettre à jour l'image dans le map
-        this.snackBar.open('Image téléchargée avec succès.', 'Fermer', { duration: 3000 });
-      },
-      (error: any) => {
-        console.error('Erreur lors du téléchargement de l\'image : ', error);
-        this.snackBar.open('Erreur lors du téléchargement de l\'image.', 'Fermer', { duration: 3000 });
-      }
-    );
-  }
   rechercheSimple(): void {
     this.loading = true;
-      const nom = this.objetForm.get('nom')?.value;
-      console.log(nom);
-
-      this.objetService.rechercheSimple(nom).subscribe(
-        data => {
-          this.objets = data;
-          this.loading = false;
-          console.log('Réponse:', data);
-          this.router.navigate(['/listeRechercheSimple'], { state: { objets: data } });
-        },
-        error => {
-          console.error('Erreur:', error);
-          this.loading = false;
-          this.objets=[];
-          this.router.navigate(['/listeRechercheSimple'], { state: { objets: this.objets } });
-          this.snackBar.open('Aucun objet', 'Fermer', {
-            duration: 3000,
-            verticalPosition: 'top',
-            horizontalPosition: 'end'
-          });
-        }
-      );
-  }
-
-  onSelectObjet(){
-
+    const nom = this.objetForm.get('nom')?.value;
+    this.objetService.rechercheSimple(nom).subscribe(
+      data => {
+        this.objets = data;
+        this.objetsUser = data.filter((objet: { utilisateur_id: any; }) => objet.utilisateur_id === this.user._id);
+        this.objetsAll = data.filter((objet: { utilisateur_id: any; }) => objet.utilisateur_id !== this.user._id);
+        this.loading = false;
+      },
+      error => {
+        console.error('Erreur:', error);
+        this.loading = false;
+        this.objets = [];
+        this.objetsUser = [];
+        this.objetsAll = [];
+        this.snackBar.open('Aucun objet', 'Fermer', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'end'
+        });
+      }
+    );
   }
 }
