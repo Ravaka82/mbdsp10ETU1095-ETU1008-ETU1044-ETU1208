@@ -47,7 +47,7 @@ const streamUpload = (file) => {
 };
 
 const createObjet = async (req, res) => {
-    const { utilisateur_id, categorie_id, titre, description, statut } = req.body;
+    const { utilisateur_id, categorie_id, titre, description, statut, etat , valeur_estimee } = req.body;
 
     try {
         const utilisateur = await Utilisateur.findById(utilisateur_id);
@@ -73,7 +73,9 @@ const createObjet = async (req, res) => {
             titre,
             description,
             statut,
-            image_url
+            image_url,
+            etat,
+            valeur_estimee
         });
 
         const newObjet = await objet.save();
@@ -85,7 +87,7 @@ const createObjet = async (req, res) => {
 
 const updateObjet = async (req, res) => {
     try {
-        const { utilisateur_id, categorie_id, titre, description, statut } = req.body;
+        const { utilisateur_id, categorie_id, titre, description, statut, etat, valeur_estimee } = req.body;
 
         let updateData = {
             utilisateur_id,
@@ -93,6 +95,8 @@ const updateObjet = async (req, res) => {
             titre,
             description,
             statut,
+            etat,
+            valeur_estimee,
             date_modification: Date.now(),
         };
 

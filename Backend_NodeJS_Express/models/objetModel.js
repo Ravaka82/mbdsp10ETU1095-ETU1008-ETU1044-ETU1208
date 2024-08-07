@@ -15,6 +15,7 @@ const objetSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    
     description: String,
     date_creation: {
         type: Date,
@@ -31,6 +32,15 @@ const objetSchema = new mongoose.Schema({
     },
     image_url: {
         type: String
+    },
+    etat: {
+        type: String,
+        enum: ['neuf', 'comme neuf', 'utilisé', 'endommagé'],
+        default: 'utilisé'
+    },
+    valeur_estimee: {
+        type: Number,
+        required: true
     }
 });
 
