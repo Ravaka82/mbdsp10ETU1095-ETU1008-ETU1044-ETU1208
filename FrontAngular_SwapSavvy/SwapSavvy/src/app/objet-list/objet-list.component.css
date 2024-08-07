@@ -73,6 +73,15 @@
   font-weight: bold;
   color:  purple;;
 }
+/* objet-list.component.css */
+.title_2 {
+  color: #1976d2; /* Change to your desired color */
+  font-weight: bold;
+}
+.item-value {
+  color: #ff5722;
+}
+
 /* .mat-mdc-card-content{
   background-color: whitesmoke;
 } */

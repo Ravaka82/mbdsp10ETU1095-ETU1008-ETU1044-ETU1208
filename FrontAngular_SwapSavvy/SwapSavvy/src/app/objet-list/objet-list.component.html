@@ -3,7 +3,7 @@
 <br><br>
 <form [formGroup]="objetForm" (ngSubmit)="rechercheSimple()">
   <mat-form-field appearance="outline">
-    <mat-label>titre de l'objet</mat-label>
+    <mat-label>Titre de l'objet</mat-label>
     <input matInput formControlName="nom" placeholder="titre de l'objet">
   </mat-form-field>
   <button mat-flat-button color="primary" class="full-width">Rechercher</button>
@@ -13,10 +13,12 @@
     <mat-card [routerLink]="['/DetailObjet', objet._id]" style="background-color: #d7e3ff;">
       <mat-card-content>
         <h2 [routerLink]="['/DetailObjet', objet._id]" class="title_2">{{ objet.titre }}</h2>
-        <p>{{ objet.description }}</p>
-        <p>Statut: {{ objet.statut }}</p>
-        <p>État: {{ objet.etat }}</p>
-        <p>Valeur estimée: {{ objet.valeur_estimee }} Ariary</p>
+        <p>Utilisateur : <span class="title_2">{{ objet.utilisateur_prenom }}</span></p>
+        <p>description :<span class="title_2">{{ objet.description }}</span></p>
+        <p>Statut : <span class="title_2">{{ objet.statut }}</span></p>
+        <p>État : <span class="title_2">{{ objet.etat }}</span></p>
+        <p class="item-value">Valeur estimée : {{ objet.valeur_estimee }} Ariary</p>
+
         <p>Image: </p>
         <ng-container>
           <img [src]="objet.image_url" alt="Image de l'objet" style="width:305px;height:255px;margin-left:-18px">
