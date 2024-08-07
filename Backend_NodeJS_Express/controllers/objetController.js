@@ -47,14 +47,17 @@ const streamUpload = (file) => {
 };
 
 const createObjet = async (req, res) => {
-    const { utilisateur_id, categorie_id, titre, description, statut, etat , valeur_estimee } = req.body;
+    const { utilisateur_id, categorie_id, titre, description, statut, etat, valeur_estimee } = req.body;
+
+    if (!utilisateur_id || !categorie_id || !titre || valeur_estimee === undefined) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
 
     try {
         const utilisateur = await Utilisateur.findById(utilisateur_id);
         if (!utilisateur) {
             return res.status(404).json({ message: 'Utilisateur not found' });
         }
-
 
         const categorie = await Categorie.findById(categorie_id);
         if (!categorie) {
@@ -63,8 +66,12 @@ const createObjet = async (req, res) => {
 
         let image_url = '';
         if (req.file) {
-            const result = await streamUpload(req.file);
-            image_url = result.secure_url;
+            try {
+                const result = await streamUpload(req.file);
+                image_url = result.secure_url;
+            } catch (uploadError) {
+                return res.status(500).json({ message: 'Error uploading image' });
+            }
         }
 
         const objet = new Objet({
@@ -73,17 +80,18 @@ const createObjet = async (req, res) => {
             titre,
             description,
             statut,
-            image_url,
             etat,
-            valeur_estimee
+            valeur_estimee,
+            image_url,
         });
 
         const newObjet = await objet.save();
         res.status(201).json(newObjet);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(500).json({ message: err.message });
     }
 };
+
 
 const updateObjet = async (req, res) => {
     try {

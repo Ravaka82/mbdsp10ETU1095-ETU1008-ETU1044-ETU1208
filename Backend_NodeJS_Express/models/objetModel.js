@@ -15,7 +15,6 @@ const objetSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
     description: String,
     date_creation: {
         type: Date,
@@ -30,9 +29,6 @@ const objetSchema = new mongoose.Schema({
         enum: ['disponible', 'réservé', 'échangé'],
         default: 'disponible'
     },
-    image_url: {
-        type: String
-    },
     etat: {
         type: String,
         enum: ['neuf', 'comme neuf', 'utilisé', 'endommagé'],
@@ -41,7 +37,10 @@ const objetSchema = new mongoose.Schema({
     valeur_estimee: {
         type: Number,
         required: true
-    }
+    },
+    image_url: {
+        type: String
+    },
 });
 
 module.exports = mongoose.model('Objet', objetSchema);
