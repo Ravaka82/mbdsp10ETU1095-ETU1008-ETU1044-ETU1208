@@ -8,12 +8,27 @@ const cloudinary = require('cloudinary').v2;
 
 const getAllObjets = async (req, res) => {
     try {
-        const objets = await Objet.find();
-        res.json(objets);
+        const objets = await Objet.find()
+            .populate({
+                path: 'utilisateur_id', 
+                select: 'prenom'
+            })
+            .populate({
+                path: 'categorie_id', 
+                select: 'nom' 
+            });
+        
+        const objetsWithUserInfo = objets.map(objet => ({
+            ...objet.toObject(),
+            utilisateur_prenom: objet.utilisateur_id ? objet.utilisateur_id.prenom : null
+        }));
+
+        res.json(objetsWithUserInfo);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
+
 
 const getAllImageObject = async (req, res)=> {
     try{
