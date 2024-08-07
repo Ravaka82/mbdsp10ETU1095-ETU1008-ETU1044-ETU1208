@@ -53,6 +53,8 @@ export class ObjetUpdateComponent implements OnInit {
       categorie_id: ['', Validators.required],
       titre: ['', Validators.required],
       description: [''],
+      etat: ['', Validators.required],
+      valeur_estimee: ['', Validators.required],
       statut: ['disponible', Validators.required]
     });
 

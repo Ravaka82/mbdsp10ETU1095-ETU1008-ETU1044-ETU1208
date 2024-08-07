@@ -39,8 +39,23 @@
         </mat-select>
       </mat-form-field>
 
-        <mat-label>Choisi l'image de l'objet : </mat-label><br><br>
-        <input type="file" (change)="onFileSelected($event)">
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>État</mat-label>
+        <mat-select formControlName="etat" required>
+          <mat-option value="neuf">Neuf</mat-option>
+          <mat-option value="comme neuf">Comme neuf</mat-option>
+          <mat-option value="utilisé">Utilisé</mat-option>
+          <mat-option value="endommagé">Endommagé</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Valeur estimée</mat-label>
+        <input matInput formControlName="valeur_estimee" type="number" required>
+      </mat-form-field>
+
+      <mat-label>Choisi l'image de l'objet : </mat-label><br><br>
+      <input type="file" (change)="onFileSelected($event)">
 
       <div class="actions">
         <button mat-flat-button color="primary" type="submit" [disabled]="loading">

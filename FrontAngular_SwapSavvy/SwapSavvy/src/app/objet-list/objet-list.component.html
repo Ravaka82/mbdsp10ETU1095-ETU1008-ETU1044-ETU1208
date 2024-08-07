@@ -2,22 +2,24 @@
 <h2>Sélectionnez le(s) objet(s) que vous souhaitiez échanger</h2>
 <br><br>
 <form [formGroup]="objetForm" (ngSubmit)="rechercheSimple()">
-<mat-form-field appearance="outline">
-  <mat-label>titre de l'objet</mat-label>
-  <input matInput formControlName="nom" placeholder="titre de l'objet">
-</mat-form-field>
-<button mat-flat-button color="primary" class="full-width">Rechercher</button>
+  <mat-form-field appearance="outline">
+    <mat-label>titre de l'objet</mat-label>
+    <input matInput formControlName="nom" placeholder="titre de l'objet">
+  </mat-form-field>
+  <button mat-flat-button color="primary" class="full-width">Rechercher</button>
 </form>
 <div class="cards-container">
   <div *ngFor="let objet of objets" class="example-card">
     <mat-card [routerLink]="['/DetailObjet', objet._id]" style="background-color: #d7e3ff;">
-      <mat-card-content >
+      <mat-card-content>
         <h2 [routerLink]="['/DetailObjet', objet._id]" class="title_2">{{ objet.titre }}</h2>
         <p>{{ objet.description }}</p>
         <p>Statut: {{ objet.statut }}</p>
+        <p>État: {{ objet.etat }}</p>
+        <p>Valeur estimée: {{ objet.valeur_estimee }} Ariary</p>
         <p>Image: </p>
         <ng-container>
-          <img [src]=objet.image_url alt="Image de l'objet" style="width:305px;height:255px;margin-left:-18px">
+          <img [src]="objet.image_url" alt="Image de l'objet" style="width:305px;height:255px;margin-left:-18px">
         </ng-container>
         <div style="margin-top: 15px;">
           <button mat-flat-button color="primary" [routerLink]="['/demandeEchange', objet._id]">
@@ -25,7 +27,7 @@
           </button>
         </div>
       </mat-card-content>
-      <mat-card-actions class="bt-action" >
+      <mat-card-actions class="bt-action">
         <button mat-flat-button color="primary" [routerLink]="['/update', objet._id]">Mettre à jour</button>
         <button mat-flat-button color="warn" (click)="deleteObjet(objet._id)">Supprimer</button>
       </mat-card-actions>

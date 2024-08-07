@@ -52,10 +52,13 @@ export class ObjetCreateComponent implements OnInit {
       titre: [''],
       description: [''],
       statut: ['disponible'],
-      image: ['']
+      image: [''],
+      etat: [''],
+      valeur_estimee: ['']
+
     });
 
- 
+
     this.fetchUtilisateurs();
     this.fetchCategories();
   }
@@ -95,6 +98,8 @@ export class ObjetCreateComponent implements OnInit {
       formData.append('titre', this.objetForm.get('titre')?.value);
       formData.append('description', this.objetForm.get('description')?.value);
       formData.append('statut', this.objetForm.get('statut')?.value);
+      formData.append('etat', this.objetForm.get('etat')?.value);
+      formData.append('valeur_estimee', this.objetForm.get('valeur_estimee')?.value);
       if (this.selectedFile) {
         formData.append('image', this.selectedFile);
       }
