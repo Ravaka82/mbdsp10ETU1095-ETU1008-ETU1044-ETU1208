@@ -8,7 +8,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -19,8 +24,30 @@ public class EchangeObjet implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "objet_propose_id", nullable = false)
+    private Objet objetPropose;
+    
+    @ManyToOne
+    @JoinColumn(name = "objet_demande_id", nullable = false)
+    private Objet objetDemande;
+    
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_proposant_id", nullable = false)
+    private User utilisateurProposant;
+    
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_demande_id", nullable = false)
+    private User utilisateurDemande;
+    
+    private String statut;  // En attente, Accepté, Refusé
+    private Date dateProposition;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateEchange;
 
     public Long getId() {
         return id;
@@ -28,6 +55,14 @@ public class EchangeObjet implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 
     @Override
