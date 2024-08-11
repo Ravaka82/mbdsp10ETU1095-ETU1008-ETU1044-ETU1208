@@ -1,0 +1,8 @@
+<h2>Liste des échanges</h2>
+<ul>
+  <li *ngFor="let echange of echanges">
+    <a [routerLink]="['/echange-detail', echange.id]">
+      Échange {{ echange.id }} - Statut : {{ echange.statut }}
+    </a>
+  </li>
+</ul>
