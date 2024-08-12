@@ -44,6 +44,8 @@ public class EchangeObjet implements Serializable {
     private User utilisateurDemande;
     
     private String statut;  // En attente, Accepté, Refusé
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateProposition;
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,6 +57,46 @@ public class EchangeObjet implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public Objet getObjetPropose() {
+        return objetPropose;
+    }
+
+    public void setObjetPropose(Objet objetPropose) {
+        this.objetPropose = objetPropose;
+    }
+    
+    public Objet getObjetDemande() {
+        return objetDemande;
+    }
+
+    public void setObjetDemande(Objet objetDemande) {
+        this.objetDemande = objetDemande;
+    }
+    
+    public User getUtilisateurProposant() {
+        return utilisateurProposant;
+    }
+
+    public void setUtilisateurProposant(User utilisateurProposant) {
+        this.utilisateurProposant = utilisateurProposant;
+    }
+
+    public User getUtilisateurDemande() {
+        return utilisateurDemande;
+    }
+
+    public void setUtilisateurDemande(User utilisateurDemande) {
+        this.utilisateurDemande = utilisateurDemande;
+    }
+    
+    public Date getDateProposition() {
+        return dateProposition;
+    }
+
+    public void setDateProposition(Date dateProposition) {
+        this.dateProposition = dateProposition;
     }
     
     public String getStatut() {
@@ -89,9 +131,4 @@ public class EchangeObjet implements Serializable {
     public String toString() {
         return "mg.itu.tptmbdsp10.entity.EchangeObjet[ id=" + id + " ]";
     }
-
-    public void setDateProposition(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }
