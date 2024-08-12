@@ -89,5 +89,9 @@ public class EchangeObjet implements Serializable {
     public String toString() {
         return "mg.itu.tptmbdsp10.entity.EchangeObjet[ id=" + id + " ]";
     }
+
+    public void setDateProposition(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
