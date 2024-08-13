@@ -1,9 +1,10 @@
 export interface Echange {
   id: number;
-  objetDemandeId: number;
   objetOffreId: number;
-  utilisateurDemandeId: number;
+  objetDemandeId: number;
   utilisateurOffreId: number;
-  dateEchange: Date;
+  utilisateurDemandeId: number;
+  dateProposition: Date;
+  dateEchange?: Date;
   statut: string;
 }

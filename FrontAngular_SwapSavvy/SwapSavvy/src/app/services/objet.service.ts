@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Objet } from '../objets/objets.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,16 @@ export class ObjetService {
 
   getObjets(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
+  }
+
+  // Méthode pour obtenir les objets de l'utilisateur connecté
+  getObjetsUser(): Observable<Objet[]> {
+    return this.http.get<Objet[]>(`${this.apiUrl}/user`);
+  }
+
+  // Méthode pour obtenir les objets des autres utilisateurs
+  getObjetsAll(): Observable<Objet[]> {
+    return this.http.get<Objet[]>(`${this.apiUrl}/all`);
   }
 
   createObjet(objet: any): Observable<any> {
