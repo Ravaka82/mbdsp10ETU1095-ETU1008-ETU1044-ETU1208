@@ -10,6 +10,7 @@ export class User {
 }
 
 export interface Objet {
+  _id: string;
   id: number;
   titre: string;
   description: string;

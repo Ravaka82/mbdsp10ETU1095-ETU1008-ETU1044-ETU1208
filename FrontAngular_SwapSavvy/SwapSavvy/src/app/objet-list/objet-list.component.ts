@@ -154,4 +154,14 @@ export class ObjetListComponent implements OnInit {
       }
     );
   }
+
+  proposerEchange(id: number): void {
+    console.log('Proposer un échange pour l\'objet avec ID :', id);
+    this.router.navigate(['/proposeEchange', id]);
+  }
+
+  demanderEchange(id: number): void {
+    console.log('Demander un échange pour l\'objet avec ID :', id);
+    this.router.navigate(['/demanderEchange', id]);
+  }
 }
