@@ -236,13 +236,17 @@ const rechercheAvanceObjets = async (req, res) => {
             query.statut = statut;
         }
 
-        const objets = await Objet.find(query).populate('categorie_id', 'nom');
+        const objets = await Objet.find(query).populate('categorie_id', 'nom').populate('utilisateur_id', 'prenom');
 
         if (objets.length === 0) {
             return res.status(404).json({ message: 'Aucun objet trouvé pour les critères donnés' });
         }
-
-        res.json(objets);
+        const objetsWithUserInfo = objets.map(objet => ({
+            ...objet.toObject(),
+            utilisateur_prenom: objet.utilisateur_id ? objet.utilisateur_id.prenom : null
+          }));
+          
+        res.json(objetsWithUserInfo);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

@@ -50,7 +50,6 @@ export class ObjetListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchObjets();
     const user = localStorage.getItem('user');
     console.log('Données stockées dans localStorage :', user);
     if (user) {
@@ -58,6 +57,21 @@ export class ObjetListComponent implements OnInit {
       console.log('Utilisateur récupéré :', this.user);
     } else {
       console.error('Aucun utilisateur trouvé dans localStorage');
+    }
+    if (history.state && history.state.objets) {
+      this.objets = history.state.objets;
+      this.objetsUser = [];
+      this.objetsAll = [];
+
+      for (const objet of this.objets) {
+        if (objet.utilisateur_id._id === this.user._id) {
+          this.objetsUser.push(objet);
+        } else {
+          this.objetsAll.push(objet);
+        }
+      }
+    } else {
+      this.fetchObjets();
     }
   }
 
