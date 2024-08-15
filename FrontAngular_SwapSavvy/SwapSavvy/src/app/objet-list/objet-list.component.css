@@ -167,3 +167,27 @@ button[mat-flat-button]:hover {
   width: 150px;
 }
 
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
