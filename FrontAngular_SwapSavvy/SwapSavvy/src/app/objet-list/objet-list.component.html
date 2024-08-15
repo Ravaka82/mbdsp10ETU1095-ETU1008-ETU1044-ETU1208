@@ -27,8 +27,8 @@
               <p>Image: </p>
               <img [src]="objet.image_url" alt="Image de l'objet" class="object-image">
               <div class="button-container">
-                <button mat-flat-button color="primary" (click)="proposerEchange(objet._id)">
-                  <i class="material-icons">check</i> Sélectionner cet objet
+                <button mat-flat-button color="primary" (click)="demanderEchange(objet._id)">
+                  <i class="material-icons">check</i> Consulter mon objet
                 </button>
               </div>
             </mat-card-content>
@@ -59,7 +59,7 @@
               <p>Image: </p>
               <img [src]="objet.image_url" alt="Image de l'objet" class="object-image">
               <div class="button-container">
-                <button mat-flat-button color="primary" (click)="demanderEchange(objet._id)">
+                <button mat-flat-button color="primary" (click)="proposerEchange(objet._id)">
                   <i class="material-icons">check</i> Sélectionner cet objet
                 </button>
               </div>
