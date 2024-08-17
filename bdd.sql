@@ -49,3 +49,10 @@ CREATE TABLE images_objets (
     date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE details_echanges (
+	details_echange_id SERIAL PRIMARY KEY,
+	echange_id INTEGER REFERENCES echanges(echange_id),
+	objet_id INTEGER REFERENCES objets(objet_id),
+	utilisateur_id INTEGER REFERENCES utilisateurs(utilisateur_id)
+);
+
