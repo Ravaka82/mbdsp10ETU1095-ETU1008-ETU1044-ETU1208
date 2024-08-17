@@ -24,7 +24,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class EchangeService {
     
-    @PersistenceContext(unitName = "swapsavvyPU")
+    @PersistenceContext(unitName = "exchangePU")
     private EntityManager em;
 
     @GET
