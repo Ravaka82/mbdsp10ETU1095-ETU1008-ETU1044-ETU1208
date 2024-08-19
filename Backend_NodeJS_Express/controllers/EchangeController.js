@@ -113,11 +113,31 @@ const updateEchange = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const getEchangeById = async (req, res) => {
+    const { echange_id } = req.params;
+
+    try {
+        const echange = await Echange.findById(echange_id)
+            .populate('objet_proposant')
+            .populate('objet_acceptant')
+            .populate('utilisateur_proposant_id')
+            .populate('utilisateur_acceptant_id');
+
+        if (!echange) {
+            return res.status(404).json({ message: 'Echange not found' });
+        }
+
+        res.status(200).json(echange);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 
 module.exports = {
     createEchange,
     getEchangesByUtilisateur,
     deleteEchange,
-    updateEchange
+    updateEchange,
+    getEchangeById
 };
