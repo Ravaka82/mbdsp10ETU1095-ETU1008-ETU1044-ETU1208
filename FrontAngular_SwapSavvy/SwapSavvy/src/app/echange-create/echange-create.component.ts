@@ -31,7 +31,7 @@ export class EchangeCreateComponent {
   loading: boolean = false;
   selectedObjetUser?: Objet;
   selectedObjetOther?: Objet;
- 
+
 
   constructor(private echangeService: EchangeService, private objetService: ObjetService, private snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
     this.echangeForm = this.fb.group({
@@ -80,14 +80,14 @@ export class EchangeCreateComponent {
     );
   }
   proposerEchange(): void {
-    
+
     if (this.echangeForm.valid) {
       const echangeData = {
         utilisateur_proposant_id: this.user._id,
         objet_proposant: this.echangeForm.get('objet_proposant')?.value,
         objet_acceptant: this.echangeForm.get('objet_acceptant')?.value
       };
-     
+
       this.echangeService.createEchange(echangeData).subscribe(
         response => {
           this.snackBar.open('Échange proposé avec succès.', 'Fermer', {
@@ -95,7 +95,7 @@ export class EchangeCreateComponent {
             verticalPosition: 'top',
             horizontalPosition: 'end'
           });
-          this.router.navigate(['/path-after-success']); // Ajustez au besoin
+          this.router.navigate(['/listesEchangesouhaites']); // Ajustez au besoin
         },
         error => {
           console.error('Erreur lors de la proposition de l\'échange:', error);
@@ -110,5 +110,5 @@ export class EchangeCreateComponent {
       console.log('Formulaire invalide');
     }
   }
-  
+
 }
