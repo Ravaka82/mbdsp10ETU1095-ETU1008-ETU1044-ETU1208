@@ -204,7 +204,32 @@ const sendEchangeEmail = async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
+
 };
+
+const updateEchangeStatut = async (req, res) => {
+    const { echange_id } = req.params;
+    const { statut } = req.body;
+
+    try {
+        if (statut !== 'en attente') {
+            return res.status(400).json({ message: 'Le statut doit être "en attente"' });
+        }
+
+        const echange = await Echange.findById(echange_id);
+        if (!echange) {
+            return res.status(404).json({ message: 'Echange not found' });
+        }
+
+        echange.statut = statut;
+
+        const updatedEchange = await echange.save();
+        res.status(200).json(updatedEchange);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 
 module.exports = {
     createEchange,
@@ -212,5 +237,7 @@ module.exports = {
     deleteEchange,
     updateEchange,
     getEchangeById,
-    sendEchangeEmail
+    sendEchangeEmail,
+    updateEchangeStatut
+
 };
