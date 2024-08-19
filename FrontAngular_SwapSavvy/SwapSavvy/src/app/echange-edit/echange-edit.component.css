@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* Vous pouvez ajuster selon les besoins */
+}
+
+.card {
+  width: 100%;
+  max-width: 500px; /* Ajustez la largeur maximale selon vos préférences */
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}

@@ -19,6 +19,13 @@ export class EchangeService {
   createEchange(echange: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, echange);
   }
+  updateEchange(echange_id: string, updatedEchange: Echange): Observable<Echange> {
+    return this.http.put<Echange>(`${this.apiUrl}/${echange_id}`, updatedEchange);
+  }
 
-  
+  getEchangeById(id: string): Observable<Echange> {
+    return this.http.get<Echange>(`${this.apiUrl}/${id}`);
+  }
+
+
 }

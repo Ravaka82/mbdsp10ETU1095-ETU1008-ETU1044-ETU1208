@@ -10,6 +10,7 @@ import { SigninComponent } from './signin/signin.component';
 import { DemandeEchangeComponent } from './demande-echange/demande-echange.component';
 import { EchangeCreateComponent } from './echange-create/echange-create.component';
 import { EchangeListComponent } from './echange-list/echange-list.component';
+import { EchangeEditComponent } from './echange-edit/echange-edit.component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'list', component: ObjetListComponent },
   { path: 'proposeEchange', component: EchangeCreateComponent },
   { path: 'listesEchangesouhaites', component: EchangeListComponent },
+  { path: 'updateEchange/:echange_id', component: EchangeEditComponent },
   { path: 'demandeEchange/:id', component: DemandeEchangeComponent },
   { path: 'update/:id', component: ObjetUpdateComponent },
 
