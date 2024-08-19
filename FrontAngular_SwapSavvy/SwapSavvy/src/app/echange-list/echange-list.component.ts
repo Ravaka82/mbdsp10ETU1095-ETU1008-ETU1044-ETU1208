@@ -3,13 +3,12 @@ import { EchangeService } from '../services/echange.service';
 import { Echange } from '../echange/echange.model';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 
 
 @Component({
   selector: 'app-echange-list',
   standalone: true,
-  imports: [RouterModule, CommonModule, BrowserModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './echange-list.component.html',
   styleUrl: './echange-list.component.css'
 })

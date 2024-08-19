@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EchangeService } from '../services/echange.service';
 import { Echange } from '../echange/echange.model';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-echange-detail',
   standalone: true,
-  imports: [BrowserModule, CommonModule],
+  imports: [CommonModule],
   templateUrl: './echange-detail.component.html',
   styleUrl: './echange-detail.component.css'
 })
