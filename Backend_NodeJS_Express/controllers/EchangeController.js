@@ -76,9 +76,48 @@ const deleteEchange = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const updateEchange = async (req, res) => {
+    const { echange_id } = req.params;
+    const { utilisateur_proposant_id, utilisateur_acceptant_id, objet_proposant, objet_acceptant, statut, date_acceptation } = req.body;
+
+    try {
+        const echange = await Echange.findById(echange_id);
+        if (!echange) {
+            return res.status(404).json({ message: 'Echange not found' });
+        }
+
+        if (objet_proposant) {
+            const objetPropose = await Objet.findById(objet_proposant);
+            if (!objetPropose) {
+                return res.status(404).json({ message: 'Objet proposé not found' });
+            }
+        }
+
+        if (objet_acceptant) {
+            const objetAcceptant = await Objet.findById(objet_acceptant);
+            if (!objetAcceptant) {
+                return res.status(404).json({ message: 'Objet acceptant not found' });
+            }
+        }
+
+        if (utilisateur_proposant_id) echange.utilisateur_proposant_id = utilisateur_proposant_id;
+        if (utilisateur_acceptant_id) echange.utilisateur_acceptant_id = utilisateur_acceptant_id;
+        if (objet_proposant) echange.objet_proposant = objet_proposant;
+        if (objet_acceptant) echange.objet_acceptant = objet_acceptant;
+        if (statut) echange.statut = statut;
+        if (date_acceptation) echange.date_acceptation = new Date(date_acceptation);
+
+        const updatedEchange = await echange.save();
+        res.status(200).json(updatedEchange);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 
 module.exports = {
     createEchange,
     getEchangesByUtilisateur,
-    deleteEchange
+    deleteEchange,
+    updateEchange
 };
