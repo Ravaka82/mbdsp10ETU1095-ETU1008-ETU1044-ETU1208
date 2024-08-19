@@ -3,12 +3,14 @@ import { EchangeService } from '../services/echange.service';
 import { Echange } from '../echange/echange.model';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-echange-list',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule,MatInputModule,MatCardModule,MatButtonModule],
   templateUrl: './echange-list.component.html',
   styleUrl: './echange-list.component.css'
 })
