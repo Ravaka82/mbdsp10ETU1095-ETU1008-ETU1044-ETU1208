@@ -1,6 +1,7 @@
 const Echange = require('../models/echangeModel');
 const Objet = require('../models/objetModel');
 const Utilisateur = require('../models/utilisateurModel');
+const nodemailer = require('nodemailer');
 
 const createEchange = async (req, res) => {
     const { utilisateur_proposant_id, objet_proposant, objet_acceptant } = req.body;
@@ -134,10 +135,109 @@ const getEchangeById = async (req, res) => {
 };
 
 
+const sendEmail = async (from, to, subject, text) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail', 
+        auth: {
+            user: from.email,
+            pass: from.password
+        }
+    });
+
+    const mailOptions = {
+        from: from.email,
+        to,
+        subject,
+        text
+    };
+
+    return transporter.sendMail(mailOptions);
+};
+
+const sendEchangeEmail = async (req, res) => {
+    const { echange_id } = req.params;
+
+    try {
+        const echange = await Echange.findById(echange_id)
+            .populate('objet_proposant')
+            .populate('objet_acceptant')
+            .populate('utilisateur_proposant_id')
+            .populate('utilisateur_acceptant_id');
+
+        if (!echange) {
+            return res.status(404).json({ message: 'Echange not found' });
+        }
+
+        const utilisateurProposant = await Utilisateur.findById(echange.utilisateur_proposant_id);
+        const utilisateurAcceptant = await Utilisateur.findById(echange.utilisateur_acceptant_id);
+        const objetPropose = await Objet.findById(echange.objet_proposant);
+        const objetAcceptant = await Objet.findById(echange.objet_acceptant);
+
+        if (!utilisateurProposant || !utilisateurAcceptant || !objetPropose || !objetAcceptant) {
+            return res.status(404).json({ message: 'One or more related entities not found' });
+        }
+
+        const emailContent = `
+            Bonjour ${utilisateurAcceptant.nom},
+
+            Vous avez reçu une proposition d'échange :
+
+            Objet proposé : ${objetPropose.nom}
+            Objet acceptant : ${objetAcceptant.nom}
+
+            Veuillez consulter les détails et répondre à la proposition.
+
+            Cordialement,
+            Votre Équipe
+        `;
+
+        await sendEmail(
+            {
+                email: utilisateurProposant.email,
+                password: utilisateurProposant.emailPassword 
+            },
+            utilisateurAcceptant.email,
+            'Proposition d\'échange',
+            emailContent
+        );
+        res.status(200).json({ message: 'Email sent successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+
+};
+
+const updateEchangeStatut = async (req, res) => {
+    const { echange_id } = req.params;
+    const { statut } = req.body;
+
+    try {
+        if (statut !== 'en attente') {
+            return res.status(400).json({ message: 'Le statut doit être "en attente"' });
+        }
+
+        const echange = await Echange.findById(echange_id);
+        if (!echange) {
+            return res.status(404).json({ message: 'Echange not found' });
+        }
+
+        echange.statut = statut;
+
+        const updatedEchange = await echange.save();
+        res.status(200).json(updatedEchange);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
 module.exports = {
     createEchange,
     getEchangesByUtilisateur,
     deleteEchange,
     updateEchange,
-    getEchangeById
+    getEchangeById,
+    sendEchangeEmail,
+    updateEchangeStatut
+
 };
