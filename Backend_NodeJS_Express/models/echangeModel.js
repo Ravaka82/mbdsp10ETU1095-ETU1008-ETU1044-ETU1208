@@ -8,16 +8,16 @@ const echangeSchema = new mongoose.Schema({
     },
     utilisateur_acceptant_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'utilisateur'
+        ref: 'Utilisateur'
     },
     objet_proposant: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'objet',
+        ref: 'Objet',
         required: true
     },
     objet_acceptant:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'objet',
+        ref: 'Objet',
         required: true
     },
     date_proposition:{

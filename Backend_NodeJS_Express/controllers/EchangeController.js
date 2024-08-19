@@ -17,10 +17,16 @@ const createEchange = async (req, res) => {
         if (!objetPropose) {
             return res.status(404).json({ message: 'Objet proposé not found' });
         }
-
+        const objetAcceptant= await Objet.findById(objet_acceptant);
+        if (!objetAcceptant) {
+            return res.status(404).json({ message: 'Objet acceptant not found' });
+        }
+        const utilisateur_acceptant_id=objetAcceptant.utilisateur_id;
+        
         // Créez un nouvel échange
         const echange = new Echange({
             utilisateur_proposant_id,
+            utilisateur_acceptant_id:utilisateur_acceptant_id,
             objet_proposant,
             objet_acceptant,
             date_proposition: new Date(),
@@ -34,7 +40,27 @@ const createEchange = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const getEchangesByUtilisateur = async (req, res) => {
+    const { utilisateur_id } = req.params; // Changer le nom du paramètre ici
 
+    try {
+        // Assurez-vous que la méthode find utilise un filtre correct
+        const echanges = await Echange.find({ utilisateur_proposant_id: utilisateur_id })
+        .populate('objet_proposant')
+        .populate('objet_acceptant')
+        .populate('utilisateur_proposant_id')
+        .populate('utilisateur_acceptant_id');
+
+        if (echanges.length === 0) {
+            return res.status(404).json({ message: 'Aucun échange trouvé pour cet utilisateur' });
+        }
+
+        res.status(200).json(echanges);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 module.exports = {
-    createEchange
+    createEchange,
+    getEchangesByUtilisateur
 };
