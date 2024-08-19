@@ -7,4 +7,5 @@ router.get('/lisesobjetsouhaites/:utilisateur_id' ,echangeController.getEchanges
 router.delete('/:echange_id', echangeController.deleteEchange);
 router.put('/:echange_id', echangeController.updateEchange);
 router.get('/:echange_id', echangeController.getEchangeById);
+router.post('/email/:echange_id', echangeController.sendEchangeEmail);
 module.exports = router;
