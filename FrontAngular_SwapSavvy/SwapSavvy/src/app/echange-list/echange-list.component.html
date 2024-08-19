@@ -1,3 +1,4 @@
+<!-- HTML pour la liste des échanges -->
 <h1 class="title1"><strong>Liste des objets souhaitant échanger</strong></h1>
 
 <br><br>
@@ -33,7 +34,7 @@
               </mat-card-content>
               <mat-card-actions class="bt-action">
                 <button mat-flat-button color="primary" (click)="updateEchange(objet._id)">Mettre à jour</button>
-                <button mat-flat-button color="warn">Supprimer</button>
+                <button mat-flat-button color="warn" (click)="openConfirmDialog(objet._id)">Supprimer</button>
               </mat-card-actions>
             </mat-card>
           </div>
