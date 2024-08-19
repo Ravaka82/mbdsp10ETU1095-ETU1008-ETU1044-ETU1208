@@ -60,7 +60,25 @@ const getEchangesByUtilisateur = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+const deleteEchange = async (req, res) => {
+    const { echange_id } = req.params;
+
+    try {
+        const echange = await Echange.findByIdAndDelete(echange_id);
+
+        if (!echange) {
+            return res.status(404).json({ message: 'Echange not found' });
+        }
+
+        res.status(200).json({ message: 'Echange deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 module.exports = {
     createEchange,
-    getEchangesByUtilisateur
+    getEchangesByUtilisateur,
+    deleteEchange
 };
