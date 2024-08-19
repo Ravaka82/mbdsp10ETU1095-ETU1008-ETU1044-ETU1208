@@ -26,9 +26,13 @@ export class EchangeService {
   getEchangeById(id: string): Observable<Echange> {
     return this.http.get<Echange>(`${this.apiUrl}/${id}`);
   }
-  
+
   deleteEchange(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  updateEchangeStatut(echange_id: string, statut: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/statut/${echange_id}`, { statut });
   }
 
 }

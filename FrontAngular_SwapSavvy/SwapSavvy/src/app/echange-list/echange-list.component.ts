@@ -72,8 +72,7 @@ export class EchangeListComponent implements OnInit {
           verticalPosition: 'top',
           horizontalPosition: 'end'
         });
-        window.location.reload();
-        this.listesobjetsouhaite(); 
+        this.listesobjetsouhaite();
       },
       error => {
         console.error('Erreur lors de la suppression de l\'échange :', error);
@@ -85,7 +84,29 @@ export class EchangeListComponent implements OnInit {
       }
     );
   }
+
   updateEchange(id: string) {
     this.router.navigate([`/updateEchange/${id}`]);
+  }
+
+  setPendingStatus(id: string) {
+    this.echangeService.updateEchangeStatut(id, 'en attente').subscribe(
+      () => {
+        this.snackBar.open('En attente de validation.', 'Fermer', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'end'
+        });
+        this.listesobjetsouhaite();
+      },
+      error => {
+        console.error('Erreur lors de la mise à jour du statut:', error);
+        this.snackBar.open('Erreur lors de la mise à jour du statut.', 'Fermer', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'end'
+        });
+      }
+    );
   }
 }
