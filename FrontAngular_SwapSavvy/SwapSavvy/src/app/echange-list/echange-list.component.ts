@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'app-echange-list',
   standalone: true,
@@ -13,13 +14,32 @@ import { BrowserModule } from '@angular/platform-browser';
   styleUrl: './echange-list.component.css'
 })
 export class EchangeListComponent implements OnInit {
-  echanges: Echange[] = [];
-
+  echanges: any[] = [];
+  user: any;
   constructor(private echangeService: EchangeService) { }
 
   ngOnInit(): void {
-    this.echangeService.getAllEchanges().subscribe(data => {
-      this.echanges = data;
-    });
+    const user = localStorage.getItem('user');
+    console.log('Données stockées dans localStorage :', user);
+    if (user) {
+      this.user = JSON.parse(user);
+      console.log('Utilisateur récupéré :', this.user);
+    } else {
+      console.error('Aucun utilisateur trouvé dans localStorage');
+    }
+    this.listesobjetsouhaite();
   }
-}
+  listesobjetsouhaite(){
+    const utilisateur_id = this.user._id;
+    this.echangeService.getEchangesByUtilisateur(utilisateur_id)
+      .subscribe(
+        (data) => {
+          this.echanges = data;
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération des échanges:', error);
+        }
+      );
+  }
+  }
+

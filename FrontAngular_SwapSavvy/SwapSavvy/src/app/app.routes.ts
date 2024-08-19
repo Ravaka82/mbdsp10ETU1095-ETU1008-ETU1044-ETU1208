@@ -9,6 +9,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { DemandeEchangeComponent } from './demande-echange/demande-echange.component';
 import { EchangeCreateComponent } from './echange-create/echange-create.component';
+import { EchangeListComponent } from './echange-list/echange-list.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
@@ -17,6 +19,7 @@ export const routes: Routes = [
   { path: 'create', component: ObjetCreateComponent },
   { path: 'list', component: ObjetListComponent },
   { path: 'proposeEchange', component: EchangeCreateComponent },
+  { path: 'listesEchangesouhaites', component: EchangeListComponent },
   { path: 'demandeEchange/:id', component: DemandeEchangeComponent },
   { path: 'update/:id', component: ObjetUpdateComponent },
 
