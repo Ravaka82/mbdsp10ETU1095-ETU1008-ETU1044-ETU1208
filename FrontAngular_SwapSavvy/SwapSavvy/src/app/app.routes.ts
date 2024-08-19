@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'create', component: ObjetCreateComponent },
   { path: 'list', component: ObjetListComponent },
-  { path: 'proposeEchange/:id', component: EchangeCreateComponent },
+  { path: 'proposeEchange', component: EchangeCreateComponent },
   { path: 'demandeEchange/:id', component: DemandeEchangeComponent },
   { path: 'update/:id', component: ObjetUpdateComponent },
 

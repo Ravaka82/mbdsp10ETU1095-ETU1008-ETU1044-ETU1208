@@ -1,10 +1,11 @@
 export interface Echange {
-  id: number;
-  objetOffreId: number;
-  objetDemandeId: number;
-  utilisateurOffreId: number;
-  utilisateurDemandeId: number;
-  dateProposition: Date;
-  dateEchange?: Date;
+  _id: string;
+  utilisateur_proposant_id: string;
+  utilisateur_acceptant_id: string;
+  objet_proposant: string;
+  objet_acceptant: string;
+  date_proposition: Date;
+  date_acceptation: Date|null;
   statut: string;
 }
+

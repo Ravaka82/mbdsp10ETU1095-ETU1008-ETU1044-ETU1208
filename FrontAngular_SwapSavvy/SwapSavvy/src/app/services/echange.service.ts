@@ -8,7 +8,7 @@ import { Echange } from '../echange/echange.model';
 })
 export class EchangeService {
 
-  private apiUrl = 'http://localhost:8080/api/echange';
+  private apiUrl = 'http://localhost:3000/api/echanges';
 
   constructor(private http: HttpClient) { }
 
@@ -16,8 +16,8 @@ export class EchangeService {
     return this.http.get<Echange[]>(this.apiUrl);
   }
 
-  createEchange(echange: Echange): Observable<Echange> {
-    return this.http.post<Echange>(this.apiUrl, echange);
+  createEchange(echange: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, echange);
   }
 
   updateEchange(id: number, echange: Echange): Observable<Echange> {

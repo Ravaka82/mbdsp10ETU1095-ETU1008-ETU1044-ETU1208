@@ -1,15 +1,15 @@
 <h2>Proposer un échange</h2>
-<form (ngSubmit)="proposerEchange()" #echangeForm="ngForm">
+<form [formGroup]="echangeForm" (ngSubmit)="proposerEchange()">
   <!-- Sélectionnez votre objet à échanger -->
   <mat-form-field appearance="fill">
     <mat-label>Objet à échanger : </mat-label>
 
-    <mat-select id="objetOffre" [(ngModel)]="echange.objetOffreId" name="objetOffreId" #objetOffreId="ngModel" required>
+    <mat-select formControlName="objet_proposant" required>
       <mat-option *ngFor="let objet of objetsUser" [value]="objet._id">
         {{ objet.titre }}
       </mat-option>
     </mat-select>
-    <mat-error *ngIf="objetOffreId.invalid && objetOffreId.touched">
+    <mat-error *ngIf="echangeForm.controls['objet_proposant']?.invalid && echangeForm.controls['objet_proposant']?.touched">
       Veuillez sélectionner un objet à échanger.
     </mat-error>
   </mat-form-field>
@@ -17,12 +17,12 @@
   <!-- Sélectionnez l'objet de l'autre utilisateur -->
   <mat-form-field appearance="fill">
     <mat-label>Objet demandé : </mat-label>
-    <mat-select id="objetDemande" [(ngModel)]="echange.objetDemandeId" name="objetDemandeId" #objetDemandeId="ngModel" required>
+    <mat-select formControlName="objet_acceptant" required>
       <mat-option *ngFor="let objet of objetsAll" [value]="objet._id">
         {{ objet.titre }}
       </mat-option>
     </mat-select>
-    <mat-error *ngIf="objetDemandeId.invalid && objetDemandeId.touched">
+    <mat-error *ngIf="echangeForm.controls['objet_acceptant']?.invalid && echangeForm.controls['objet_acceptant']?.touched">
       Veuillez sélectionner un objet demandé.
     </mat-error>
   </mat-form-field>
