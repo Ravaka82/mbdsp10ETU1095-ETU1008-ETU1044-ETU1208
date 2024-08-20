@@ -46,7 +46,7 @@ const getEchangesByUtilisateur = async (req, res) => {
 
     try {
         // Assurez-vous que la méthode find utilise un filtre correct
-        const echanges = await Echange.find({ utilisateur_proposant_id: utilisateur_id })
+        const echanges = await Echange.find({ utilisateur_proposant_id: utilisateur_id,statut: 'en cours' })
         .populate('objet_proposant')
         .populate('objet_acceptant')
         .populate('utilisateur_proposant_id')
@@ -61,7 +61,26 @@ const getEchangesByUtilisateur = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const getEchangeEnAttente = async (req, res) => {
+    const { utilisateur_id } = req.params; // Changer le nom du paramètre ici
 
+    try {
+        // Assurez-vous que la méthode find utilise un filtre correct
+        const echanges = await Echange.find({ utilisateur_proposant_id: utilisateur_id,statut: 'en attente' })
+        .populate('objet_proposant')
+        .populate('objet_acceptant')
+        .populate('utilisateur_proposant_id')
+        .populate('utilisateur_acceptant_id');
+
+        if (echanges.length === 0) {
+            return res.status(404).json({ message: 'Aucun échange trouvé pour cet utilisateur' });
+        }
+
+        res.status(200).json(echanges);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 const deleteEchange = async (req, res) => {
     const { echange_id } = req.params;
 
@@ -238,6 +257,7 @@ module.exports = {
     updateEchange,
     getEchangeById,
     sendEchangeEmail,
-    updateEchangeStatut
+    updateEchangeStatut,
+    getEchangeEnAttente
 
 };

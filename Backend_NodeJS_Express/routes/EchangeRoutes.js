@@ -9,4 +9,5 @@ router.put('/:echange_id', echangeController.updateEchange);
 router.get('/:echange_id', echangeController.getEchangeById);
 router.post('/email/:echange_id', echangeController.sendEchangeEmail);
 router.put('/statut/:echange_id', echangeController.updateEchangeStatut);
+router.get('/EchangePropose/:utilisateur_id', echangeController.getEchangeEnAttente);
 module.exports = router;
