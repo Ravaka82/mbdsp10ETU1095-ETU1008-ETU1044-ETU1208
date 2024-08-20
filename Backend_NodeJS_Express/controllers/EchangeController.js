@@ -66,7 +66,7 @@ const getEchangeEnAttente = async (req, res) => {
 
     try {
         // Assurez-vous que la méthode find utilise un filtre correct
-        const echanges = await Echange.find({ utilisateur_proposant_id: utilisateur_id,statut: 'en attente' })
+        const echanges = await Echange.find({ utilisateur_acceptant_id: utilisateur_id,statut: 'en attente' })
         .populate('objet_proposant')
         .populate('objet_acceptant')
         .populate('utilisateur_proposant_id')
