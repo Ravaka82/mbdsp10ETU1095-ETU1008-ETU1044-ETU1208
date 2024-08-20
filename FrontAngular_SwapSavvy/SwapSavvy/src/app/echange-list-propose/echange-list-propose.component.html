@@ -1,1 +1,45 @@
-<p>echange-list-propose works!</p>
+<!-- HTML pour la liste des échanges -->
+<h1 class="title1"><strong>Liste des échanges proposées</strong></h1>
+
+<br><br>
+<div class="centered-container">
+  <div class="cards-container">
+    <!-- Section des objets de l'utilisateur -->
+    <div class="column">
+      <div class="row">
+        <div *ngFor="let objet of echanges" class="col-md-6">
+          <div class="example-card">
+            <mat-card class="card-background">
+              <mat-card-content>
+                <div class="card-content">
+                  <div class="card-half">
+                    <h3 class="section-title">L'objet propose:</h3>
+                    <h2 class="title_2">{{ objet.objet_proposant.titre }}</h2>
+                    <p>Utilisateur proposant: <span class="title_2">{{ objet.utilisateur_proposant_id.nom }}</span></p>
+                    <p>Titre :<span class="title_2">{{ objet.objet_proposant.titre }}</span></p>
+                    <p>Etat :<span class="title_2">{{ objet.objet_proposant.etat }}</span></p>
+                    <p>Image: </p>
+                    <img [src]="objet.objet_proposant.image_url" alt="Image de l'objet" class="object-image">
+                  </div>
+                  <div class="card-half">
+                    <h3 class="section-title">Votre objet:</h3>
+                    <h2 class="title_2">{{ objet.objet_acceptant.titre }}</h2>
+                    <p>Utilisateur acceptant: <span class="title_2">{{ objet.utilisateur_acceptant_id.nom }}</span></p>
+                    <p>Titre :<span class="title_2">{{ objet.objet_acceptant.titre }}</span></p>
+                    <p>Etat :<span class="title_2">{{ objet.objet_acceptant.etat }}</span></p>
+                    <p>Image: </p>
+                    <img [src]="objet.objet_acceptant.image_url" alt="Image de l'objet" class="object-image">
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="bt-action">
+                <button mat-flat-button color="primary">Accepter</button>
+                <button mat-flat-button color="accent">Refuser </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { DemandeEchangeComponent } from './demande-echange/demande-echange.compo
 import { EchangeCreateComponent } from './echange-create/echange-create.component';
 import { EchangeListComponent } from './echange-list/echange-list.component';
 import { EchangeEditComponent } from './echange-edit/echange-edit.component';
+import { EchangeListProposeComponent } from './echange-list-propose/echange-list-propose.component';
 
 
 export const routes: Routes = [
@@ -24,6 +25,7 @@ export const routes: Routes = [
   { path: 'updateEchange/:echange_id', component: EchangeEditComponent },
   { path: 'demandeEchange/:id', component: DemandeEchangeComponent },
   { path: 'update/:id', component: ObjetUpdateComponent },
+  { path: 'ListeEchangePropose', component: EchangeListProposeComponent },
 
   { path: 'DetailObjet/:id', component: DetailsObjetComponent },
   { path: 'rechercheAvance', component: RechercheAvanceObjetComponent },
