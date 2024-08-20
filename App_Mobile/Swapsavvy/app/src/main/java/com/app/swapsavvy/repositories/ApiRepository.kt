@@ -18,4 +18,6 @@ class ApiRepository(private val apiService: ApiService) {
     fun getObjets(): Call<List<Objet>> {
         return apiService.getObjets()
     }
+
+    fun getObjetById(id: String) = apiService.getObjetById(id)
 }
