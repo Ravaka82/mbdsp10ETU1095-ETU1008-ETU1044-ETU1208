@@ -25,4 +25,7 @@ export class UtilisateurService {
   deleteUtilisateur(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
+  logout(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/logout`, {}); // Requête vers l'API de déconnexion
+  }
 }

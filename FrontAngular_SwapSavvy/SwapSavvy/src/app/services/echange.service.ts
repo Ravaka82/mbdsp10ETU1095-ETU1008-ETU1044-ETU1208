@@ -34,5 +34,9 @@ export class EchangeService {
   updateEchangeStatut(echange_id: string, statut: string): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/statut/${echange_id}`, { statut });
   }
+  getEchangeEnAttente(utilisateur_id: string): Observable<any> {
+    const url = `${this.apiUrl}/EchangePropose/${utilisateur_id}`;
+    return this.http.get<any>(url);
+  }
 
 }
