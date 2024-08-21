@@ -58,4 +58,7 @@ export class ObjetService {
     let params = new HttpParams().set('nom', nom);
     return this.http.get<any>(`${this.apiUrl}/RechercheSimple`, { params });
   }
+  updateUtilisateurId(id: string, utilisateurId: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/Modificationobjet/${id}/utilisateur`, { utilisateur_id: utilisateurId });
+  }
 }
