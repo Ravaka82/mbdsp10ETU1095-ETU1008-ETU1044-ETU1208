@@ -25,6 +25,14 @@
             <mat-label>Mot de passe</mat-label>
             <input matInput type="password" id="password" name="password" [(ngModel)]="mot_de_passe" placeholder="Votre mot de passe" required>
           </mat-form-field>
+          <mat-form-field appearance="fill" class="full-width mb-3">
+            <mat-label>Latitude</mat-label>
+            <input matInput type="number" id="latitude" name="latitude" [(ngModel)]="latitude" placeholder="Votre latitude" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="full-width mb-3">
+            <mat-label>Longitude</mat-label>
+            <input matInput type="number" id="longitude" name="longitude" [(ngModel)]="longitude" placeholder="Votre longitude" required>
+          </mat-form-field>
           <button mat-raised-button color="primary" type="submit" class="full-width">S'inscrire</button>
         </form>
         <div *ngIf="inscriptionError" class="alert alert-danger mt-3" role="alert">

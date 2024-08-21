@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import  {RouterLink} from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,9 +19,10 @@ import { MatInputModule } from '@angular/material/input';
     RouterLink,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule,],
+    MatInputModule,
+  ],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
 
@@ -29,29 +30,37 @@ export class SignupComponent {
   prenom: string = '';
   email: string = '';
   mot_de_passe: string = '';
+  latitude: number | undefined;
+  longitude: number | undefined;
 
   // Gestion des erreurs
-  inscriptionError: string = '' ;
+  inscriptionError: string = '';
 
   constructor(private registerService: AuthService, private router: Router) { }
 
   // Inscription
   inscription() {
+    if (this.latitude === undefined || this.longitude === undefined) {
+      this.inscriptionError = 'Latitude et longitude sont requises.';
+      return;
+    }
 
     const form = {
       nom: this.nom,
       prenom: this.prenom,
       email: this.email,
-      mot_de_passe: this.mot_de_passe
+      mot_de_passe: this.mot_de_passe,
+      latitude: this.latitude,
+      longitude: this.longitude
     };
 
     this.registerService.signup(form).subscribe((result) => {
-      if (result.error) this.inscriptionError = result.error ;
-      else {
-        localStorage.setItem('signin', JSON.stringify(result)) ;
-        this.router.navigate(['/signin']) ;
+      if (result.error) {
+        this.inscriptionError = result.error;
+      } else {
+        localStorage.setItem('signin', JSON.stringify(result));
+        this.router.navigate(['/signin']);
       }
-    }) ;
+    });
   }
 }
-
