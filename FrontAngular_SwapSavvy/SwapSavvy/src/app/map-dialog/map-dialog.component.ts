@@ -31,32 +31,59 @@ export class MapDialogComponent implements AfterViewInit {
   ) {}
 
   private initMap(): void {
-    this.map = L.map('map', {
-      center: [-18.90662643252923,47.526624991911596], // Coordonnées pour Antananarivo
-      zoom: 12 
-    });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(this.map);
+    if (this.data && this.data.objet_utilisateur_proposant && this.data.objet_utilisateur_proposant.position) {
+      const proposingCoordinates: [number, number] = [
+        this.data.objet_utilisateur_proposant.position.coordinates[0],
+        this.data.objet_utilisateur_proposant.position.coordinates[1]
+      ];
 
-    if (this.data && this.data.objet_utilisateur_proposant && this.data.objet_utilisateur_acceptant) {
-      this.addMarker(this.data.objet_utilisateur_proposant.position, this.data.objet_utilisateur_proposant.nom);
-      this.addMarker(this.data.objet_utilisateur_acceptant.position, this.data.objet_utilisateur_acceptant.nom);
+      this.map = L.map('map', {
+        center: proposingCoordinates,
+        zoom: 12
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 2,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(this.map);
+
+
+      this.addMarker(proposingCoordinates, this.data.objet_utilisateur_proposant.nom);
+
+      if (this.data.objet_utilisateur_acceptant && this.data.objet_utilisateur_acceptant.position) {
+        const acceptingCoordinates: [number, number] = [
+          this.data.objet_utilisateur_acceptant.position.coordinates[0],
+          this.data.objet_utilisateur_acceptant.position.coordinates[1]
+        ];
+        this.addMarker(acceptingCoordinates, this.data.objet_utilisateur_acceptant.nom);
+
+
+        this.addRoute(proposingCoordinates, acceptingCoordinates);
+      }
+    } else {
+      console.error("Les coordonnées de l'utilisateur proposant ne sont pas disponibles.");
     }
   }
 
-  private addMarker(position: { coordinates: [number, number] }, name: string): void {
+  private addMarker(position: [number, number], name: string): void {
     if (this.map) {
-      const marker = L.marker([position.coordinates[1], position.coordinates[0]])
+      const marker = L.marker(position)
         .addTo(this.map)
-        .bindPopup(`<b>${name}</b><br>Latitude: ${position.coordinates[1]}<br>Longitude: ${position.coordinates[0]}`);
+        .bindPopup(`<b>${name}</b><br>Latitude: ${position[0]}<br>Longitude: ${position[1]}`);
 
       marker.openPopup();
     }
   }
+
+  private addRoute(start: [number, number], end: [number, number]): void {
+    if (this.map) {
+      const route = L.polyline([start, end], { color: 'blue' }).addTo(this.map);
+      this.map.fitBounds(route.getBounds());
+    }
+  }
+
 
   ngAfterViewInit(): void {
     this.initMap();
