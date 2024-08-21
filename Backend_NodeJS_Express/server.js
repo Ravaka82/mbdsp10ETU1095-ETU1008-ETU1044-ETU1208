@@ -16,6 +16,7 @@ mongoose.Promise = global.Promise;
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
 const echangeRoutes= require('./routes/EchangeRoutes');
+const AdminRoutes= require('./routes/AdminRoutes');
 
 const uri = 'mongodb+srv://ravaka:ravaka@cluster0.o8xl4n2.mongodb.net/transversale?retryWrites=true&w=majority&appName=Cluster0'; 
 
@@ -49,6 +50,7 @@ app.use('/api/objets', objetRoutes);
 app.use('/api/utilisateurs', utilisateurRoutes);
 app.use('/api/categories', categorieRoutes);
 app.use('/api/echanges',echangeRoutes);
+app.use('/api/admin',AdminRoutes);
 
 const PORT = process.env.PORT || 3000;
 
