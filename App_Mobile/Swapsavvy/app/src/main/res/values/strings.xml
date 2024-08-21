@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Swapsavvy</string>
+
+    <string name="logo_description">Logo description</string>
+    <string name="email">Email</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>
