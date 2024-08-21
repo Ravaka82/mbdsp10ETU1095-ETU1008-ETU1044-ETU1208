@@ -4,6 +4,7 @@ import com.app.swapsavvy.data.Objet
 import com.app.swapsavvy.data.Utilisateur
 import com.app.swapsavvy.services.ApiService
 import retrofit2.Call
+import retrofit2.Response
 
 class ApiRepository(private val apiService: ApiService) {
 
@@ -20,4 +21,7 @@ class ApiRepository(private val apiService: ApiService) {
     }
 
     fun getObjetById(id: String) = apiService.getObjetById(id)
+    suspend fun login(email: String, password: String): Response<Utilisateur> {
+        return apiService.login(email, password)
+    }
 }

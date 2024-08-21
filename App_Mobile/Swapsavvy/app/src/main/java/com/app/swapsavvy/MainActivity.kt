@@ -105,29 +105,3 @@ fun Greeting(name: String, apiRepository: ApiRepository, modifier: Modifier = Mo
     }
 
 }
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SwapsavvyTheme {
-        Greeting("Android", apiRepository = ApiRepository(apiService = object : ApiService {
-            override fun getUtilisateurById(id: String): Call<Utilisateur> {
-                TODO("Not yet implemented")
-            }
-
-            override fun createUtilisateur(utilisateur: Utilisateur): Call<Utilisateur> {
-                TODO("Not yet implemented")
-            }
-
-            override fun getObjets(): Call<List<Objet>> {
-                TODO("Not yet implemented")
-            }
-
-            override fun getObjetById(id: String): Call<Objet> {
-                TODO("Not yet implemented")
-            }
-
-
-        }))
-    }
-}
