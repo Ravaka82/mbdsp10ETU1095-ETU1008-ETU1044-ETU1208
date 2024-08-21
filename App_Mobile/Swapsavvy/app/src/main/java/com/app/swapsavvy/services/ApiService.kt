@@ -1,13 +1,11 @@
 package com.app.swapsavvy.services
 
+import com.app.swapsavvy.login.LoginResponse
 import com.app.swapsavvy.data.Objet
 import com.app.swapsavvy.data.Utilisateur
+import com.app.swapsavvy.register.RegisterResponse
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import com.app.swapsavvy.services.ApiService
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -15,6 +13,11 @@ import retrofit2.http.Path
 
 interface ApiService {
 
+    @POST("auth/login")
+    fun loginUser(@Body utilisateur: Utilisateur): Call<LoginResponse>
+
+    @POST("auth/register")
+    fun registerUser(@Body utilisateur: Utilisateur): Call<RegisterResponse>
     @GET("utilisateurs/{id}")
     fun getUtilisateurById(@Path("id") id: String): Call<Utilisateur>
 

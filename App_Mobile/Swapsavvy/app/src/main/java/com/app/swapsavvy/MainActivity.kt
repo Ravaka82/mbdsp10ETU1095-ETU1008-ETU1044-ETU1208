@@ -38,10 +38,10 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // Créer une instance d'ApiService
+        // Créer une instance d'ApiServices
         val apiService = retrofit.create(ApiService::class.java)
 
-        // Initialiser ApiRepository avec ApiService
+        // Initialiser ApiRepository avec ApiServices
         apiRepository = ApiRepository(apiService)
 
         setContent {
