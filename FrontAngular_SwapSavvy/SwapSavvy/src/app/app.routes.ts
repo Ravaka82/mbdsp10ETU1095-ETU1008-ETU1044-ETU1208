@@ -13,6 +13,7 @@ import { EchangeListComponent } from './echange-list/echange-list.component';
 import { EchangeEditComponent } from './echange-edit/echange-edit.component';
 import { EchangeListProposeComponent } from './echange-list-propose/echange-list-propose.component';
 import { HistoriqueEchangeComponent } from './historique-echange/historique-echange.component';
+import { MapDialogComponent } from './map-dialog/map-dialog.component';
 
 
 export const routes: Routes = [
@@ -31,5 +32,7 @@ export const routes: Routes = [
   { path: 'DetailObjet/:id', component: DetailsObjetComponent },
   { path: 'rechercheAvance', component: RechercheAvanceObjetComponent },
   { path: 'listeRechercheSimple', component: ListRechercheSimpleComponent },
-  { path: 'historique', component: HistoriqueEchangeComponent }
+  { path: 'historique', component: HistoriqueEchangeComponent },
+  { path: 'map', component: MapDialogComponent }
+
 ];

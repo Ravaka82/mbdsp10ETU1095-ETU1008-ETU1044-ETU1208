@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MapDialogComponent } from '../map-dialog/map-dialog.component';
+
 
 @Component({
   selector: 'app-echange-list',
@@ -108,5 +110,23 @@ export class EchangeListComponent implements OnInit {
         });
       }
     );
+  }
+  openMapDialog(objet: any): void {
+    this.dialog.open(MapDialogComponent, {
+      width: '600px',
+      data: {
+        objet_utilisateur_proposant: {
+          position: objet.utilisateur_proposant_id.position,
+          nom: objet.utilisateur_proposant_id.nom
+        },
+        objet_utilisateur_acceptant: {
+          position: objet.utilisateur_acceptant_id.position,
+          nom: objet.utilisateur_acceptant_id.nom
+        }
+
+      },
+
+    }
+  ); 
   }
 }

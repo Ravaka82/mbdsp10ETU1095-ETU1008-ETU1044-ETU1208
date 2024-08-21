@@ -1,0 +1,26 @@
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dialog-content {
+  padding: 0;
+  margin: 0;
+}
+
+.map-container {
+  height: 500px; /* Ajustez la hauteur selon vos besoins */
+  width: 100%;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dialog-actions button {
+  margin: 0;
+  padding: 10px 20px;
+}
