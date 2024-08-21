@@ -251,7 +251,33 @@ const rechercheAvanceObjets = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const updateUtilisateurIdById = async (req, res) => {
+    try {
+        const { id } = req.params; 
+        const { utilisateur_id } = req.body; 
 
+        if (!utilisateur_id) {
+            return res.status(400).json({ message: 'utilisateur_id is required' });
+        }
+
+       
+        const updatedObjet = await Objet.findByIdAndUpdate(
+            id, 
+            { utilisateur_id }, 
+            { new: true, runValidators: true } 
+        );
+
+       
+        if (!updatedObjet) {
+            return res.status(404).json({ message: 'Objet not found' });
+        }
+
+        res.status(200).json(updatedObjet);
+    } catch (err) {
+       
+        res.status(500).json({ message: err.message });
+    }
+};
 module.exports = {
     getAllObjets,
     createObjet,
@@ -261,5 +287,6 @@ module.exports = {
     getObjetParCategorie,
     RechercheObjetsParTitre,
     rechercheAvanceObjets,
-    getAllImageObject
+    getAllImageObject,
+    updateUtilisateurIdById,
 };

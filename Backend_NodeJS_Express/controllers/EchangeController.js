@@ -248,8 +248,26 @@ const updateEchangeStatut = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const updateEchangeStatutEnValidatation= async (req, res) => {
+    const { echange_id } = req.params;
+    const { statut } = req.body;
 
+    try {
+        const echange = await Echange.findById(echange_id);
+        if (!echange) {
+            return res.status(404).json({ message: 'Echange not found' });
+        }
+        
+        // Update statut and date_acceptation
+        echange.statut = statut;
+        echange.date_acceptation = Date.now();
 
+        const updatedEchange = await echange.save();
+        res.status(200).json(updatedEchange);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 module.exports = {
     createEchange,
     getEchangesByUtilisateur,
@@ -258,6 +276,6 @@ module.exports = {
     getEchangeById,
     sendEchangeEmail,
     updateEchangeStatut,
-    getEchangeEnAttente
-
+    getEchangeEnAttente,
+    updateEchangeStatutEnValidatation,
 };
