@@ -1,0 +1,40 @@
+.title1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  max-width: 80%;
+  overflow-x: auto;
+  margin: 0 auto;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-image {
+  max-width: 100px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.table-cell-content {
+  display: flex;
+  align-items: center;
+}
+
+.table-text p {
+  margin: 0;
+}
+
+.date-info {
+  font-style: italic;
+  color: #555;
+}
+
+.status-info {
+  font-weight: bold;
+  color: #007bff; /* Couleur pour le statut, personnaliser si nécessaire */
+}

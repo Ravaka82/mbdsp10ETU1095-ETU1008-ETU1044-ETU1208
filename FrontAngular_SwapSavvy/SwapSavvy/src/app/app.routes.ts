@@ -12,6 +12,7 @@ import { EchangeCreateComponent } from './echange-create/echange-create.componen
 import { EchangeListComponent } from './echange-list/echange-list.component';
 import { EchangeEditComponent } from './echange-edit/echange-edit.component';
 import { EchangeListProposeComponent } from './echange-list-propose/echange-list-propose.component';
+import { HistoriqueEchangeComponent } from './historique-echange/historique-echange.component';
 
 
 export const routes: Routes = [
@@ -29,5 +30,6 @@ export const routes: Routes = [
 
   { path: 'DetailObjet/:id', component: DetailsObjetComponent },
   { path: 'rechercheAvance', component: RechercheAvanceObjetComponent },
-  { path: 'listeRechercheSimple', component: ListRechercheSimpleComponent }
+  { path: 'listeRechercheSimple', component: ListRechercheSimpleComponent },
+  { path: 'historique', component: HistoriqueEchangeComponent }
 ];

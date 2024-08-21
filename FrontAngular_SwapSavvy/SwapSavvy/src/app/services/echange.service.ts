@@ -41,6 +41,9 @@ export class EchangeService {
   updateEchangeStatutEnValidation(echange_id: string, statut: string): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/echange/${echange_id}/statut`, { statut });
   }
-  
+  getHistoriqueEchanges(utilisateur_id: string): Observable<any> {
+    const url = `${this.apiUrl}/historique/${utilisateur_id}`;
+    return this.http.get<any>(url);
+  }
 
 }
