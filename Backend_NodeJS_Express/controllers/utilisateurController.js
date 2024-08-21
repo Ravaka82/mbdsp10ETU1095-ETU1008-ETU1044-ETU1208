@@ -49,30 +49,45 @@ const getUtilisateurById = async (req, res, next) => {
     }
 };
 async function inscription(req, res) {
-    try {
+  try {
+
       if (!req.body.nom || !req.body.prenom || !req.body.email || !req.body.mot_de_passe) {
-        return res.status(400).send("All fields are required.");
+          return res.status(400).send("All fields are required.");
       }
+
   
+      const { latitude, longitude } = req.body;
+      if (latitude === undefined || longitude === undefined) {
+          return res.status(400).send("Latitude and longitude are required.");
+      }
+
+    
       const hashedPassword = await bcrypt.hash(req.body.mot_de_passe, 8);
+
+     
       const user = await Utilisateur.create({
-        nom: req.body.nom,
-        prenom: req.body.prenom,
-        email: req.body.email,
-        mot_de_passe: hashedPassword
-      });
-  
-      const token = jwt.sign({ id: user._id }, config.secret, {
-        expiresIn: 86400 
+          nom: req.body.nom,
+          prenom: req.body.prenom,
+          email: req.body.email,
+          mot_de_passe: hashedPassword,
+          position: {
+              type: 'Point',
+              coordinates: [longitude, latitude] // [longitude, latitude]
+          }
       });
 
-      res.status(200).send({ auth: true, token: token });
-    } catch (err) {
      
+      const token = jwt.sign({ id: user._id }, config.secret, {
+          expiresIn: 86400 // 24 heures
+      });
+
+   
+      res.status(200).send({ auth: true, token: token });
+  } catch (err) {
       console.error(err);
       res.status(500).send("There was a problem registering the user.");
-    }
   }
+}
 
   async function getUserConnected(req, res, next) {
     try {

@@ -17,7 +17,22 @@ const utilisateurSchema = new mongoose.Schema({
     mot_de_passe: {
         type: String,
         required: true
+    },
+    position: {
+        type: {
+            type: String,
+            enum: ['Point'], 
+            required: true
+        },
+        coordinates: {
+            type: [Number], // [longitude, latitude]
+            required: true
+        }
     }
+}, {
+    timestamps: true
 });
+
+utilisateurSchema.index({ position: '2dsphere' });
 
 module.exports = mongoose.model('Utilisateur', utilisateurSchema);
