@@ -152,10 +152,22 @@ async function inscription(req, res) {
   function logout(req, res) {
     res.status(200).send({ auth: false, token: null });
 }
+const deleteUser = async (req, res) => {
+  try {
+      const utilisateur = await Utilisateur.findByIdAndDelete(req.params.id);
+      if (!utilisateur) {
+          return res.status(404).json({ message: 'Utilisateur not found' });
+      }
+      res.status(200).json({ message: 'Utilisateur deleted successfully' });
+  } catch (err) {
+      res.status(500).json({ message: err.message });
+  }
+};
 module.exports = {
     getAllUtilisateurs,
     getUtilisateur,
     createUtilisateur,
     getUtilisateurById,
-    getUserConnected,inscription,login,logout
+    getUserConnected,inscription,login,logout,
+    deleteUser
 };
