@@ -11,4 +11,6 @@ router.post('/email/:echange_id', echangeController.sendEchangeEmail);
 router.put('/statut/:echange_id', echangeController.updateEchangeStatut);
 router.get('/EchangePropose/:utilisateur_id', echangeController.getEchangeEnAttente);
 router.put('/echange/:echange_id/statut', echangeController.updateEchangeStatutEnValidatation);
+router.get('/historique/:utilisateur_id', echangeController.getHistoriqueEchanges);
+
 module.exports = router;

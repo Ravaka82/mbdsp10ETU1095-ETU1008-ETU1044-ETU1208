@@ -268,6 +268,31 @@ const updateEchangeStatutEnValidatation= async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 }
+
+const getHistoriqueEchanges = async (req, res) => {
+    const { utilisateur_id } = req.params;
+
+    try {
+        const echanges = await Echange.find({
+            utilisateur_proposant_id: utilisateur_id,
+            statut: { $in: ['accepter', 'refuser'] }
+        })
+        .populate('objet_proposant')
+        .populate('objet_acceptant')
+        .populate('utilisateur_proposant_id')
+        .populate('utilisateur_acceptant_id');
+
+        if (echanges.length === 0) {
+            return res.status(404).json({ message: 'Aucun échange trouvé pour cet utilisateur' });
+        }
+
+        res.status(200).json(echanges);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
 module.exports = {
     createEchange,
     getEchangesByUtilisateur,
@@ -278,4 +303,5 @@ module.exports = {
     updateEchangeStatut,
     getEchangeEnAttente,
     updateEchangeStatutEnValidatation,
+    getHistoriqueEchanges
 };
