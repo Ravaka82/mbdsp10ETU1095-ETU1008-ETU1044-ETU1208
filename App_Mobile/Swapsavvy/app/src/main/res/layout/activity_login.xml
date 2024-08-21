@@ -17,40 +17,40 @@
 
     <EditText
         android:id="@+id/emailEditText"
-        android:layout_width="0dp"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_weight="1"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:importantForAutofill="yes"
         android:autofillHints="@string/email"
-        android:padding="16dp"
-        android:layout_marginTop="24dp" />
+        android:hint="@string/email"
+        android:importantForAutofill="yes"
+        android:inputType="textEmailAddress"
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="0dp"
+        android:layout_width="149dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:hint="@string/mot_de_passe"
-        android:inputType="textPassword"
-        android:importantForAutofill="yes"
         android:autofillHints="@string/mot_de_passe"
-        android:padding="16dp"
-        android:layout_marginTop="16dp" />
+        android:hint="@string/mot_de_passe"
+        android:importantForAutofill="yes"
+        android:inputType="textPassword"
+        android:padding="16dp" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:layout_marginTop="24dp" />
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/login" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:layout_marginTop="16dp" />
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/register" />
 
 </LinearLayout>
