@@ -14,6 +14,8 @@ import { EchangeEditComponent } from './echange-edit/echange-edit.component';
 import { EchangeListProposeComponent } from './echange-list-propose/echange-list-propose.component';
 import { HistoriqueEchangeComponent } from './historique-echange/historique-echange.component';
 import { MapDialogComponent } from './map-dialog/map-dialog.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { AcceuilAdminComponent } from './acceuil-admin/acceuil-admin.component';
 
 
 export const routes: Routes = [
@@ -33,6 +35,9 @@ export const routes: Routes = [
   { path: 'rechercheAvance', component: RechercheAvanceObjetComponent },
   { path: 'listeRechercheSimple', component: ListRechercheSimpleComponent },
   { path: 'historique', component: HistoriqueEchangeComponent },
-  { path: 'map', component: MapDialogComponent }
+  { path: 'map', component: MapDialogComponent },
+
+  { path: 'LoginAdmin', component: LoginAdminComponent},
+  { path: 'AccueilAdmin', component: AcceuilAdminComponent}
 
 ];
