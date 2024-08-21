@@ -1,17 +1,32 @@
+/* Style pour les utilisateurs normaux */
 .app-layout {
   display: flex;
   height: 100vh;
-
 }
 
 app-sidebar {
   width: 150px;
   background-color: #2c3e50;
   border-right: 1px solid #d7e3ff;
-  height: 530%;
+  height: 100%; /* Assure que la hauteur de la sidebar est correcte */
 }
 
 .content {
   flex: 1;
   padding: 20px;
+}
+
+/* Style pour les administrateurs */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f5f5; /* Fond global différent pour la partie admin */
+}
+
+
+
+.admin-layout .admin-content {
+  margin-left: 250px; /* Correspond à la largeur de la sidebar admin */
+  padding-top: 64px; /* Correspond à la hauteur de la toolbar admin */
+  background-color: #e0e0e0; /* Fond pour le contenu admin */
 }
