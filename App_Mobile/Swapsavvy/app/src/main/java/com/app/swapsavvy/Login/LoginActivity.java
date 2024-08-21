@@ -38,9 +38,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser() {
         String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+        String mot_de_passe = passwordEditText.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || mot_de_passe.isEmpty()) {
             Toast.makeText(this, "Veuillez entrer votre email et mot de passe", Toast.LENGTH_SHORT).show();
             return;
         }
