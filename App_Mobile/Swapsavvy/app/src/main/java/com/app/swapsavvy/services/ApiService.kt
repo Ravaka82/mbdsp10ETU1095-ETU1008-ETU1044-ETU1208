@@ -28,6 +28,7 @@ interface ApiService {
 
     @GET("objets/{id}")
     fun getObjetById(@Path("id") id: String): Call<Objet>
+    abstract fun login(email: String, password: String): Response<Utilisateur>
 
 
 }

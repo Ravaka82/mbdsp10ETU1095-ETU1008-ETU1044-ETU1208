@@ -60,13 +60,14 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        val apiService = APIClient.retrofit.create(ApiService::class.java)
+        val apiService = APIClient.create(this, ApiService::class.java)
         val utilisateur = Utilisateur(
             _id = null,
             nom = "",
             prenom = "",
             email = email,
-            mot_de_passe = mot_de_passe
+            mot_de_passe = mot_de_passe,
+            token = ""
         )
 
         apiService.registerUser(utilisateur).enqueue(object : Callback<Void> {

@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         // Initialiser Retrofit
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/api/") // URL de base de l'API
+            .baseUrl("http://localhost:3000/api/") // URL de base de l'API
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
