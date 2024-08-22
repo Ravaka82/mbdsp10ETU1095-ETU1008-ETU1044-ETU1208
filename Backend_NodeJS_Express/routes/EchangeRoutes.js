@@ -3,6 +3,7 @@ const router = express.Router();
 const echangeController = require('../controllers/EchangeController');
 
 router.post('/', echangeController.createEchange);
+router.get('/', echangeController.getAllEchanges);
 router.get('/lisesobjetsouhaites/:utilisateur_id' ,echangeController.getEchangesByUtilisateur);
 router.delete('/:echange_id', echangeController.deleteEchange);
 router.put('/:echange_id', echangeController.updateEchange);
@@ -16,4 +17,6 @@ router.get('/count/acceptes', echangeController.countEchangesAccepted);
 router.get('/count/refus', echangeController.countEchangesRefused);
 router.get('/count/en-attente', echangeController.countEchangesEnAttente);
 router.get('/count/en-cours', echangeController.countEchangesEnCours);
+
+
 module.exports = router;

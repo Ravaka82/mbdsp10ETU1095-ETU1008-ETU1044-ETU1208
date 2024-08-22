@@ -292,6 +292,7 @@ const getHistoriqueEchanges = async (req, res) => {
     }
 };
 
+
 const countEchangesAccepted = async (req, res) => {
     try {
         const count = await Echange.countDocuments({ statut: 'accepter' });
@@ -325,6 +326,27 @@ const countEchangesEnCours = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+const getAllEchanges = async (req, res) => {
+    try {
+    
+        const echanges = await Echange.find({})
+            .populate('objet_proposant') 
+            .populate('objet_acceptant') 
+            .populate('utilisateur_proposant_id') 
+            .populate('utilisateur_acceptant_id'); 
+
+        if (echanges.length === 0) {
+            return res.status(404).json({ message: 'Aucun échange trouvé' });
+        }
+
+        res.status(200).json(echanges);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
 module.exports = {
     createEchange,
     getEchangesByUtilisateur,
@@ -339,6 +361,7 @@ module.exports = {
     countEchangesAccepted,
     countEchangesRefused,
     countEchangesEnAttente,
-    countEchangesEnCours
+    countEchangesEnCours,
+    getAllEchanges
 
 };
