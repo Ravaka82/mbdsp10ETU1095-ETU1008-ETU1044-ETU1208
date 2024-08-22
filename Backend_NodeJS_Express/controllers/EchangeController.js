@@ -345,6 +345,53 @@ const getAllEchanges = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const getStatistiquesEchanges = async (req, res) => {
+    try {
+
+        const exchanges = await Echange.find()
+            .populate('utilisateur_proposant_id', 'nom') 
+            .exec();
+
+        const statistiques = exchanges.reduce((acc, exchange) => {
+            const userId = exchange.utilisateur_proposant_id._id.toString();
+            if (!acc[userId]) {
+                acc[userId] = {
+                    utilisateur_id: userId,
+                    nom: exchange.utilisateur_proposant_id.nom,
+                    echanges: {
+                        accepte: 0,
+                        refuse: 0,
+                        en_cours: 0,
+                        en_attente: 0
+                    }
+                };
+            }
+            switch (exchange.statut) {
+                case 'accepter':
+                    acc[userId].echanges.accepte += 1;
+                    break;
+                case 'refuser':
+                    acc[userId].echanges.refuse += 1;
+                    break;
+                case 'en cours':
+                    acc[userId].echanges.en_cours += 1;
+                    break;
+                case 'en attente':
+                    acc[userId].echanges.en_attente += 1;
+                    break;
+            }
+            return acc;
+        }, {});
+
+        // Convertir l'objet en tableau
+        const result = Object.values(statistiques);
+
+        res.json({ utilisateurs: result });
+    } catch (error) {
+        console.error('Erreur lors de la récupération des statistiques:', error);
+        res.status(500).json({ message: 'Erreur interne du serveur' });
+    }
+};
 
 
 module.exports = {
@@ -362,6 +409,7 @@ module.exports = {
     countEchangesRefused,
     countEchangesEnAttente,
     countEchangesEnCours,
-    getAllEchanges
+    getAllEchanges,
+    getStatistiquesEchanges
 
 };
