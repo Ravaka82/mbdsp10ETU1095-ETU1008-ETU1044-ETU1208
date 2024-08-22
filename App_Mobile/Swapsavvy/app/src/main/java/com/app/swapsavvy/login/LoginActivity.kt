@@ -10,7 +10,8 @@ import android.widget.Toast
 import com.app.swapsavvy.data.Utilisateur
 import com.app.swapsavvy.register.RegisterActivity
 import com.app.swapsavvy.services.ApiService
-import com.app.swapsavvy.api.APIClient
+import com.app.swapsavvy.network.APIClient
+import com.app.swapsavvy.security.TokenManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,20 +52,26 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        val apiService = APIClient.create(ApiService::class.java)
+        val apiService = APIClient.create(this, ApiService::class.java)
         val utilisateur = Utilisateur(
             _id = null,
             nom = "",
             prenom = "",
             email = email,
-            mot_de_passe = mot_de_passe
+            mot_de_passe = mot_de_passe,
+            token = ""
         )
 
         apiService.loginUser(utilisateur).enqueue(object : Callback<Utilisateur> {
             override fun onResponse(call: Call<Utilisateur>, response: Response<Utilisateur>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@LoginActivity, "Connexion réussie", Toast.LENGTH_SHORT).show()
-                } else {
+                    response.body()?.let { utilisateur ->
+                        // Sauvegarde du token après une connexion réussie
+                        utilisateur.token?.let { TokenManager.saveToken(this@LoginActivity, it) }
+                        Toast.makeText(this@LoginActivity, "Connexion réussie", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    } else {
                     Toast.makeText(this@LoginActivity, "Échec de la connexion", Toast.LENGTH_SHORT).show()
                 }
             }

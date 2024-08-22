@@ -5,5 +5,6 @@ data class Utilisateur(
     val nom: String,
     val prenom: String,
     val email: String,
-    val mot_de_passe: String
+    val mot_de_passe: String,
+    val token: String?
 )

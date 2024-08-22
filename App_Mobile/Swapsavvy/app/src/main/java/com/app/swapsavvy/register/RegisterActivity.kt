@@ -7,7 +7,7 @@ import com.app.swapsavvy.R
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.app.swapsavvy.api.APIClient
+import com.app.swapsavvy.network.APIClient
 import com.app.swapsavvy.data.Utilisateur
 import com.app.swapsavvy.services.ApiService
 import retrofit2.Call
