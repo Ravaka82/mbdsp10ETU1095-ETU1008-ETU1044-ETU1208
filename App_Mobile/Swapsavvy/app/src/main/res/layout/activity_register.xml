@@ -16,6 +16,28 @@
         android:src="@drawable/logo" />
 
     <EditText
+        android:id="@+id/nomEditText"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:autofillHints="@string/nom"
+        android:hint="@string/nom"
+        android:importantForAutofill="yes"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/prenomEditText"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:autofillHints="@string/prenom"
+        android:hint="@string/prenom"
+        android:importantForAutofill="yes"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/emailEditText"
         android:layout_width="148dp"
         android:layout_height="wrap_content"

@@ -1,9 +1,7 @@
 package com.app.swapsavvy.services
 
-import com.app.swapsavvy.login.LoginResponse
 import com.app.swapsavvy.data.Objet
 import com.app.swapsavvy.data.Utilisateur
-import com.app.swapsavvy.register.RegisterResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -30,6 +28,6 @@ interface ApiService {
 
     @GET("objets/{id}")
     fun getObjetById(@Path("id") id: String): Call<Objet>
-    abstract fun login(email: String, mot_de_passe: String): Response<Utilisateur>
+
 
 }
