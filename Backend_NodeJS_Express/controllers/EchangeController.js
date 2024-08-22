@@ -308,8 +308,23 @@ const countEchangesRefused = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const countEchangesEnAttente = async (req, res) => {
+    try {
+        const count = await Echange.countDocuments({ statut: 'en attente' });
+        res.status(200).json({ count });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
-
+const countEchangesEnCours = async (req, res) => {
+    try {
+        const count = await Echange.countDocuments({ statut: 'en cours' });
+        res.status(200).json({ count });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 module.exports = {
     createEchange,
     getEchangesByUtilisateur,
@@ -322,6 +337,8 @@ module.exports = {
     updateEchangeStatutEnValidatation,
     getHistoriqueEchanges,
     countEchangesAccepted,
-    countEchangesRefused
+    countEchangesRefused,
+    countEchangesEnAttente,
+    countEchangesEnCours
 
 };
