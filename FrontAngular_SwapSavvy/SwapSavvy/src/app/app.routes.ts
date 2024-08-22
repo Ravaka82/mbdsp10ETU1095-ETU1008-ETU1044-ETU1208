@@ -38,6 +38,7 @@ export const routes: Routes = [
   { path: 'map', component: MapDialogComponent },
 
   { path: 'LoginAdmin', component: LoginAdminComponent},
-  { path: 'AccueilAdmin', component: AcceuilAdminComponent}
+  { path: 'AccueilAdmin', component: AcceuilAdminComponent},
+
 
 ];

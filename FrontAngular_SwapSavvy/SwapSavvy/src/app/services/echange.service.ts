@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Echange } from '../echange/echange.model';
 
 @Injectable({
@@ -46,4 +46,31 @@ export class EchangeService {
     return this.http.get<any>(url);
   }
 
+  countEchangesAccepted(): Observable<number> {
+    return this.http.get<{ count: number }>(`${this.apiUrl}/count/acceptes`).pipe(
+      map(response => response.count)
+    );
+  }
+
+  countEchangesRefused(): Observable<number> {
+    return this.http.get<{ count: number }>(`${this.apiUrl}/count/refus`).pipe(
+      map(response => response.count)
+    );
+  }
+
+  countEchangesEnAttente(): Observable<number> {
+    return this.http.get<{ count: number }>(`${this.apiUrl}/count/en-attente`).pipe(
+      map(response => response.count)
+    );
+  }
+
+  countEchangesEnCours(): Observable<number> {
+    return this.http.get<{ count: number }>(`${this.apiUrl}/count/en-cours`).pipe(
+      map(response => response.count)
+    );
+  }
+
+  getAllEchanges(): Observable<Echange[]> {
+    return this.http.get<Echange[]>(this.apiUrl);
+  }
 }

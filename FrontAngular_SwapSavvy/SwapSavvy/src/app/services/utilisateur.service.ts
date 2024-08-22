@@ -28,4 +28,7 @@ export class UtilisateurService {
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}); // Requête vers l'API de déconnexion
   }
+  countUtilisateurs(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/count`);
+  }
 }

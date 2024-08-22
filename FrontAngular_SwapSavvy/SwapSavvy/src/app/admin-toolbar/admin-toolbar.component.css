@@ -5,21 +5,21 @@ mat-toolbar {
     align-items: center; /* Centrer verticalement les éléments */
     padding: 0 20px; /* Ajouter un peu d'espace à gauche et à droite */
     height: 64px; /* Hauteur de la toolbar */
-    
+
 
 
 
     color: white; /* Couleur du texte */
   }
-  
+
   mat-toolbar .spacer {
     flex: 1 1 auto; /* Prend tout l'espace disponible */
   }
-  
+
   mat-toolbar button {
     color: white; /* Couleur du texte des boutons */
   }
-  
+
   mat-toolbar button:hover {
     background-color: rgba(255, 255, 255, 0.2); /* Effet au survol des boutons */
   }
@@ -27,11 +27,11 @@ mat-toolbar {
     display: flex;
     align-items: center;
   }
-  
+
   .spacer {
     flex: 1 1 auto;
   }
-  
+
   button {
     margin-left: 16px; /* Espacement à gauche du bouton */
   }
@@ -45,15 +45,20 @@ mat-toolbar {
     font-size: 14px; /* Taille de police */
     cursor: pointer; /* Curseur pointer sur le bouton */
   }
-  
+
   button:hover {
     background-color: #d32f2f; /* Couleur de fond lors du survol (hover) */
   }
-  
+
   button:focus {
     outline: none; /* Enlever le contour par défaut lors du focus */
   }
-  
+
   button:active {
     background-color: #c62828; /* Couleur de fond lors du clic */
+  }
+
+  .dsh{
+    margin-left: 50px;
+    color: black;
   }
