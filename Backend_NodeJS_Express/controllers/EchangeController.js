@@ -300,7 +300,14 @@ const countEchangesAccepted = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
-
+const countEchangesRefused = async (req, res) => {
+    try {
+        const count = await Echange.countDocuments({ statut: 'refuser' });
+        res.status(200).json({ count });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 
 module.exports = {
@@ -315,5 +322,6 @@ module.exports = {
     updateEchangeStatutEnValidatation,
     getHistoriqueEchanges,
     countEchangesAccepted,
+    countEchangesRefused
 
 };

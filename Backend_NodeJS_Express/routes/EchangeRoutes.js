@@ -13,5 +13,5 @@ router.get('/EchangePropose/:utilisateur_id', echangeController.getEchangeEnAtte
 router.put('/echange/:echange_id/statut', echangeController.updateEchangeStatutEnValidatation);
 router.get('/historique/:utilisateur_id', echangeController.getHistoriqueEchanges);
 router.get('/count/acceptes', echangeController.countEchangesAccepted);
-
+router.get('/count/refus', echangeController.countEchangesRefused);
 module.exports = router;
