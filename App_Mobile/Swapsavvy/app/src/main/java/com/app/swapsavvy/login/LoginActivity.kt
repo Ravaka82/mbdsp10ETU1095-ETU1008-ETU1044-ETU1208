@@ -30,7 +30,11 @@ class LoginActivity : AppCompatActivity() {
         loginButton = findViewById(R.id.loginButton)
         registerButton = findViewById(R.id.registerButton)
 
-        loginButton.setOnClickListener { loginUser() }
+        loginButton.setOnClickListener {
+            val email = emailEditText.text.toString()
+            val mot_de_passe = passwordEditText.text.toString()
+            login()
+        }
 
         registerButton.setOnClickListener {
             // Rediriger vers RegisterActivity
@@ -38,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loginUser() {
+    private fun login() {
         val email = emailEditText.text.toString().trim()
         val mot_de_passe = passwordEditText.text.toString().trim()
 
@@ -47,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        val apiService = APIClient.retrofit.create(ApiService::class.java)
+        val apiService = APIClient.create(ApiService::class.java)
         val utilisateur = Utilisateur(
             _id = null,
             nom = "",
@@ -56,19 +60,16 @@ class LoginActivity : AppCompatActivity() {
             mot_de_passe = mot_de_passe
         )
 
-        apiService.loginUser(utilisateur).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+        apiService.loginUser(utilisateur).enqueue(object : Callback<Utilisateur> {
+            override fun onResponse(call: Call<Utilisateur>, response: Response<Utilisateur>) {
                 if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    // Connexion réussie, gérer la réponse
                     Toast.makeText(this@LoginActivity, "Connexion réussie", Toast.LENGTH_SHORT).show()
-                    // Rediriger vers une autre activité
                 } else {
                     Toast.makeText(this@LoginActivity, "Échec de la connexion", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+            override fun onFailure(call: Call<Utilisateur>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Erreur : ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
