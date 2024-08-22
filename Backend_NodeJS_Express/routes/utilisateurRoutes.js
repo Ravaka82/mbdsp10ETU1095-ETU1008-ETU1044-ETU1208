@@ -11,4 +11,5 @@ router.post('/register',utilisateurController.inscription);
 router.post('/logout').get(middleware.verifyToken,utilisateurController.logout);
 router.get('/me', middleware.verifyToken, utilisateurController.getUserConnected);
 router.delete('/:id', utilisateurController.deleteUser);
+router.get('/count', utilisateurController.countUtilisateurs);
 module.exports = router;

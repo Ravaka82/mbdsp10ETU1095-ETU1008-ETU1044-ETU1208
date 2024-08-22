@@ -163,11 +163,20 @@ const deleteUser = async (req, res) => {
       res.status(500).json({ message: err.message });
   }
 };
+const countUtilisateurs = async (req, res) => {
+  try {
+      const count = await Utilisateur.countDocuments();
+      res.status(200).json({ count });
+  } catch (err) {
+      res.status(500).json({ message: err.message });
+  }
+};
 module.exports = {
     getAllUtilisateurs,
     getUtilisateur,
     createUtilisateur,
     getUtilisateurById,
     getUserConnected,inscription,login,logout,
-    deleteUser
+    deleteUser,
+    countUtilisateurs
 };
