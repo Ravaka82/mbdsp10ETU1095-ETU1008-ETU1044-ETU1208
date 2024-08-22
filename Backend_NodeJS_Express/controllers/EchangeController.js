@@ -292,6 +292,16 @@ const getHistoriqueEchanges = async (req, res) => {
     }
 };
 
+const countEchangesAccepted = async (req, res) => {
+    try {
+        const count = await Echange.countDocuments({ statut: 'accepter' });
+        res.status(200).json({ count });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
 
 module.exports = {
     createEchange,
@@ -303,5 +313,7 @@ module.exports = {
     updateEchangeStatut,
     getEchangeEnAttente,
     updateEchangeStatutEnValidatation,
-    getHistoriqueEchanges
+    getHistoriqueEchanges,
+    countEchangesAccepted,
+
 };
