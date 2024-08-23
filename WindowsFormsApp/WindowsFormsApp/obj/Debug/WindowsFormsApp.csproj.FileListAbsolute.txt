@@ -13,3 +13,4 @@ D:\Examen Transversale\mbdsp10ETU1095-ETU1008-ETU1044-ETU1208\WindowsFormsApp\Wi
 D:\Examen Transversale\mbdsp10ETU1095-ETU1008-ETU1044-ETU1208\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.pdb
 D:\Examen Transversale\mbdsp10ETU1095-ETU1008-ETU1044-ETU1208\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.CreateObjectForm.resources
 D:\Examen Transversale\mbdsp10ETU1095-ETU1008-ETU1044-ETU1208\WindowsFormsApp\WindowsFormsApp\bin\Debug\MimeTypesMap.dll
+D:\Examen Transversale\mbdsp10ETU1095-ETU1008-ETU1044-ETU1208\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.ListObjectsForm.resources

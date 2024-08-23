@@ -5,6 +5,7 @@
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.Button createObjectButton;
+        private System.Windows.Forms.Button listObjectButton;
         private System.Windows.Forms.Panel navbarPanel;
 
         protected override void Dispose(bool disposing)
@@ -21,6 +22,7 @@
             this.components = new System.ComponentModel.Container();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.createObjectButton = new System.Windows.Forms.Button();
+            this.listObjectButton = new System.Windows.Forms.Button(); // Nouveau bouton
             this.navbarPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
 
@@ -29,6 +31,7 @@
             // 
             this.navbarPanel.BackColor = System.Drawing.Color.Brown;
             this.navbarPanel.Controls.Add(this.createObjectButton);
+            this.navbarPanel.Controls.Add(this.listObjectButton); // Ajouter le bouton ici
             this.navbarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.navbarPanel.Height = 60;
             this.navbarPanel.Location = new System.Drawing.Point(0, 0);
@@ -48,6 +51,19 @@
             this.createObjectButton.Text = "Création d'objet";
             this.createObjectButton.UseVisualStyleBackColor = false;
             this.createObjectButton.Click += new System.EventHandler(this.CreateObjectButton_Click);
+
+            // 
+            // listObjectsButton
+            // 
+            this.listObjectButton.BackColor = System.Drawing.Color.White;
+            this.listObjectButton.ForeColor = System.Drawing.Color.Brown;
+            this.listObjectButton.Location = new System.Drawing.Point(180, 15);
+            this.listObjectButton.Name = "listObjectsButton";
+            this.listObjectButton.Size = new System.Drawing.Size(150, 30);
+            this.listObjectButton.TabIndex = 2;
+            this.listObjectButton.Text = "Liste des objets";
+            this.listObjectButton.UseVisualStyleBackColor = false;
+            this.listObjectButton.Click += new System.EventHandler(this.ListObjectsButton_Click);
 
             // 
             // welcomeLabel
@@ -73,5 +89,6 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
     }
 }

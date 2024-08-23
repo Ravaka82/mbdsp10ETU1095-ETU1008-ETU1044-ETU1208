@@ -11,7 +11,7 @@ namespace WindowsFormsApp
     {
         private string _userId;
         private string _userToken;
-        private string _userName; // Ajouter la variable pour le nom de l'utilisateur
+        private string _userName;
 
         public HomePage()
         {
@@ -42,7 +42,7 @@ namespace WindowsFormsApp
                         var user = JObject.Parse(result);
 
                         _userId = user["_id"]?.ToString();
-                        _userName = user["nom"]?.ToString(); // Récupération du nom de l'utilisateur
+                        _userName = user["nom"]?.ToString();
                         welcomeLabel.Text = $"Bienvenue, {_userName} !";
                     }
                     else
@@ -59,9 +59,14 @@ namespace WindowsFormsApp
 
         private void CreateObjectButton_Click(object sender, EventArgs e)
         {
-            // Passer l'ID et le nom de l'utilisateur au formulaire de création d'objet
             var createObjectForm = new CreateObjectForm(_userToken, _userId, _userName);
             createObjectForm.Show();
+        }
+
+        private void ListObjectsButton_Click(object sender, EventArgs e)
+        {
+            var listObjectsForm = new ListObjectsForm(_userId, _userToken);
+            listObjectsForm.Show();
         }
     }
 
