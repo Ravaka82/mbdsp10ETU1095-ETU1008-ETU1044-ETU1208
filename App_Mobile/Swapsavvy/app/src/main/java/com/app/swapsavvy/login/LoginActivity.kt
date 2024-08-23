@@ -1,5 +1,6 @@
 package com.app.swapsavvy.login
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.app.swapsavvy.R
@@ -22,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -45,8 +47,6 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val email = emailEditText.text.toString().trim()
         val mot_de_passe = passwordEditText.text.toString().trim()
-        val longitude = 47.47534905075115
-        val latitude = -18.799103605262818
 
         if (email.isEmpty() || mot_de_passe.isEmpty()) {
             Toast.makeText(this, "Veuillez entrer votre email et mot de passe", Toast.LENGTH_SHORT).show()
