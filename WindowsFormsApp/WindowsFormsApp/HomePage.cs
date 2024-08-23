@@ -73,6 +73,13 @@ namespace WindowsFormsApp
             var listOtherObjectsForm = new ListOtherObjectsForm();
             listOtherObjectsForm.Show();
         }
+        private async void ExchangeButton_Click(object sender, EventArgs e)
+        {
+         
+            var exchangeForm = new ExchangeObjectsForm(_userId, _userToken);
+            exchangeForm.Show();
+        }
+
 
 
         private void HomePage_Load(object sender, EventArgs e)

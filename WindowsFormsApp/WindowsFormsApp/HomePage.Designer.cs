@@ -8,6 +8,7 @@
         private System.Windows.Forms.Button listObjectButton;
         private System.Windows.Forms.Button listOtherObjectsButton;
         private System.Windows.Forms.Panel navbarPanel;
+        private System.Windows.Forms.Button exchangeButton;
 
         protected override void Dispose(bool disposing)
         {
@@ -76,6 +77,23 @@
             this.listOtherObjectsButton.UseVisualStyleBackColor = false;
             this.listOtherObjectsButton.Click += new System.EventHandler(this.ListOtherObjectsButton_Click);
             this.navbarPanel.Controls.Add(this.listOtherObjectsButton);
+
+            // 
+            // exchangeButton
+            // 
+            this.exchangeButton = new System.Windows.Forms.Button();
+            this.exchangeButton.BackColor = System.Drawing.Color.White;
+            this.exchangeButton.ForeColor = System.Drawing.Color.Brown;
+            this.exchangeButton.Location = new System.Drawing.Point(375, 12);
+            this.exchangeButton.Margin = new System.Windows.Forms.Padding(2);
+            this.exchangeButton.Name = "exchangeButton";
+            this.exchangeButton.Size = new System.Drawing.Size(112, 24);
+            this.exchangeButton.TabIndex = 4;
+            this.exchangeButton.Text = "Échanger objets";
+            this.exchangeButton.UseVisualStyleBackColor = false;
+            this.exchangeButton.Click += new System.EventHandler(this.ExchangeButton_Click);
+            this.navbarPanel.Controls.Add(this.exchangeButton);
+
             // 
             // navbarPanel
             // 

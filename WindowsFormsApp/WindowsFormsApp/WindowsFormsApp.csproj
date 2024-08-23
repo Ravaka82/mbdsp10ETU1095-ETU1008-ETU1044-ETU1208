@@ -58,6 +58,12 @@
     <Compile Include="CreateObjectForm.Designer.cs">
       <DependentUpon>CreateObjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExchangeObjectsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExchangeObjectsForm.Designer.cs">
+      <DependentUpon>ExchangeObjectsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreateObjectForm.resx">
       <DependentUpon>CreateObjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExchangeObjectsForm.resx">
+      <DependentUpon>ExchangeObjectsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

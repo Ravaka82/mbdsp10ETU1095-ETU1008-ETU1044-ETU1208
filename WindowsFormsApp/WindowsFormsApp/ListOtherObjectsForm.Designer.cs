@@ -24,6 +24,7 @@
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Name = "ListOtherObjectsForm";
             this.Text = "Objets des autres utilisateurs";
+            this.Load += new System.EventHandler(this.ListOtherObjectsForm_Load_1);
             this.ResumeLayout(false);
 
         }

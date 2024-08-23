@@ -37,7 +37,7 @@ namespace WindowsFormsApp
 
                         foreach (var obj in objects)
                         {
-                            if (obj["utilisateur_id"]?["_id"]?.ToString() != userId)
+                            if (obj["utilisateur_id"]["_id"]?.ToString() != userId)
                             {
                                 // Créez et ajoutez les panneaux pour chaque objet
                                 var card = new Panel
@@ -134,6 +134,11 @@ namespace WindowsFormsApp
         }
 
         private void ListOtherObjectsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListOtherObjectsForm_Load_1(object sender, EventArgs e)
         {
 
         }
