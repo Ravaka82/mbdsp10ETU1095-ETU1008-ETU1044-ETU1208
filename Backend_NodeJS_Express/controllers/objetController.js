@@ -278,6 +278,26 @@ const updateUtilisateurIdById = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const deleteObjectsByUtilisateurId = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ message: 'utilisateurId is required' });
+        }
+
+        const result = await Objet.deleteMany({ utilisateur_id: id });
+
+        if (result.deletedCount > 0) {
+            res.status(200).json({ message: `${result.deletedCount} object(s) deleted.` });
+        } else {
+            res.status(404).json({ message: 'No objects found for this utilisateurId.' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting objects.', error });
+    }
+};
+
 module.exports = {
     getAllObjets,
     createObjet,
@@ -289,4 +309,5 @@ module.exports = {
     rechercheAvanceObjets,
     getAllImageObject,
     updateUtilisateurIdById,
+    deleteObjectsByUtilisateurId
 };
