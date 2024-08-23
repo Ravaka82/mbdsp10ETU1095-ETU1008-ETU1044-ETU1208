@@ -87,6 +87,12 @@ namespace WindowsFormsApp
             var listWishForm = new ListWishForm(_userId, _userToken);
             listWishForm.Show();
         }
+        private async void ListProposedExchangesButton_Click(object sender, EventArgs e)
+        {
+            var listProposedExchangesForm = new ListProposedExchangesForm(_userId, _userToken);
+            listProposedExchangesForm.Show();
+        }
+
 
 
         private void HomePage_Load(object sender, EventArgs e)
