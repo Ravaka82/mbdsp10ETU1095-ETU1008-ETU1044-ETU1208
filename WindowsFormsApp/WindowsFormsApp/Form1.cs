@@ -16,7 +16,7 @@ namespace WindowsFormsApp
         private TextBox latitudeTextBox;
         private TextBox longitudeTextBox;
         private Button submitButton;
-        private LinkLabel loginLinkLabel; // Add LinkLabel
+        private LinkLabel loginLinkLabel;
 
         public Form1()
         {
@@ -26,11 +26,11 @@ namespace WindowsFormsApp
 
         private void InitializeCustomComponents()
         {
-            // Adjust form size
-            this.Text = "Formulaire d'inscription";
-            this.Size = new Size(450, 500); // Increased form size
 
-            // Create and add TextBox controls
+            this.Text = "Formulaire d'inscription";
+            this.Size = new Size(450, 500);
+
+
             this.nomTextBox = CreatePlaceholderTextBox("Nom", 20, 20);
             this.prenomTextBox = CreatePlaceholderTextBox("Prénom", 20, 60);
             this.emailTextBox = CreatePlaceholderTextBox("Email", 20, 100);
@@ -38,12 +38,12 @@ namespace WindowsFormsApp
             this.latitudeTextBox = CreatePlaceholderTextBox("Latitude", 20, 180);
             this.longitudeTextBox = CreatePlaceholderTextBox("Longitude", 20, 220);
 
-            // Create and add submit button
+
             this.submitButton = new Button
             {
                 Text = "S'inscrire",
                 Size = new Size(150, 40), // Button size
-                BackColor = Color.FromArgb(139, 69, 19), // Brown color
+                BackColor = Color.FromArgb(139, 69, 19),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 12, FontStyle.Bold)
@@ -56,7 +56,7 @@ namespace WindowsFormsApp
             this.loginLinkLabel = new LinkLabel
             {
                 Text = "Vous-voulez vous connecter ?",
-                Location = new Point((this.ClientSize.Width - 200) / 2, 360), // Centered position
+                Location = new Point((this.ClientSize.Width - 200) / 2, 360),
                 Size = new Size(200, 30),
                 LinkColor = Color.Blue,
                 VisitedLinkColor = Color.Purple,
@@ -144,7 +144,7 @@ namespace WindowsFormsApp
 
         private void LoginLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            // Open login form (create and show a new Form2 or equivalent for login)
+
             LoginForm loginForm = new LoginForm();
             loginForm.StartPosition = FormStartPosition.CenterParent; // Center the login form
             loginForm.ShowDialog(); // Use ShowDialog to make it modal
@@ -159,7 +159,7 @@ namespace WindowsFormsApp
 
         public LoginForm()
         {
-          
+
             InitializeLoginComponents();
         }
 
@@ -167,18 +167,18 @@ namespace WindowsFormsApp
         {
             // Adjust form size
             this.Text = "Connexion";
-            this.Size = new Size(350, 200); // Increased form size
+            this.Size = new Size(350, 200);
 
-            // Create and add TextBox controls
+
             this.emailTextBox = CreatePlaceholderTextBox("Email", 20, 20);
             this.motDePasseTextBox = CreatePlaceholderTextBox("Mot de passe", 20, 60);
 
-            // Create and add login button
+
             this.loginButton = new Button
             {
                 Text = "Se connecter",
-                Size = new Size(120, 30), // Button size
-                BackColor = Color.FromArgb(139, 69, 19), // Brown color
+                Size = new Size(120, 30),
+                BackColor = Color.FromArgb(139, 69, 19),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 10, FontStyle.Bold)
@@ -187,7 +187,6 @@ namespace WindowsFormsApp
             this.loginButton.Location = new Point((this.ClientSize.Width - this.loginButton.Width) / 2, 100);
             this.loginButton.Click += new EventHandler(this.LoginButton_Click);
 
-            // Add controls to the form
             this.Controls.Add(emailTextBox);
             this.Controls.Add(motDePasseTextBox);
             this.Controls.Add(loginButton);
@@ -199,7 +198,7 @@ namespace WindowsFormsApp
             {
                 Text = placeholder,
                 Location = new Point(x, y),
-                Size = new Size(300, 30), // Increase TextBox size
+                Size = new Size(300, 30),
                 ForeColor = Color.Gray
             };
 
@@ -247,7 +246,14 @@ namespace WindowsFormsApp
 
                         if (responseObject.auth == true)
                         {
-                            MessageBox.Show("Connexion réussie !");
+                            string token = responseObject.token;
+                            // Store the token (e.g., in a static variable or settings)
+                            Global.Token = token;
+
+                            // Redirect to home page
+                            HomePage homePage = new HomePage();
+                            homePage.StartPosition = FormStartPosition.CenterParent; // Center the home page
+                            homePage.ShowDialog(); // Show home page as a modal form
                             this.Close(); // Close the login form
                         }
                         else
@@ -267,4 +273,6 @@ namespace WindowsFormsApp
             }
         }
     }
+
 }
+

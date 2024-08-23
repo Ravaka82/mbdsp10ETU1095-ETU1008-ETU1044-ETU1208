@@ -83,6 +83,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 Toast.makeText(this@RegisterActivity, "Erreur : ${t.message}", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
             }
         })
     }

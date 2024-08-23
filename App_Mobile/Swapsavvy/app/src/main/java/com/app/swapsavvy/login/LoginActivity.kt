@@ -38,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         registerButton.setOnClickListener {
-            // Rediriger vers RegisterActivity
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
@@ -78,6 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Utilisateur>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Erreur : ${t.message}", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
             }
         })
     }
