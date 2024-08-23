@@ -19,10 +19,11 @@ public class ObjectCard : Panel
     private void InitializeComponents()
     {
         // Configure le panneau principal
-        this.BackColor = Color.FromArgb(128, 0, 0); 
-        this.BorderStyle = BorderStyle.None; 
+        this.BackColor = Color.FromArgb(128, 0, 0);
+        this.BorderStyle = BorderStyle.None;
         this.Padding = new Padding(10);
         this.Height = 300; // Augmenté pour plus d'espace
+        this.Width = 250;  // Ajustez la largeur en fonction de l'espace disponible
         this.Margin = new Padding(10);
 
         // PictureBox pour l'image
@@ -51,7 +52,7 @@ public class ObjectCard : Panel
             Dock = DockStyle.Top,
             Height = 50,
             TextAlign = ContentAlignment.MiddleLeft,
-            ForeColor = Color.LightGray, 
+            ForeColor = Color.LightGray,
             Padding = new Padding(5)
         };
 
@@ -61,7 +62,7 @@ public class ObjectCard : Panel
             Dock = DockStyle.Top,
             Height = 30,
             TextAlign = ContentAlignment.MiddleLeft,
-            ForeColor = Color.FromArgb(0, 255, 0), 
+            ForeColor = Color.FromArgb(0, 255, 0),
             Padding = new Padding(5)
         };
 
@@ -93,7 +94,7 @@ public class ObjectCard : Panel
 
         // Optionnel : Ajouter des animations de survol
         this.MouseEnter += (s, e) => this.BackColor = Color.FromArgb(139, 0, 0);
-        this.MouseLeave += (s, e) => this.BackColor = Color.FromArgb(128, 0, 0); 
+        this.MouseLeave += (s, e) => this.BackColor = Color.FromArgb(128, 0, 0);
     }
 
     public void SetObjectData(Objet obj)

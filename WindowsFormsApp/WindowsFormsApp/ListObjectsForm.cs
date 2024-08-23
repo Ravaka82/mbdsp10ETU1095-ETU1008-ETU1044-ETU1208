@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
@@ -17,6 +20,7 @@ namespace WindowsFormsApp
             InitializeComponent();
             _userId = userId;
             _userToken = userToken;
+
             LoadObjects();
         }
 
@@ -41,8 +45,7 @@ namespace WindowsFormsApp
                         var result = await response.Content.ReadAsStringAsync();
                         var objects = JsonConvert.DeserializeObject<List<Objet>>(result);
 
-                        // Assurez-vous que cardsPanel est bien défini dans votre formulaire
-                        DisplayObjects(objects);
+                        DisplayObjectsAsync(objects);
                     }
                     else
                     {
@@ -56,14 +59,98 @@ namespace WindowsFormsApp
             }
         }
 
-        private void DisplayObjects(List<Objet> objects)
+        private async Task DisplayObjectsAsync(List<Objet> objects)
         {
-            // Assurez-vous que cardsPanel est un conteneur (Panel, FlowLayoutPanel, etc.)
+           
+            cardsPanel.Controls.Clear();
+
+            int panelTop = 10; // Position initiale du premier panel
+            int panelSpacing = 10; // Espace entre chaque panel
+
+         
             foreach (var obj in objects)
             {
-                var card = new ObjectCard();
-                card.SetObjectData(obj);
+            
+                var card = new Panel
+                {
+                    Width = cardsPanel.Width - 20, 
+                    Height = 450, // Hauteur ajustée pour chaque panel
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Padding = new Padding(10),
+                    Top = panelTop,
+                    Left = (cardsPanel.Width - (cardsPanel.Width - 40)) / 2 // Centre le card
+                };
+
+                // Titre
+                var titleLabel = new Label
+                {
+                    Text = $"Titre : {obj.Titre}",
+                    AutoSize = true,
+                    Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold)
+                };
+                card.Controls.Add(titleLabel);
+
+                // Description
+                var descriptionLabel = new Label
+                {
+                    Text = $"Description : {obj.Description}",
+                    AutoSize = true,
+                    Top = titleLabel.Bottom + 5
+                };
+                card.Controls.Add(descriptionLabel);
+
+                // Image
+                var pictureBox = new PictureBox
+                {
+                    Width = 200,
+                    Height = 200,
+                    Top = descriptionLabel.Bottom + 10,
+                    SizeMode = PictureBoxSizeMode.Zoom
+                };
+                card.Controls.Add(pictureBox);
+
+                // Charger l'image depuis l'URL
+                await LoadImageAsync(pictureBox, obj.ImageUrl);
+
+                // Autres détails
+                var detailsLabel = new Label
+                {
+                    Text = $"Statut : {obj.Statut}\n" +
+                           $"Etat : {obj.Etat}\n" +
+                           $"Valeur Estimée : {obj.ValeurEstimee:C}\n" +
+                           $"Date Création : {obj.DateCreation:dd/MM/yyyy}\n" +
+                           $"Date Modification : {obj.DateModification:dd/MM/yyyy}\n",
+                    AutoSize = true,
+                    Top = pictureBox.Bottom + 5
+                };
+                card.Controls.Add(detailsLabel);
+
+                // Ajout du panel de carte à cardsPanel
                 cardsPanel.Controls.Add(card);
+
+                // Ajustement de la position pour le prochain panel
+                panelTop += card.Height + panelSpacing;
+            }
+        }
+
+
+
+        private async Task LoadImageAsync(PictureBox pictureBox, string imageUrl)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    var imageBytes = await client.GetByteArrayAsync(imageUrl);
+                    using (var ms = new System.IO.MemoryStream(imageBytes))
+                    {
+                        pictureBox.Image = Image.FromStream(ms);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur lors du chargement de l'image : {ex.Message}");
+                }
             }
         }
     }

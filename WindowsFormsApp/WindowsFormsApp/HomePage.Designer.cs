@@ -61,7 +61,7 @@
             this.listObjectButton.Name = "listObjectsButton";
             this.listObjectButton.Size = new System.Drawing.Size(150, 30);
             this.listObjectButton.TabIndex = 2;
-            this.listObjectButton.Text = "Liste des objets";
+            this.listObjectButton.Text = "Liste de mes objets";
             this.listObjectButton.UseVisualStyleBackColor = false;
             this.listObjectButton.Click += new System.EventHandler(this.ListObjectsButton_Click);
 
