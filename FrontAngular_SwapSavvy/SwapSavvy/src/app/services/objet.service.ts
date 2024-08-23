@@ -8,8 +8,8 @@ import { Objet } from '../objets/objets.model';
 })
 export class ObjetService {
 
-  private apiUrl = 'http://localhost:3000/api/objets';
-  private apiUrlImage = 'http://localhost:3000/api/images';
+  private apiUrl = 'https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets';
+  private apiUrlImage = 'https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/images';
 
 
   constructor(private http: HttpClient) { }

@@ -8,7 +8,7 @@ import { Echange } from '../echange/echange.model';
 })
 export class EchangeService {
 
-  private apiUrl = 'http://localhost:3000/api/echanges';
+  private apiUrl = 'https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges';
 
   constructor(private http: HttpClient) { }
 

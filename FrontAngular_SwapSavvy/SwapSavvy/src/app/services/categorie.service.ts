@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategorieService {
-  private apiUrl = 'http://localhost:3000/api/categories';
+  private apiUrl = 'https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/categories';
 
   constructor(private http: HttpClient) { }
 

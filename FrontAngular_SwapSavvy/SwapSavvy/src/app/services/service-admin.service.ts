@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServiceAdminService {
 
-  private apiUrl = 'http://localhost:3000/api/admin';
+  private apiUrl = 'https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/admin';
   constructor(private http: HttpClient) { }
 
   loginAdmin(credentials: any): Observable<any> {
