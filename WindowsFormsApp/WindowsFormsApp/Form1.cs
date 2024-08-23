@@ -16,6 +16,7 @@ namespace WindowsFormsApp
         private TextBox latitudeTextBox;
         private TextBox longitudeTextBox;
         private Button submitButton;
+        private LinkLabel loginLinkLabel; // Add LinkLabel
 
         public Form1()
         {
@@ -25,9 +26,9 @@ namespace WindowsFormsApp
 
         private void InitializeCustomComponents()
         {
-      
+            // Adjust form size
             this.Text = "Formulaire d'inscription";
-            this.Size = new Size(400, 400); // Form size
+            this.Size = new Size(450, 500); // Increased form size
 
             // Create and add TextBox controls
             this.nomTextBox = CreatePlaceholderTextBox("Nom", 20, 20);
@@ -48,10 +49,20 @@ namespace WindowsFormsApp
                 Font = new Font("Arial", 12, FontStyle.Bold)
             };
             this.submitButton.FlatAppearance.BorderSize = 0;
-
-            // Center the button horizontally
             this.submitButton.Location = new Point((this.ClientSize.Width - this.submitButton.Width) / 2, 270);
             this.submitButton.Click += new EventHandler(this.SubmitButton_Click);
+
+            // Create and add login link
+            this.loginLinkLabel = new LinkLabel
+            {
+                Text = "Vous-voulez vous connecter ?",
+                Location = new Point((this.ClientSize.Width - 200) / 2, 360), // Centered position
+                Size = new Size(200, 30),
+                LinkColor = Color.Blue,
+                VisitedLinkColor = Color.Purple,
+                Font = new Font("Arial", 10)
+            };
+            this.loginLinkLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(this.LoginLinkLabel_LinkClicked);
 
             // Add controls to the form
             this.Controls.Add(nomTextBox);
@@ -61,6 +72,7 @@ namespace WindowsFormsApp
             this.Controls.Add(latitudeTextBox);
             this.Controls.Add(longitudeTextBox);
             this.Controls.Add(submitButton);
+            this.Controls.Add(loginLinkLabel);
         }
 
         private TextBox CreatePlaceholderTextBox(string placeholder, int x, int y)
@@ -69,7 +81,7 @@ namespace WindowsFormsApp
             {
                 Text = placeholder,
                 Location = new Point(x, y),
-                Size = new Size(350, 30), // TextBox size
+                Size = new Size(400, 30), // Increase TextBox size
                 ForeColor = Color.Gray
             };
 
@@ -121,6 +133,131 @@ namespace WindowsFormsApp
                     else
                     {
                         MessageBox.Show("Erreur lors de l'inscription.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur : {ex.Message}");
+                }
+            }
+        }
+
+        private void LoginLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // Open login form (create and show a new Form2 or equivalent for login)
+            LoginForm loginForm = new LoginForm();
+            loginForm.StartPosition = FormStartPosition.CenterParent; // Center the login form
+            loginForm.ShowDialog(); // Use ShowDialog to make it modal
+        }
+    }
+
+    public partial class LoginForm : Form
+    {
+        private TextBox emailTextBox;
+        private TextBox motDePasseTextBox;
+        private Button loginButton;
+
+        public LoginForm()
+        {
+          
+            InitializeLoginComponents();
+        }
+
+        private void InitializeLoginComponents()
+        {
+            // Adjust form size
+            this.Text = "Connexion";
+            this.Size = new Size(350, 200); // Increased form size
+
+            // Create and add TextBox controls
+            this.emailTextBox = CreatePlaceholderTextBox("Email", 20, 20);
+            this.motDePasseTextBox = CreatePlaceholderTextBox("Mot de passe", 20, 60);
+
+            // Create and add login button
+            this.loginButton = new Button
+            {
+                Text = "Se connecter",
+                Size = new Size(120, 30), // Button size
+                BackColor = Color.FromArgb(139, 69, 19), // Brown color
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Arial", 10, FontStyle.Bold)
+            };
+            this.loginButton.FlatAppearance.BorderSize = 0;
+            this.loginButton.Location = new Point((this.ClientSize.Width - this.loginButton.Width) / 2, 100);
+            this.loginButton.Click += new EventHandler(this.LoginButton_Click);
+
+            // Add controls to the form
+            this.Controls.Add(emailTextBox);
+            this.Controls.Add(motDePasseTextBox);
+            this.Controls.Add(loginButton);
+        }
+
+        private TextBox CreatePlaceholderTextBox(string placeholder, int x, int y)
+        {
+            var textBox = new TextBox
+            {
+                Text = placeholder,
+                Location = new Point(x, y),
+                Size = new Size(300, 30), // Increase TextBox size
+                ForeColor = Color.Gray
+            };
+
+            textBox.GotFocus += (sender, e) =>
+            {
+                if (textBox.Text == placeholder)
+                {
+                    textBox.Text = "";
+                    textBox.ForeColor = Color.Black;
+                }
+            };
+
+            textBox.LostFocus += (sender, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholder;
+                    textBox.ForeColor = Color.Gray;
+                }
+            };
+
+            return textBox;
+        }
+
+        private async void LoginButton_Click(object sender, EventArgs e)
+        {
+            var utilisateur = new
+            {
+                email = emailTextBox.Text != "Email" ? emailTextBox.Text : string.Empty,
+                mot_de_passe = motDePasseTextBox.Text != "Mot de passe" ? motDePasseTextBox.Text : string.Empty
+            };
+
+            var json = JsonConvert.SerializeObject(utilisateur);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    var response = await client.PostAsync("http://localhost:3000/api/utilisateurs/login", data);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        var responseObject = JsonConvert.DeserializeObject<dynamic>(result);
+
+                        if (responseObject.auth == true)
+                        {
+                            MessageBox.Show("Connexion réussie !");
+                            this.Close(); // Close the login form
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erreur lors de la connexion.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors de la connexion.");
                     }
                 }
                 catch (Exception ex)
