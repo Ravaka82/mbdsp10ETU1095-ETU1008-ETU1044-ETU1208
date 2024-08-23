@@ -18,6 +18,7 @@ router.get('/count/refus', echangeController.countEchangesRefused);
 router.get('/count/en-attente', echangeController.countEchangesEnAttente);
 router.get('/count/en-cours', echangeController.countEchangesEnCours);
 router.get('/count/statistiques', echangeController.getStatistiquesEchanges);
+router.put('/updateAttente/:echange_id', echangeController.updateEchangeStatutEnAttente);
 
 
 module.exports = router;

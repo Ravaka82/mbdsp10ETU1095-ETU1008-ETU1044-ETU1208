@@ -26,19 +26,21 @@
             this.listPanel.Location = new System.Drawing.Point(0, 0);
             this.listPanel.Name = "listPanel";
             this.listPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.listPanel.Size = new System.Drawing.Size(800, 600); // Ajustez la taille selon vos besoins
+            this.listPanel.Size = new System.Drawing.Size(800, 600);
             this.listPanel.TabIndex = 0;
+          
             // 
             // ListWishForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600); // Ajustez la taille selon vos besoins
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.listPanel);
             this.Name = "ListWishForm";
             this.Text = "Listes des souhaits";
             this.Load += new System.EventHandler(this.ListWishForm_Load);
             this.ResumeLayout(false);
+
         }
     }
 }
