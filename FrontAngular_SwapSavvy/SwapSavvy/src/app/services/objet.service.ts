@@ -61,4 +61,7 @@ export class ObjetService {
   updateUtilisateurId(id: string, utilisateurId: string): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/Modificationobjet/${id}/utilisateur`, { utilisateur_id: utilisateurId });
   }
+  deleteObjetUtilisateur(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/deleteobjets/${id}`);
+  }
 }

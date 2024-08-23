@@ -99,7 +99,7 @@ export class EchangeListComponent implements OnInit {
           verticalPosition: 'top',
           horizontalPosition: 'end'
         });
-        this.listesobjetsouhaite();
+        this.router.navigate(['/list']);
       },
       error => {
         console.error('Erreur lors de la mise à jour du statut:', error);

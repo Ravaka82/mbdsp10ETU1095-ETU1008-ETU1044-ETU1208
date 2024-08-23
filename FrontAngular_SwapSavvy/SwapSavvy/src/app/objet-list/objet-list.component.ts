@@ -58,7 +58,7 @@ export class ObjetListComponent implements OnInit {
     } else {
       console.error('Aucun utilisateur trouvé dans localStorage');
     }
-    if (history.state && history.state.objets) {
+   if (history.state && history.state.objets) {
       this.objets = history.state.objets;
       this.objetsUser = [];
       this.objetsAll = [];
@@ -117,6 +117,7 @@ export class ObjetListComponent implements OnInit {
           horizontalPosition: 'end'
         });
         this.fetchObjets();
+        this.router.navigate(['/list']);
       },
       (error) => {
         console.error('Erreur lors de la suppression de l\'objet : ', error);

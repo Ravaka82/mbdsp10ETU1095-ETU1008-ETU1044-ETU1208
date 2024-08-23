@@ -107,7 +107,7 @@ export class ObjetCreateComponent implements OnInit {
       this.objetService.createObjet(formData).subscribe(
         () => {
           this.loading = false;
-          this.router.navigate(['/']);
+          this.router.navigate(['/list']);
           this.snackBar.open('Objet créé avec succès.', 'Fermer', {
             duration: 3000,
             verticalPosition: 'top',

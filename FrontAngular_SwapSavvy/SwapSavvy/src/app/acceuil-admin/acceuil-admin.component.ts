@@ -4,6 +4,7 @@ import { EchangeService } from '../services/echange.service';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { ObjetService } from '../services/objet.service';
 
 @Component({
   selector: 'app-acceuil-admin',
@@ -28,7 +29,8 @@ export class AcceuilAdminComponent implements OnInit {
 
   constructor(
     private utilisateurService: UtilisateurService,
-    private echangeService: EchangeService
+    private echangeService: EchangeService,
+    private objetService: ObjetService
   ) {}
 
   ngOnInit(): void {
@@ -53,9 +55,19 @@ export class AcceuilAdminComponent implements OnInit {
 
   onDelete(utilisateur: any): void {
     if (confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${utilisateur.nom}?`)) {
-      this.utilisateurService.deleteUtilisateur(utilisateur._id).subscribe(() => {
-        this.utilisateurs = this.utilisateurs.filter(u => u._id !== utilisateur._id);
-        this.utilisateurCount--;
+      // Supprimer les objets associés à l'utilisateur
+      this.objetService.deleteObjetUtilisateur(utilisateur._id).subscribe({
+        next: () => {
+          // Puis supprimer l'utilisateur
+          this.utilisateurService.deleteUtilisateur(utilisateur._id).subscribe({
+            next: () => {
+              this.utilisateurs = this.utilisateurs.filter(u => u._id !== utilisateur._id);
+              this.utilisateurCount--;
+            },
+            error: (err) => console.error('Error deleting utilisateur:', err)
+          });
+        },
+        error: (err) => console.error('Error deleting objects:', err)
       });
     }
   }

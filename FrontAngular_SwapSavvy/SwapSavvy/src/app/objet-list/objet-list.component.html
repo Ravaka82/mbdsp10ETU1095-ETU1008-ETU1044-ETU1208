@@ -1,3 +1,16 @@
+<style>
+  .example-card {
+    max-width: 300px; /* Ajustez la largeur maximale selon vos besoins */
+    margin: 10px; /* Ajoutez un peu d'espace autour des cartes */
+  }
+  
+  .object-image {
+    width: 100%; /* Prend la largeur maximale de la carte */
+    height: 200px; /* Fixez la hauteur souhaitée */
+    object-fit: cover; /* Assure que l'image remplit le conteneur sans déformation */
+    display: block;
+  }
+  </style>
 <h1 class="title1"><strong>Liste des objets de l'utilisateur {{ user.prenom }}</strong></h1>
 <h2>Sélectionnez le(s) objet(s) que vous souhaitiez échanger</h2>
 <br><br>

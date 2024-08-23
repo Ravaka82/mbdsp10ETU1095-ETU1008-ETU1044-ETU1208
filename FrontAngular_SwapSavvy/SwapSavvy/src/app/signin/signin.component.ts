@@ -30,40 +30,26 @@ export class SigninComponent {
   constructor(private loginServ:AuthService,private router:Router) {}
 
   login() {
-    let user:User = {
-      email : this.email,
-      mot_de_passe : this.mot_de_passe
-    }
+    let user = { email: this.email, mot_de_passe: this.mot_de_passe };
 
     this.loginServ.logIn(user).subscribe(
-      (d:any)=>{
+      (d: any) => {
         this.error = d.token;
         localStorage.setItem('token', d.token);
-        this.loginServ.loggedIn=true;
-         this.loginServ.getUserLogged().subscribe(
-        (d:any)=>{
-          // this.nom =d.nom;
-          localStorage.setItem('user',  JSON.stringify(d));
-          this.router.navigate(['/list']);
-        },
-        (err:any) => {
-
-            // Autre gestion d'erreur
+        this.loginServ.loggedIn = true;
+        this.loginServ.getUserLogged().subscribe(
+          (user: any) => {
+            localStorage.setItem('user', JSON.stringify(user));
+         
+            this.router.navigate(['/list']);
+          },
+          (err: any) => {
             this.error = err.error.message;
-
-
-        }
-      );
-         this.router.navigate(['/list']);
+          }
+        );
       },
-      (err:any) => {
-        if (err.status === 404) {
-          this.error = err.error; // Récupération du message d'erreur "No user found"
-        } else {
-          // Autre gestion d'erreur
-          this.error = "Mot de passe erroné";
-        }
-
+      (err: any) => {
+        this.error = err.status === 404 ? err.error : "Mot de passe erroné";
       }
     );
   }
