@@ -1,14 +1,17 @@
 package com.app.swapsavvy.register
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.app.swapsavvy.R
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.app.swapsavvy.network.APIClient
 import com.app.swapsavvy.data.Utilisateur
+import com.app.swapsavvy.login.LoginActivity
 import com.app.swapsavvy.services.ApiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -62,22 +65,32 @@ class RegisterActivity : AppCompatActivity() {
 
         val apiService = APIClient.create(this, ApiService::class.java)
         val utilisateur = Utilisateur(
-            _id = null,
-            nom = "",
-            prenom = "",
+            nom = nom,
+            prenom = prenom,
             email = email,
             mot_de_passe = mot_de_passe,
-            token = ""
+            latitude = -18.79910360526281,
+            longitude = 47.47534905075115
         )
+
+        // Log des données envoyées pour vérification
+        Log.d("Register", "Utilisateur envoyé : $utilisateur")
 
         apiService.registerUser(utilisateur).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     val registerResponse = response.body()
                     Toast.makeText(this@RegisterActivity, "Inscription réussie", Toast.LENGTH_SHORT).show()
+
+                    // Redirection vers la page de connexion
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+
                     finish()
                 } else {
-                    Toast.makeText(this@RegisterActivity, "Échec de l'inscription", Toast.LENGTH_SHORT).show()
+                    val errorMessage = "Échec de l'inscription. Code: ${response.code()}, Message: ${response.message()}"
+                    Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                    Log.e("RegisterActivity", "Erreur : ${response.errorBody()?.string()}")
                 }
             }
 

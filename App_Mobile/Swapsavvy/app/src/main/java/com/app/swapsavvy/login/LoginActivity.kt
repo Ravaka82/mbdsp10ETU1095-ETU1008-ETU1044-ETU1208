@@ -11,7 +11,7 @@ import com.app.swapsavvy.data.Utilisateur
 import com.app.swapsavvy.register.RegisterActivity
 import com.app.swapsavvy.services.ApiService
 import com.app.swapsavvy.network.APIClient
-import com.app.swapsavvy.security.TokenManager
+import com.app.swapsavvy.objetlist.ObjetListActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,6 +45,8 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val email = emailEditText.text.toString().trim()
         val mot_de_passe = passwordEditText.text.toString().trim()
+        val longitude = 47.47534905075115
+        val latitude = -18.799103605262818
 
         if (email.isEmpty() || mot_de_passe.isEmpty()) {
             Toast.makeText(this, "Veuillez entrer votre email et mot de passe", Toast.LENGTH_SHORT).show()
@@ -53,23 +55,23 @@ class LoginActivity : AppCompatActivity() {
 
         val apiService = APIClient.create(this, ApiService::class.java)
         val utilisateur = Utilisateur(
-            _id = null,
             nom = "",
             prenom = "",
             email = email,
             mot_de_passe = mot_de_passe,
-            token = ""
+            latitude = -18.79910360526281,
+            longitude = 47.47534905075115
         )
 
         apiService.loginUser(utilisateur).enqueue(object : Callback<Utilisateur> {
             override fun onResponse(call: Call<Utilisateur>, response: Response<Utilisateur>) {
                 if (response.isSuccessful) {
-                    response.body()?.let { utilisateur ->
-                        // Sauvegarde du token après une connexion réussie
-                        utilisateur.token?.let { TokenManager.saveToken(this@LoginActivity, it) }
                         Toast.makeText(this@LoginActivity, "Connexion réussie", Toast.LENGTH_SHORT)
                             .show()
-                    }
+                        // Redirection vers la page liste des objets
+                        val intent = Intent(this@LoginActivity, ObjetListActivity::class.java)
+                        startActivity(intent)
+
                     } else {
                     Toast.makeText(this@LoginActivity, "Échec de la connexion", Toast.LENGTH_SHORT).show()
                 }
