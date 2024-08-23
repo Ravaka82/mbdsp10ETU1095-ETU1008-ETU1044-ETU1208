@@ -11,22 +11,22 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-    @POST("auth/register")
+    @POST("/api/auth/register")
     fun registerUser(@Body utilisateur: Utilisateur): Call<Void>
 
-    @POST("auth/login")
+    @POST("/api/auth/login")
     fun loginUser(@Body utilisateur: Utilisateur): Call<Utilisateur>
 
-    @POST("utilisateurs")
+    @POST("/api/utilisateurs")
     fun createUtilisateur(@Body utilisateur: Utilisateur): Call<Utilisateur>
 
-    @GET("utilisateurs/{id}")
+    @GET("/api/utilisateurs/{id}")
     fun getUtilisateurById(@Path("id") id: String): Call<Utilisateur>
 
-    @GET("objets")
+    @GET("/api/objets")
     fun getObjets(): Call<List<Objet>>
 
-    @GET("objets/{id}")
+    @GET("/api/objets/{id}")
     fun getObjetById(@Path("id") id: String): Call<Objet>
     abstract fun login(email: String, password: String): Response<Utilisateur>
 

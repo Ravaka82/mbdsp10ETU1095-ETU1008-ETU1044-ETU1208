@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/emailEditText"
-        android:layout_width="148dp"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_weight="1"
@@ -29,7 +29,7 @@
 
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="149dp"
+        android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
@@ -41,16 +41,20 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="175dp"
+        android:layout_height="35dp"
         android:layout_marginTop="24dp"
-        android:text="@string/login" />
+        android:text="@string/login"
+        android:background="@color/teal_700"
+        android:textColor="@color/textColorLight" />
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="34dp"
+        android:layout_width="155dp"
+        android:layout_height="46dp"
         android:layout_marginTop="16dp"
-        android:text="@string/register" />
+        android:text="@string/register"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/textColorLight" />
 
 </LinearLayout>
