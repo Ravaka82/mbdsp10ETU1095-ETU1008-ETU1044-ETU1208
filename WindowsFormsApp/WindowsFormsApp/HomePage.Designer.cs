@@ -9,6 +9,7 @@
         private System.Windows.Forms.Button listOtherObjectsButton;
         private System.Windows.Forms.Panel navbarPanel;
         private System.Windows.Forms.Button exchangeButton;
+        private System.Windows.Forms.Button listWishButton;
 
         protected override void Dispose(bool disposing)
         {
@@ -93,6 +94,22 @@
             this.exchangeButton.UseVisualStyleBackColor = false;
             this.exchangeButton.Click += new System.EventHandler(this.ExchangeButton_Click);
             this.navbarPanel.Controls.Add(this.exchangeButton);
+
+            // Ajoutez ceci dans la méthode InitializeComponent juste après l'initialisation des autres boutons
+
+            this.listWishButton = new System.Windows.Forms.Button();
+            this.listWishButton.BackColor = System.Drawing.Color.White;
+            this.listWishButton.ForeColor = System.Drawing.Color.Brown;
+            this.listWishButton.Location = new System.Drawing.Point(495, 12);
+            this.listWishButton.Margin = new System.Windows.Forms.Padding(2);
+            this.listWishButton.Name = "listWishButton";
+            this.listWishButton.Size = new System.Drawing.Size(112, 24);
+            this.listWishButton.TabIndex = 5;
+            this.listWishButton.Text = "Listes des souhaits";
+            this.listWishButton.UseVisualStyleBackColor = false;
+            this.listWishButton.Click += new System.EventHandler(this.ListWishButton_Click);
+            this.navbarPanel.Controls.Add(this.listWishButton);
+
 
             // 
             // navbarPanel
