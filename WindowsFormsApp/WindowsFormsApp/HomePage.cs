@@ -68,6 +68,17 @@ namespace WindowsFormsApp
             var listObjectsForm = new ListObjectsForm(_userId, _userToken);
             listObjectsForm.Show();
         }
+        private async void ListOtherObjectsButton_Click(object sender, EventArgs e)
+        {
+            var listOtherObjectsForm = new ListOtherObjectsForm();
+            listOtherObjectsForm.Show();
+        }
+
+
+        private void HomePage_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public static class Global

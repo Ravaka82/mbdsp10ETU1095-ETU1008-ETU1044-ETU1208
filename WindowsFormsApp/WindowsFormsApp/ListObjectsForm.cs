@@ -153,6 +153,11 @@ namespace WindowsFormsApp
                 }
             }
         }
+
+        private void cardsPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
     public class Objet
