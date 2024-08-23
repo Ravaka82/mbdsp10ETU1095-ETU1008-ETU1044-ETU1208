@@ -18,4 +18,5 @@ router.get('/RechercheSimple', objetController.RechercheObjetsParTitre);
 router.post('/rechercheAvance', objetController.rechercheAvanceObjets);
 router.get('/FindAllImageObject', objetController.getAllImageObject );
 router.put('/Modificationobjet/:id/utilisateur', objetController.updateUtilisateurIdById);
+router.get('/utilisateur/:utilisateur_id', objetController.getObjetsByUtilisateur);
 module.exports = router;
