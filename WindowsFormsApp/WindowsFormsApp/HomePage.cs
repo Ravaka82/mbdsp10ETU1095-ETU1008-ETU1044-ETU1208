@@ -80,6 +80,13 @@ namespace WindowsFormsApp
             exchangeForm.Show();
         }
 
+        private async void ListWishButton_Click(object sender, EventArgs e)
+        {
+
+            // Ouvrir le formulaire pour afficher les souhaits
+            var listWishForm = new ListWishForm(_userId, _userToken);
+            listWishForm.Show();
+        }
 
 
         private void HomePage_Load(object sender, EventArgs e)
