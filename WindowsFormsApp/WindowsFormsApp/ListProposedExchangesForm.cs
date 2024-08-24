@@ -159,6 +159,34 @@ namespace WindowsFormsApp
                 };
                 card.Controls.Add(detailsLabel);
 
+                // Boutons Refuser et Accepter
+                var refuseButton = new Button
+                {
+                    Text = "Refuser",
+                    Top = detailsLabel.Bottom + 10,
+                    Width = 100,
+                    Left = 10
+                };
+                refuseButton.Click += async (sender, args) =>
+                {
+                    await RefuserEchange(exchangeId);
+                };
+                card.Controls.Add(refuseButton);
+
+                var acceptButton = new Button
+                {
+                    Text = "Accepter",
+                    Top = detailsLabel.Bottom + 10,
+                    Width = 100,
+                    Left = refuseButton.Right + 10
+                };
+                acceptButton.Click += async (sender, args) =>
+                {
+                    await AccepterEchange(exchangeId, proposerUser["_id"]?.ToString(), acceptorUser["_id"]?.ToString(),
+                                           proposedItem["_id"]?.ToString(), acceptingItem["_id"]?.ToString());
+                };
+                card.Controls.Add(acceptButton);
+
                 // Ajout du panel de carte à listPanel
                 listPanel.Controls.Add(card);
 
@@ -167,6 +195,96 @@ namespace WindowsFormsApp
             }
         }
 
+        private async Task RefuserEchange(string exchangeId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _userToken);
+
+                try
+                {
+                    var response = await client.PutAsync($"http://localhost:3000/api/echanges/echange/{exchangeId}/statut",
+                        new StringContent("{\"statut\":\"refuser\"}", System.Text.Encoding.UTF8, "application/json"));
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Vous avez refusé la proposition.");
+                        await LoadProposedExchanges(); // Recharger les échanges après le refus
+                    }
+                    else
+                    {
+                        var errorMessage = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show($"Erreur lors du refus : {errorMessage}");
+                    }
+                }
+                catch (HttpRequestException httpEx)
+                {
+                    MessageBox.Show($"Erreur de requête HTTP : {httpEx.Message}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur : {ex.Message}");
+                }
+            }
+        }
+
+        private async Task AccepterEchange(string exchangeId, string utilisateurIdProposant, string utilisateurIdAcceptant, string objetProposant, string objetAcceptant)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _userToken);
+
+                try
+                {
+                    // Mettre à jour le statut de l'échange
+                    var response1 = await client.PutAsync($"http://localhost:3000/api/echanges/echange/{exchangeId}/statut",
+                        new StringContent("{\"statut\":\"accepter\"}", System.Text.Encoding.UTF8, "application/json"));
+
+                    if (response1.IsSuccessStatusCode)
+                    {
+                        // Mettre à jour l'utilisateur pour l'objet proposé
+                        var response2 = await client.PutAsync($"http://localhost:3000/api/objets/Modificationobjet/{objetProposant}/utilisateur",
+                            new StringContent($"{{\"utilisateur_id\":\"{utilisateurIdAcceptant}\"}}", System.Text.Encoding.UTF8, "application/json"));
+
+                        if (response2.IsSuccessStatusCode)
+                        {
+                            // Mettre à jour l'utilisateur pour l'objet accepté
+                            var response3 = await client.PutAsync($"http://localhost:3000/api/objets/Modificationobjet/{objetAcceptant}/utilisateur",
+                                new StringContent($"{{\"utilisateur_id\":\"{utilisateurIdProposant}\"}}", System.Text.Encoding.UTF8, "application/json"));
+
+                            if (response3.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Vous avez accepté et les objets ont été échangés.");
+                                await LoadProposedExchanges(); // Recharger les échanges après l'acceptation
+                            }
+                            else
+                            {
+                                var errorMessage = await response3.Content.ReadAsStringAsync();
+                                MessageBox.Show($"Erreur lors de la mise à jour de l'objet acceptant : {errorMessage}");
+                            }
+                        }
+                        else
+                        {
+                            var errorMessage = await response2.Content.ReadAsStringAsync();
+                            MessageBox.Show($"Erreur lors de la mise à jour de l'objet proposant : {errorMessage}");
+                        }
+                    }
+                    else
+                    {
+                        var errorMessage = await response1.Content.ReadAsStringAsync();
+                        MessageBox.Show($"Erreur lors de l'acceptation : {errorMessage}");
+                    }
+                }
+                catch (HttpRequestException httpEx)
+                {
+                    MessageBox.Show($"Erreur de requête HTTP : {httpEx.Message}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur : {ex.Message}");
+                }
+            }
+        }
 
         private async Task LoadImageAsync(PictureBox pictureBox, string imageUrl)
         {
