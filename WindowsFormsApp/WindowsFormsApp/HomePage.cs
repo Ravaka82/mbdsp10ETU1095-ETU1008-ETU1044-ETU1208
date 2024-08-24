@@ -141,6 +141,11 @@ namespace WindowsFormsApp
         {
 
         }
+
+        private void navbarPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
     public static class Global

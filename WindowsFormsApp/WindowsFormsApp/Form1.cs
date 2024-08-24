@@ -42,8 +42,8 @@ namespace WindowsFormsApp
             this.submitButton = new Button
             {
                 Text = "S'inscrire",
-                Size = new Size(150, 40), // Button size
-                BackColor = Color.FromArgb(139, 69, 19),
+                Size = new Size(120, 30),
+                BackColor = Color.Purple,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 12, FontStyle.Bold)
@@ -81,8 +81,8 @@ namespace WindowsFormsApp
             {
                 Text = placeholder,
                 Location = new Point(x, y),
-                Size = new Size(400, 30), // Increase TextBox size
-                ForeColor = Color.Gray
+                Size = new Size(800, 30), // Increase TextBox size
+                ForeColor = Color.Purple
             };
 
             textBox.GotFocus += (sender, e) =>
@@ -183,7 +183,7 @@ namespace WindowsFormsApp
             {
                 Text = "Se connecter",
                 Size = new Size(120, 30),
-                BackColor = Color.FromArgb(139, 69, 19),
+                BackColor = Color.Purple,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 10, FontStyle.Bold)
