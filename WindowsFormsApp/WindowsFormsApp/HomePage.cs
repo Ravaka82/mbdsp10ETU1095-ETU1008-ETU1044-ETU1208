@@ -70,7 +70,7 @@ namespace WindowsFormsApp
         }
         private async void ListOtherObjectsButton_Click(object sender, EventArgs e)
         {
-            var listOtherObjectsForm = new ListOtherObjectsForm();
+            var listOtherObjectsForm = new ListOtherObjectsForm(_userId, _userToken);
             listOtherObjectsForm.Show();
         }
         private async void ExchangeButton_Click(object sender, EventArgs e)

@@ -11,9 +11,13 @@ namespace WindowsFormsApp
 {
     public partial class ListOtherObjectsForm : Form
     {
-        public ListOtherObjectsForm()
+        private string _userId;
+        private string _userToken;
+        public ListOtherObjectsForm(string userId, string userToken)
         {
             InitializeComponent();
+            _userId = userId;
+            _userToken = userToken;
             LoadOtherObjects();
         }
 
@@ -21,25 +25,22 @@ namespace WindowsFormsApp
         {
             using (var client = new HttpClient())
             {
-                // Ajout de l'autorisation avec le token
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Global.Token);
 
                 try
                 {
-          
                     var response = await client.GetAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets");
 
                     if (response.IsSuccessStatusCode)
                     {
                         var result = await response.Content.ReadAsStringAsync();
                         var objects = JArray.Parse(result);
-                        var userId = Global.Token;
 
-               
+
                         foreach (var obj in objects)
                         {
                             var ownerId = obj["utilisateur_id"]?["_id"]?.ToString();
-                            if (ownerId != userId) 
+                            if (ownerId != _userId)
                             {
                                 // Créez et configurez un panneau pour chaque objet
                                 var card = new Panel
@@ -52,7 +53,6 @@ namespace WindowsFormsApp
                                     Left = (otherObjectsPanel.Width - (otherObjectsPanel.Width - 40)) / 2
                                 };
 
-                                // Titre
                                 var titleLabel = new Label
                                 {
                                     Text = $"Titre : {obj["titre"]}",
@@ -61,7 +61,6 @@ namespace WindowsFormsApp
                                 };
                                 card.Controls.Add(titleLabel);
 
-                                // Description
                                 var descriptionLabel = new Label
                                 {
                                     Text = $"Description : {obj["description"]}",
@@ -70,7 +69,6 @@ namespace WindowsFormsApp
                                 };
                                 card.Controls.Add(descriptionLabel);
 
-                                // Image
                                 var pictureBox = new PictureBox
                                 {
                                     Width = 200,
@@ -79,24 +77,48 @@ namespace WindowsFormsApp
                                     SizeMode = PictureBoxSizeMode.Zoom
                                 };
                                 card.Controls.Add(pictureBox);
-
-                                // Chargement de l'image de manière asynchrone
                                 await LoadImageAsync(pictureBox, obj["image_url"]?.ToString());
 
-                                // Détails
                                 var detailsLabel = new Label
                                 {
-                                    Text = $"Statut : {obj["statut"]}\n" +
-                                           $"Etat : {obj["etat"]}\n" +
-                                           $"Valeur Estimée : {obj["valeur_estimee"]:C}\n" +
-                                           $"Date Création : {DateTime.Parse(obj["date_creation"]?.ToString()):dd/MM/yyyy}\n" +
-                                           $"Date Modification : {DateTime.Parse(obj["date_modification"]?.ToString()):dd/MM/yyyy}\n",
                                     AutoSize = true,
                                     Top = pictureBox.Bottom + 5
                                 };
-                                card.Controls.Add(detailsLabel);
 
-                                // Ajout du panneau à otherObjectsPanel
+                                detailsLabel.Text += $"Statut : {obj["statut"]}\n";
+                                detailsLabel.Text += $"Etat : {obj["etat"]}\n";
+
+                                decimal valeurEstimee;
+                                if (decimal.TryParse(obj["valeur_estimee"]?.ToString(), out valeurEstimee))
+                                {
+                                    detailsLabel.Text += $"Valeur Estimée : {valeurEstimee:C}\n";
+                                }
+                                else
+                                {
+                                    detailsLabel.Text += "Valeur Estimée : Inconnue\n";
+                                }
+
+                                DateTime dateCreation;
+                                if (DateTime.TryParse(obj["date_creation"]?.ToString(), out dateCreation))
+                                {
+                                    detailsLabel.Text += $"Date Création : {dateCreation:dd/MM/yyyy}\n";
+                                }
+                                else
+                                {
+                                    detailsLabel.Text += "Date Création : Inconnue\n";
+                                }
+
+                                DateTime dateModification;
+                                if (DateTime.TryParse(obj["date_modification"]?.ToString(), out dateModification))
+                                {
+                                    detailsLabel.Text += $"Date Modification : {dateModification:dd/MM/yyyy}\n";
+                                }
+                                else
+                                {
+                                    detailsLabel.Text += "Date Modification : Inconnue\n";
+                                }
+
+                                card.Controls.Add(detailsLabel);
                                 otherObjectsPanel.Controls.Add(card);
                             }
                         }
@@ -112,6 +134,7 @@ namespace WindowsFormsApp
                 }
             }
         }
+
 
         private async Task LoadImageAsync(PictureBox pictureBox, string imageUrl)
         {
