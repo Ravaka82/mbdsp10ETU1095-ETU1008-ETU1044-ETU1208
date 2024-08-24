@@ -224,5 +224,10 @@ namespace WindowsFormsApp
             }
             return null;
         }
+
+        private void otherObjectsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

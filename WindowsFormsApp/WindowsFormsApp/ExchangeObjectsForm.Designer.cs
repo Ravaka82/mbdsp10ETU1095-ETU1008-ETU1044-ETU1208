@@ -26,25 +26,23 @@
             this.userObjectsLabel = new System.Windows.Forms.Label();
             this.otherObjectsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
-
             // 
             // userObjectsListBox
             // 
             this.userObjectsListBox.FormattingEnabled = true;
             this.userObjectsListBox.Location = new System.Drawing.Point(12, 40);
             this.userObjectsListBox.Name = "userObjectsListBox";
-            this.userObjectsListBox.Size = new System.Drawing.Size(250, 300);
+            this.userObjectsListBox.Size = new System.Drawing.Size(250, 290);
             this.userObjectsListBox.TabIndex = 0;
-
             // 
             // otherObjectsListBox
             // 
             this.otherObjectsListBox.FormattingEnabled = true;
             this.otherObjectsListBox.Location = new System.Drawing.Point(275, 40);
             this.otherObjectsListBox.Name = "otherObjectsListBox";
-            this.otherObjectsListBox.Size = new System.Drawing.Size(250, 300);
+            this.otherObjectsListBox.Size = new System.Drawing.Size(250, 290);
             this.otherObjectsListBox.TabIndex = 1;
-
+            this.otherObjectsListBox.SelectedIndexChanged += new System.EventHandler(this.otherObjectsListBox_SelectedIndexChanged);
             // 
             // validateButton
             // 
@@ -55,17 +53,15 @@
             this.validateButton.Text = "Valider";
             this.validateButton.UseVisualStyleBackColor = true;
             this.validateButton.Click += new System.EventHandler(this.ValidateButton_Click);
-
             // 
             // userObjectsLabel
             // 
             this.userObjectsLabel.AutoSize = true;
             this.userObjectsLabel.Location = new System.Drawing.Point(12, 20);
             this.userObjectsLabel.Name = "userObjectsLabel";
-            this.userObjectsLabel.Size = new System.Drawing.Size(104, 13);
+            this.userObjectsLabel.Size = new System.Drawing.Size(60, 13);
             this.userObjectsLabel.TabIndex = 3;
             this.userObjectsLabel.Text = "Mes Objets";
-
             // 
             // otherObjectsLabel
             // 
@@ -75,7 +71,6 @@
             this.otherObjectsLabel.Size = new System.Drawing.Size(144, 13);
             this.otherObjectsLabel.TabIndex = 4;
             this.otherObjectsLabel.Text = "Objets des Autres Utilisateurs";
-
             // 
             // ExchangeObjectsForm
             // 
@@ -89,6 +84,7 @@
             this.Text = "Échanger Objets";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
     }
 }

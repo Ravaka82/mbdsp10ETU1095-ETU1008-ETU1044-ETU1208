@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Http;
@@ -23,33 +21,38 @@ namespace WindowsFormsApp
         {
             using (var client = new HttpClient())
             {
+                // Ajout de l'autorisation avec le token
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Global.Token);
 
                 try
                 {
+          
                     var response = await client.GetAsync("http://localhost:3000/api/objets");
 
                     if (response.IsSuccessStatusCode)
                     {
                         var result = await response.Content.ReadAsStringAsync();
                         var objects = JArray.Parse(result);
-                        var userId = Global.Token; // Supposez que vous avez le userId dans Global
+                        var userId = Global.Token;
 
+               
                         foreach (var obj in objects)
                         {
-                            if (obj["utilisateur_id"]["_id"]?.ToString() != userId)
+                            var ownerId = obj["utilisateur_id"]?["_id"]?.ToString();
+                            if (ownerId != userId) 
                             {
-                                // Créez et ajoutez les panneaux pour chaque objet
+                                // Créez et configurez un panneau pour chaque objet
                                 var card = new Panel
                                 {
-                                    Width = this.Width - 40,
+                                    Width = otherObjectsPanel.Width - 40,
                                     Height = 450,
                                     BorderStyle = BorderStyle.FixedSingle,
                                     Padding = new Padding(10),
-                                    Top = 10 + 460 * (this.Controls.Count / 2),
-                                    Left = (this.Width - (this.Width - 40)) / 2
+                                    Top = 10 + 460 * (otherObjectsPanel.Controls.Count),
+                                    Left = (otherObjectsPanel.Width - (otherObjectsPanel.Width - 40)) / 2
                                 };
 
+                                // Titre
                                 var titleLabel = new Label
                                 {
                                     Text = $"Titre : {obj["titre"]}",
@@ -58,6 +61,7 @@ namespace WindowsFormsApp
                                 };
                                 card.Controls.Add(titleLabel);
 
+                                // Description
                                 var descriptionLabel = new Label
                                 {
                                     Text = $"Description : {obj["description"]}",
@@ -66,6 +70,7 @@ namespace WindowsFormsApp
                                 };
                                 card.Controls.Add(descriptionLabel);
 
+                                // Image
                                 var pictureBox = new PictureBox
                                 {
                                     Width = 200,
@@ -75,8 +80,10 @@ namespace WindowsFormsApp
                                 };
                                 card.Controls.Add(pictureBox);
 
+                                // Chargement de l'image de manière asynchrone
                                 await LoadImageAsync(pictureBox, obj["image_url"]?.ToString());
 
+                                // Détails
                                 var detailsLabel = new Label
                                 {
                                     Text = $"Statut : {obj["statut"]}\n" +
@@ -89,7 +96,8 @@ namespace WindowsFormsApp
                                 };
                                 card.Controls.Add(detailsLabel);
 
-                                this.Controls.Add(card);
+                                // Ajout du panneau à otherObjectsPanel
+                                otherObjectsPanel.Controls.Add(card);
                             }
                         }
                     }
@@ -123,24 +131,24 @@ namespace WindowsFormsApp
                     }
                     else
                     {
-                        pictureBox.Image = null;
+                        pictureBox.Image = null; // Image non disponible
                     }
                 }
             }
             catch
             {
-                pictureBox.Image = null;
+                pictureBox.Image = null; // Erreur lors du chargement de l'image
             }
         }
 
         private void ListOtherObjectsForm_Load(object sender, EventArgs e)
         {
-
+            // Code à exécuter lors du chargement du formulaire
         }
 
-        private void ListOtherObjectsForm_Load_1(object sender, EventArgs e)
+        private void otherObjectsPanel_Paint(object sender, PaintEventArgs e)
         {
-
+            // Code à exécuter lors du dessin du panneau (si nécessaire)
         }
     }
 }
