@@ -1,5 +1,6 @@
 package com.app.swapsavvy.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ObjectAdapter(private val objets: List<Objet>) : RecyclerView.Adapter<ObjectAdapter.ObjectViewHolder>() {
+class ObjectAdapter(private var objets: List<Objet>) : RecyclerView.Adapter<ObjectAdapter.ObjectViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_object, parent, false)
@@ -56,22 +57,13 @@ class ObjectAdapter(private val objets: List<Objet>) : RecyclerView.Adapter<Obje
                 imageView.setImageResource(R.drawable.default_image) // Image par défaut
             }
 
-            // Appeler l'API pour récupérer le nom de l'utilisateur propriétaire
-            RetrofitClient.apiService.getUtilisateurById(objet.utilisateur_id).enqueue(object :
-                Callback<Utilisateur> {
-                override fun onResponse(call: Call<Utilisateur>, response: Response<Utilisateur>) {
-                    if (response.isSuccessful) {
-                        val utilisateur = response.body()
-                        ownerTextView.text = "Propriétaire: ${utilisateur?.nom}"
-                    } else {
-                        ownerTextView.text = "Propriétaire: Inconnu"
-                    }
-                }
-
-                override fun onFailure(call: Call<Utilisateur>, t: Throwable) {
-                    ownerTextView.text = "Propriétaire: Erreur"
-                }
-            })
+            val utilisateur = objet.utilisateur_id
+            ownerTextView.text = "Propriétaire: ${utilisateur.prenom}"
         }
+    }
+
+    fun updateData(newObjects: List<Objet>) {
+        this.objets = newObjects
+        notifyDataSetChanged()
     }
 }

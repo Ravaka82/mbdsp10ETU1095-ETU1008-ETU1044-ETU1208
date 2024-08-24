@@ -5,17 +5,116 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".objetlist.ObjetListActivity">
+    tools:context=".objetlist.ObjetListActivity"
+    android:padding="16dp">
 
-    <!-- Toolbar avec titre personnalisé -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <!-- Titre -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🛍️ ÉCHANGEZ VOS OBJETS 🛍️"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_purple"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp" />
+
+    <!-- Menu horizontal avec des boutons -->
+    <LinearLayout
+        android:id="@+id/menuLayout1"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:layout_height="33dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp">
+
+        <Button
+            android:id="@+id/btnMyObjects"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:text="Mes Objets" />
+
+        <Button
+            android:id="@+id/btnCreateObject"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:text="Créer Objet" />
+
+        <Button
+            android:id="@+id/btnObjectList"
+            android:layout_width="138dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:text="Objets autres" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuLayout2"
+        android:layout_width="381dp"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/btnObjectEchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:text="Echanger" />
+
+        <Button
+            android:id="@+id/btnListEchangeSouhait"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:text="Souhaités" />
+
+        <Button
+            android:id="@+id/btnListEchangePropose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:text="Proposés" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuLayout3"
+        android:layout_width="387dp"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnHistoriqueEchange"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:text="Historiques des échanges" />
+
+    </LinearLayout>
+
 
     <!-- RecyclerView pour afficher la liste des objets -->
     <androidx.recyclerview.widget.RecyclerView
@@ -25,4 +124,4 @@
         android:padding="16dp"
         android:scrollbars="vertical" />
 
-</LinearLayout>
+</LinearLayout >

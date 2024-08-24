@@ -4,6 +4,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.TextView
 import retrofit2.Call
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,15 +24,53 @@ class ObjetListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_objet_list)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = "Liste des Objets"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val titleTextView: TextView = findViewById(R.id.titleTextView)
+        val animation = AnimationUtils.loadAnimation(this, R.anim.text_animation)
+        titleTextView.startAnimation(animation)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        adapter = ObjectAdapter(emptyList())
+        recyclerView.adapter = adapter
+
         fetchObjectsFromApi()
+
+        val btnMyObjects: Button = findViewById(R.id.btnMyObjects)
+        val btnCreateObject: Button = findViewById(R.id.btnCreateObject)
+        val btnObjectList: Button = findViewById(R.id.btnObjectList)
+        val btnObjectEchange: Button = findViewById(R.id.btnObjectEchange)
+        val btnListEchangeSouhait: Button = findViewById(R.id.btnListEchangeSouhait)
+        val btnListEchangePropose: Button = findViewById(R.id.btnListEchangePropose)
+        val btnHistoriqueEchange: Button = findViewById(R.id.btnHistoriqueEchange)
+
+        btnMyObjects.setOnClickListener {
+            Toast.makeText(this, "Mes Objets clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        btnCreateObject.setOnClickListener {
+            Toast.makeText(this, "Créer Objet clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        btnObjectList.setOnClickListener {
+            Toast.makeText(this, "Liste Objets clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        btnObjectEchange.setOnClickListener {
+            Toast.makeText(this, "Echanger Objet clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        btnListEchangeSouhait.setOnClickListener {
+            Toast.makeText(this, "Liste échanges Objets souhaités clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        btnListEchangePropose.setOnClickListener {
+            Toast.makeText(this, "Liste échanges Objets proposés clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        btnHistoriqueEchange.setOnClickListener {
+            Toast.makeText(this, "Historique échanges Objets clicked", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -40,8 +81,8 @@ class ObjetListActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Objet>>, response: Response<List<Objet>>) {
                 if (response.isSuccessful) {
                     val objects: List<Objet> = response.body() ?: emptyList()
-                    adapter = ObjectAdapter(objects)
-                    recyclerView.adapter = adapter
+                    Log.d("ObjetListActivity", "Objets reçus: $objects")
+                    adapter.updateData(objects)
                 } else {
                     Toast.makeText(this@ObjetListActivity, "Erreur lors du chargement des objets", Toast.LENGTH_SHORT).show()
                 }
