@@ -27,8 +27,16 @@ interface ApiService {
     fun getObjets(): Call<List<Objet>>
 
     @GET("/api/objets/{id}")
-    fun getObjetById(@Path("id") id: String): Call<Objet>
+    fun getObjetById(@Path("id") id: String): Call<List<Objet>>
     abstract fun login(email: String, password: String): Response<Utilisateur>
 
+    @GET("/api/objets/utilisateur/{id}")
+    fun getObjetsByUtilisateur(@Path("id") id: String): Call<List<Objet>>
+
+    @GET("/api/objets/user/{id}")
+    fun getObjetsUser(@Path("id") id: String): Call<List<Objet>>
+
+    @GET("/api/objets/all")
+    fun getObjetsAll(): Call<List<Objet>>
 
 }

@@ -1,5 +1,6 @@
 package com.app.swapsavvy.objetlist
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,8 @@ class ObjetListActivity : AppCompatActivity() {
 
         btnMyObjects.setOnClickListener {
             Toast.makeText(this, "Mes Objets clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MyObjectsActivity::class.java)
+            startActivity(intent)
         }
 
         btnCreateObject.setOnClickListener {
