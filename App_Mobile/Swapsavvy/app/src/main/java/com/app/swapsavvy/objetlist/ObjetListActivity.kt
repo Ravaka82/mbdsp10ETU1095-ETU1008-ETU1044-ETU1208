@@ -21,13 +21,11 @@ class ObjetListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_objet_list)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = "Liste des Objets"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        adapter = ObjectAdapter(emptyList())
+        recyclerView.adapter = adapter
 
         fetchObjectsFromApi()
 
@@ -40,8 +38,8 @@ class ObjetListActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Objet>>, response: Response<List<Objet>>) {
                 if (response.isSuccessful) {
                     val objects: List<Objet> = response.body() ?: emptyList()
-                    adapter = ObjectAdapter(objects)
-                    recyclerView.adapter = adapter
+                    Log.d("ObjetListActivity", "Objets reçus: $objects")
+                    adapter.updateData(objects)
                 } else {
                     Toast.makeText(this@ObjetListActivity, "Erreur lors du chargement des objets", Toast.LENGTH_SHORT).show()
                 }
