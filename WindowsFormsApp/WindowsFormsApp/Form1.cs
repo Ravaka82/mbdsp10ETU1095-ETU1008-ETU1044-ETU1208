@@ -125,7 +125,7 @@ namespace WindowsFormsApp
             {
                 try
                 {
-                    var response = await client.PostAsync("http://localhost:3000/api/utilisateurs/register", data);
+                    var response = await client.PostAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/utilisateurs/register", data);
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Inscription réussie !");
@@ -243,7 +243,7 @@ namespace WindowsFormsApp
             {
                 try
                 {
-                    var response = await client.PostAsync("http://localhost:3000/api/utilisateurs/login", data);
+                    var response = await client.PostAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/utilisateurs/login", data);
                     if (response.IsSuccessStatusCode)
                     {
                         var result = await response.Content.ReadAsStringAsync();

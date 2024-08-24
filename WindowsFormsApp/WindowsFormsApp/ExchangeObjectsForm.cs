@@ -39,7 +39,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.GetAsync($"http://localhost:3000/api/objets/utilisateur/{_userId}");
+                    var response = await client.GetAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets/utilisateur/{_userId}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -79,7 +79,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.GetAsync("http://localhost:3000/api/objets");
+                    var response = await client.GetAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -167,7 +167,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.PostAsync("http://localhost:3000/api/echanges", content);
+                    var response = await client.PostAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges", content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -204,7 +204,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.GetAsync($"http://localhost:3000/api/objets/DetailsObjet/{objectId}");
+                    var response = await client.GetAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets/DetailsObjet/{objectId}");
 
                     if (response.IsSuccessStatusCode)
                     {

@@ -34,7 +34,7 @@ namespace WindowsFormsApp
             {
                 try
                 {
-                    var response = await client.GetStringAsync("http://localhost:3000/api/categories");
+                    var response = await client.GetStringAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/categories");
                     var categories = JsonConvert.DeserializeObject<List<Category>>(response);
                     categoryComboBox.DataSource = categories;
                     categoryComboBox.DisplayMember = "nom";
@@ -115,7 +115,7 @@ namespace WindowsFormsApp
 
                     try
                     {
-                        var response = await client.PostAsync("http://localhost:3000/api/objets", multipartContent);
+                        var response = await client.PostAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets", multipartContent);
                         var responseContent = await response.Content.ReadAsStringAsync();
 
                         if (response.IsSuccessStatusCode)
@@ -134,6 +134,11 @@ namespace WindowsFormsApp
                     }
                 }
             }
+        }
+
+        private void CreateObjectForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -34,7 +34,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.GetAsync("http://localhost:3000/api/utilisateurs/me");
+                    var response = await client.GetAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/utilisateurs/me");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -103,37 +103,27 @@ namespace WindowsFormsApp
             {
                 using (var client = new HttpClient())
                 {
-                    
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _userToken);
 
-                  
-                    var response = await client.PostAsync("http://localhost:3000/api/admin/logout", null);
+                    var response = await client.PostAsync("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/admin/logout", null);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                       
+                        _userToken = null;
                         Global.Token = null;
 
-                       
+                     
                         MessageBox.Show("Déconnexion réussie.");
 
-                     
+                 
                         this.Close();
-               
-                    }
-                    else
-                    {
-                     
-                        MessageBox.Show("Erreur lors de la déconnexion.");
-                    }
+
                 }
             }
             catch (Exception ex)
             {
-             
                 MessageBox.Show($"Erreur : {ex.Message}");
             }
         }
+
 
 
 

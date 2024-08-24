@@ -33,7 +33,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.GetAsync($"http://localhost:3000/api/echanges/lisesobjetsouhaites/{_userId}");
+                    var response = await client.GetAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges/lisesobjetsouhaites/{_userId}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -229,7 +229,7 @@ namespace WindowsFormsApp
                     var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
                     // Envoi de la requête PUT à l'API pour valider l'échange spécifié par echangeId
-                    var response = await client.PutAsync($"http://localhost:3000/api/echanges/statut/{echangeId}", content);
+                    var response = await client.PutAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges/statut/{echangeId}", content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -262,7 +262,7 @@ namespace WindowsFormsApp
                 try
                 {
                     // Envoi de la requête DELETE à l'API pour l'échange spécifié par echangeId
-                    var response = await client.DeleteAsync($"http://localhost:3000/api/echanges/{echangeId}");
+                    var response = await client.DeleteAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges/{echangeId}");
 
                     if (response.IsSuccessStatusCode)
                     {

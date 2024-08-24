@@ -33,7 +33,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.GetAsync($"http://localhost:3000/api/echanges/EchangePropose/{_userId}");
+                    var response = await client.GetAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges/EchangePropose/{_userId}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -203,7 +203,7 @@ namespace WindowsFormsApp
 
                 try
                 {
-                    var response = await client.PutAsync($"http://localhost:3000/api/echanges/echange/{exchangeId}/statut",
+                    var response = await client.PutAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges/echange/{exchangeId}/statut",
                         new StringContent("{\"statut\":\"refuser\"}", System.Text.Encoding.UTF8, "application/json"));
 
                     if (response.IsSuccessStatusCode)
@@ -237,19 +237,19 @@ namespace WindowsFormsApp
                 try
                 {
                     // Mettre à jour le statut de l'échange
-                    var response1 = await client.PutAsync($"http://localhost:3000/api/echanges/echange/{exchangeId}/statut",
+                    var response1 = await client.PutAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/echanges/echange/{exchangeId}/statut",
                         new StringContent("{\"statut\":\"accepter\"}", System.Text.Encoding.UTF8, "application/json"));
 
                     if (response1.IsSuccessStatusCode)
                     {
                         // Mettre à jour l'utilisateur pour l'objet proposé
-                        var response2 = await client.PutAsync($"http://localhost:3000/api/objets/Modificationobjet/{objetProposant}/utilisateur",
+                        var response2 = await client.PutAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets/Modificationobjet/{objetProposant}/utilisateur",
                             new StringContent($"{{\"utilisateur_id\":\"{utilisateurIdAcceptant}\"}}", System.Text.Encoding.UTF8, "application/json"));
 
                         if (response2.IsSuccessStatusCode)
                         {
                             // Mettre à jour l'utilisateur pour l'objet accepté
-                            var response3 = await client.PutAsync($"http://localhost:3000/api/objets/Modificationobjet/{objetAcceptant}/utilisateur",
+                            var response3 = await client.PutAsync($"https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/api/objets/Modificationobjet/{objetAcceptant}/utilisateur",
                                 new StringContent($"{{\"utilisateur_id\":\"{utilisateurIdProposant}\"}}", System.Text.Encoding.UTF8, "application/json"));
 
                             if (response3.IsSuccessStatusCode)
