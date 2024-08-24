@@ -97,6 +97,44 @@ namespace WindowsFormsApp
             var viewHistoryForm = new ViewHistoryForm(_userId, _userToken);
             viewHistoryForm.Show();
         }
+        private async void LogoutButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _userToken);
+
+                  
+                    var response = await client.PostAsync("http://localhost:3000/api/admin/logout", null);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                       
+                        Global.Token = null;
+
+                       
+                        MessageBox.Show("Déconnexion réussie.");
+
+                     
+                        this.Close();
+               
+                    }
+                    else
+                    {
+                     
+                        MessageBox.Show("Erreur lors de la déconnexion.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+             
+                MessageBox.Show($"Erreur : {ex.Message}");
+            }
+        }
+
 
 
         private void HomePage_Load(object sender, EventArgs e)

@@ -149,7 +149,7 @@ async function inscription(req, res) {
       res.status(500).send('Error on the server.');
     }
   }
-  function logout(req, res) {
+  const logout= async (req, res) => {
     res.status(200).send({ auth: false, token: null });
 }
 const deleteUser = async (req, res) => {

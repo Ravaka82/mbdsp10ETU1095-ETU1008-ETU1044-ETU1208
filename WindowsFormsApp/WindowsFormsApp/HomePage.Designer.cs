@@ -11,6 +11,7 @@
         private System.Windows.Forms.Button listWishButton;
         private System.Windows.Forms.Button listProposedExchangesButton;
         private System.Windows.Forms.Button viewHistoryButton; // Nouveau bouton pour l'historique des échanges
+        private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Panel navbarPanel;
 
         protected override void Dispose(bool disposing)
@@ -33,6 +34,7 @@
             this.listProposedExchangesButton = new System.Windows.Forms.Button();
             this.viewHistoryButton = new System.Windows.Forms.Button(); // Initialisation du nouveau bouton
             this.navbarPanel = new System.Windows.Forms.Panel();
+            this.logoutButton = new System.Windows.Forms.Button(); // Initialisation du bouton de déconnexion
 
             this.navbarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +89,6 @@
             this.listOtherObjectsButton.Text = "Objets autres utilisateurs";
             this.listOtherObjectsButton.UseVisualStyleBackColor = false;
             this.listOtherObjectsButton.Click += new System.EventHandler(this.ListOtherObjectsButton_Click);
-
             // 
             // exchangeButton
             // 
@@ -101,7 +102,6 @@
             this.exchangeButton.Text = "Échanger objets";
             this.exchangeButton.UseVisualStyleBackColor = false;
             this.exchangeButton.Click += new System.EventHandler(this.ExchangeButton_Click);
-
             // 
             // listWishButton
             // 
@@ -115,7 +115,6 @@
             this.listWishButton.Text = "Listes des souhaits";
             this.listWishButton.UseVisualStyleBackColor = false;
             this.listWishButton.Click += new System.EventHandler(this.ListWishButton_Click);
-
             // 
             // listProposedExchangesButton
             // 
@@ -129,7 +128,6 @@
             this.listProposedExchangesButton.Text = "Échanges proposés";
             this.listProposedExchangesButton.UseVisualStyleBackColor = false;
             this.listProposedExchangesButton.Click += new System.EventHandler(this.ListProposedExchangesButton_Click);
-
             // 
             // viewHistoryButton
             // 
@@ -143,6 +141,19 @@
             this.viewHistoryButton.Text = "Historique";
             this.viewHistoryButton.UseVisualStyleBackColor = false;
             this.viewHistoryButton.Click += new System.EventHandler(this.ViewHistoryButton_Click);
+            // 
+            // logoutButton
+            // 
+            this.logoutButton.BackColor = System.Drawing.Color.White;
+            this.logoutButton.ForeColor = System.Drawing.Color.Brown;
+            this.logoutButton.Location = new System.Drawing.Point(855, 12); // Position ajustée
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(2);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(112, 24);
+            this.logoutButton.TabIndex = 8;
+            this.logoutButton.Text = "Déconnexion";
+            this.logoutButton.UseVisualStyleBackColor = false;
+            this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
 
             // 
             // navbarPanel
@@ -155,11 +166,12 @@
             this.navbarPanel.Controls.Add(this.listWishButton);
             this.navbarPanel.Controls.Add(this.listProposedExchangesButton);
             this.navbarPanel.Controls.Add(this.viewHistoryButton); // Ajout du nouveau bouton
+            this.navbarPanel.Controls.Add(this.logoutButton); // Ajout du bouton de déconnexion
             this.navbarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.navbarPanel.Location = new System.Drawing.Point(0, 0);
             this.navbarPanel.Margin = new System.Windows.Forms.Padding(2);
             this.navbarPanel.Name = "navbarPanel";
-            this.navbarPanel.Size = new System.Drawing.Size(860, 49); // Taille agrandie
+            this.navbarPanel.Size = new System.Drawing.Size(860, 49); // Taille ajustée
             this.navbarPanel.TabIndex = 0;
 
             // 
@@ -167,7 +179,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(860, 400); // Taille agrandie
+            this.ClientSize = new System.Drawing.Size(860, 400); // Taille ajustée
             this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.navbarPanel);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -178,6 +190,7 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
 
     }
 }

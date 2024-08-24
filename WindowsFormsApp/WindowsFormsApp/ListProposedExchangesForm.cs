@@ -45,7 +45,7 @@ namespace WindowsFormsApp
                     else
                     {
                         var errorMessage = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show($"Erreur lors de la récupération des échanges proposés. Code: {response.StatusCode}, Message: {errorMessage}");
+                        MessageBox.Show($"Notification: {response.StatusCode}, Message: {errorMessage}");
                     }
                 }
                 catch (HttpRequestException httpEx)

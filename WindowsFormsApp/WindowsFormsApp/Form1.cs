@@ -149,6 +149,11 @@ namespace WindowsFormsApp
             loginForm.StartPosition = FormStartPosition.CenterParent; // Center the login form
             loginForm.ShowDialog(); // Use ShowDialog to make it modal
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public partial class LoginForm : Form
