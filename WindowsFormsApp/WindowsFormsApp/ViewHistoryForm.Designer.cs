@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp
 {
-    partial class ListWishForm
+    partial class ViewHistoryForm
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Panel listPanel;
@@ -30,16 +30,18 @@
             this.listPanel.TabIndex = 0;
             this.listPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.listPanel_Paint);
             // 
-            // ListWishForm
+            // ViewHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.listPanel);
-            this.Name = "ListWishForm";
-            this.Text = "Listes des souhaits";
-            this.Load += new System.EventHandler(this.ListWishForm_Load);
+            this.Name = "ViewHistoryForm";
+            this.Text = "Historique des échanges";
+            this.Load += new System.EventHandler(this.ViewHistoryForm_Load);
             this.ResumeLayout(false);
+
+
 
         }
     }

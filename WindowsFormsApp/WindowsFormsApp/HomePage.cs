@@ -92,7 +92,11 @@ namespace WindowsFormsApp
             var listProposedExchangesForm = new ListProposedExchangesForm(_userId, _userToken);
             listProposedExchangesForm.Show();
         }
-
+        private void ViewHistoryButton_Click(object sender, EventArgs e)
+        {
+            var viewHistoryForm = new ViewHistoryForm(_userId, _userToken);
+            viewHistoryForm.Show();
+        }
 
 
         private void HomePage_Load(object sender, EventArgs e)

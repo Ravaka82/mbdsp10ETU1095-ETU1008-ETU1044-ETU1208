@@ -7,10 +7,11 @@
         private System.Windows.Forms.Button createObjectButton;
         private System.Windows.Forms.Button listObjectButton;
         private System.Windows.Forms.Button listOtherObjectsButton;
-        private System.Windows.Forms.Panel navbarPanel;
         private System.Windows.Forms.Button exchangeButton;
         private System.Windows.Forms.Button listWishButton;
         private System.Windows.Forms.Button listProposedExchangesButton;
+        private System.Windows.Forms.Button viewHistoryButton; // Nouveau bouton pour l'historique des échanges
+        private System.Windows.Forms.Panel navbarPanel;
 
         protected override void Dispose(bool disposing)
         {
@@ -27,10 +28,11 @@
             this.createObjectButton = new System.Windows.Forms.Button();
             this.listObjectButton = new System.Windows.Forms.Button();
             this.listOtherObjectsButton = new System.Windows.Forms.Button();
-            this.navbarPanel = new System.Windows.Forms.Panel();
             this.exchangeButton = new System.Windows.Forms.Button();
             this.listWishButton = new System.Windows.Forms.Button();
             this.listProposedExchangesButton = new System.Windows.Forms.Button();
+            this.viewHistoryButton = new System.Windows.Forms.Button(); // Initialisation du nouveau bouton
+            this.navbarPanel = new System.Windows.Forms.Panel();
 
             this.navbarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -114,7 +116,7 @@
             this.listWishButton.UseVisualStyleBackColor = false;
             this.listWishButton.Click += new System.EventHandler(this.ListWishButton_Click);
 
-           
+            // 
             // listProposedExchangesButton
             // 
             this.listProposedExchangesButton.BackColor = System.Drawing.Color.White;
@@ -129,6 +131,20 @@
             this.listProposedExchangesButton.Click += new System.EventHandler(this.ListProposedExchangesButton_Click);
 
             // 
+            // viewHistoryButton
+            // 
+            this.viewHistoryButton.BackColor = System.Drawing.Color.White;
+            this.viewHistoryButton.ForeColor = System.Drawing.Color.Brown;
+            this.viewHistoryButton.Location = new System.Drawing.Point(735, 12); // Position ajustée
+            this.viewHistoryButton.Margin = new System.Windows.Forms.Padding(2);
+            this.viewHistoryButton.Name = "viewHistoryButton";
+            this.viewHistoryButton.Size = new System.Drawing.Size(112, 24);
+            this.viewHistoryButton.TabIndex = 7;
+            this.viewHistoryButton.Text = "Historique";
+            this.viewHistoryButton.UseVisualStyleBackColor = false;
+            this.viewHistoryButton.Click += new System.EventHandler(this.ViewHistoryButton_Click);
+
+            // 
             // navbarPanel
             // 
             this.navbarPanel.BackColor = System.Drawing.Color.Brown;
@@ -138,11 +154,12 @@
             this.navbarPanel.Controls.Add(this.exchangeButton);
             this.navbarPanel.Controls.Add(this.listWishButton);
             this.navbarPanel.Controls.Add(this.listProposedExchangesButton);
+            this.navbarPanel.Controls.Add(this.viewHistoryButton); // Ajout du nouveau bouton
             this.navbarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.navbarPanel.Location = new System.Drawing.Point(0, 0);
             this.navbarPanel.Margin = new System.Windows.Forms.Padding(2);
             this.navbarPanel.Name = "navbarPanel";
-            this.navbarPanel.Size = new System.Drawing.Size(600, 49);
+            this.navbarPanel.Size = new System.Drawing.Size(860, 49); // Taille agrandie
             this.navbarPanel.TabIndex = 0;
 
             // 
@@ -150,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(860, 400); // Taille agrandie
             this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.navbarPanel);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -161,7 +178,6 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
-
 
     }
 }

@@ -286,5 +286,9 @@ namespace WindowsFormsApp
             }
         }
 
+        private void listPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
