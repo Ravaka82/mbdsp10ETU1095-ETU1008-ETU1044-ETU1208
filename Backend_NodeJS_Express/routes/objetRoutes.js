@@ -21,4 +21,5 @@ router.put('/Modificationobjet/:id/utilisateur', objetController.updateUtilisate
 router.delete('/deleteobjets/:id', objetController.deleteObjectsByUtilisateurId);
 router.get('/utilisateur/:utilisateur_id', objetController.getObjetsByUtilisateur);
 router.get('/utilisateurConnected/:utilisateur_id', objetController.getObjetsByUtilisateurConnected);
+router.get('/excluded/:userId', objetController.getOtherObjets);
 module.exports = router;

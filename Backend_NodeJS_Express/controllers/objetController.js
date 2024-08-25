@@ -28,6 +28,38 @@ const getAllObjets = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const getOtherObjets = async (req, res) => {
+    try {
+        
+        const { userId } = req.params;
+
+   
+        const objets = await Objet.find()
+            .populate({
+                path: 'utilisateur_id', 
+                select: 'prenom'
+            })
+            .populate({
+                path: 'categorie_id', 
+                select: 'nom' 
+            });
+        
+ 
+        const filteredObjets = objets.filter(objet => objet.utilisateur_id._id.toString() !== userId);
+
+     
+        const objetsWithUserInfo = filteredObjets.map(objet => ({
+            ...objet.toObject(),
+            utilisateur_prenom: objet.utilisateur_id ? objet.utilisateur_id.prenom : null
+        }));
+
+ 
+        res.json(objetsWithUserInfo);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 const getObjetsByUtilisateur = async (req, res) => {
     try {
        
@@ -347,5 +379,6 @@ module.exports = {
     updateUtilisateurIdById,
     deleteObjectsByUtilisateurId,
     getObjetsByUtilisateur,
-    getObjetsByUtilisateurConnected
+    getObjetsByUtilisateurConnected,
+    getOtherObjets
 };
