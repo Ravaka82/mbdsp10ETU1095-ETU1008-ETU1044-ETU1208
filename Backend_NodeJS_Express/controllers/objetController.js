@@ -45,6 +45,26 @@ const getObjetsByUtilisateur = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+const getObjetsByUtilisateurConnected = async (req, res) => {
+    try {
+        const { utilisateur_id } = req.params;
+
+        
+        const objets = await Objet.find({ utilisateur_id })
+            .populate({
+                path: 'categorie_id',
+                select: 'nom'
+            })
+            .populate({
+                path: 'utilisateur_id',
+                select: 'prenom nom email' 
+            });
+
+        res.json(objets);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 const getAllImageObject = async (req, res)=> {
     try{
@@ -326,5 +346,6 @@ module.exports = {
     getAllImageObject,
     updateUtilisateurIdById,
     deleteObjectsByUtilisateurId,
-    getObjetsByUtilisateur
+    getObjetsByUtilisateur,
+    getObjetsByUtilisateurConnected
 };

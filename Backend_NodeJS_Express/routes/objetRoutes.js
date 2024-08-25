@@ -20,4 +20,5 @@ router.get('/FindAllImageObject', objetController.getAllImageObject );
 router.put('/Modificationobjet/:id/utilisateur', objetController.updateUtilisateurIdById);
 router.delete('/deleteobjets/:id', objetController.deleteObjectsByUtilisateurId);
 router.get('/utilisateur/:utilisateur_id', objetController.getObjetsByUtilisateur);
+router.get('/utilisateurConnected/:utilisateur_id', objetController.getObjetsByUtilisateurConnected);
 module.exports = router;
