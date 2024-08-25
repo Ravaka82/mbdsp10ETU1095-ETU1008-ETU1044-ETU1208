@@ -52,25 +52,40 @@ export class AcceuilAdminComponent implements OnInit {
       console.log(data)
     });
   }
-
   onDelete(utilisateur: any): void {
     if (confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${utilisateur.nom}?`)) {
-      // Supprimer les objets associés à l'utilisateur
-      this.objetService.deleteObjetUtilisateur(utilisateur._id).subscribe({
-        next: () => {
-          // Puis supprimer l'utilisateur
-          this.utilisateurService.deleteUtilisateur(utilisateur._id).subscribe({
-            next: () => {
-              this.utilisateurs = this.utilisateurs.filter(u => u._id !== utilisateur._id);
-              this.utilisateurCount--;
-            },
-            error: (err) => console.error('Error deleting utilisateur:', err)
-          });
+      // Vérifier s'il y a des objets associés à l'utilisateur
+      this.objetService.objetByUser(utilisateur._id).subscribe({
+        next: (objets) => {
+          if (objets && objets.length > 0) {
+            // Supprimer les objets associés à l'utilisateur
+            this.objetService.deleteObjetUtilisateur(utilisateur._id).subscribe({
+              next: () => {
+                // Puis supprimer l'utilisateur
+                this.deleteUser(utilisateur);
+              },
+              error: (err) => console.error('Error deleting objects:', err)
+            });
+          } else {
+            // Si l'utilisateur n'a pas d'objets, supprimer directement l'utilisateur
+            this.deleteUser(utilisateur);
+          }
         },
-        error: (err) => console.error('Error deleting objects:', err)
+        error: (err) => console.error('Error fetching objects:', err)
       });
     }
   }
+  
+  private deleteUser(utilisateur: any): void {
+    this.utilisateurService.deleteUtilisateur(utilisateur._id).subscribe({
+      next: () => {
+        this.utilisateurs = this.utilisateurs.filter(u => u._id !== utilisateur._id);
+        this.utilisateurCount--;
+      },
+      error: (err) => console.error('Error deleting utilisateur:', err)
+    });
+  }
+  
 
   getStatusClass(statut: string): string {
     switch (statut) {

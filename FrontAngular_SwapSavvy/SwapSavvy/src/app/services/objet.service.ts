@@ -22,7 +22,7 @@ export class ObjetService {
   getObjetsUser(): Observable<Objet[]> {
     return this.http.get<Objet[]>(`${this.apiUrl}/user`);
   }
-
+  
   // Méthode pour obtenir les objets des autres utilisateurs
   getObjetsAll(): Observable<Objet[]> {
     return this.http.get<Objet[]>(`${this.apiUrl}/all`);
@@ -63,5 +63,8 @@ export class ObjetService {
   }
   deleteObjetUtilisateur(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/deleteobjets/${id}`);
+  }
+  objetByUser(utilisateur_id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/utilisateur/${utilisateur_id}`);
   }
 }
