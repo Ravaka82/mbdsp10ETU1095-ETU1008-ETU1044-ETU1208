@@ -63,7 +63,9 @@ class ObjetListActivity : AppCompatActivity() {
         }
 
         btnObjectList.setOnClickListener {
-            Toast.makeText(this, "Liste Objets clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Mes Objets clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, OtherObjectActivity::class.java)
+            startActivity(intent)
         }
 
         btnObjectEchange.setOnClickListener {

@@ -44,6 +44,13 @@ interface ApiService {
     fun getObjetsByUtilisateurConnected(@Path("id") id: String): Call<List<Objet>>
 
 
+    @GET("/api/objets/excluded/{id}")
+    fun getOtherObjets(@Path("id") id: String): Call<List<Objet>>
+
+
+    @GET("/api/objets/excluded/{userId}")
+    fun getObjetsExcludedByUser(@Path("userId") userId: String): Call<List<Objet>>
+
     @GET("/api/objets/user/{id}")
     fun getObjetsUser(@Path("id") id: String): Call<List<Objet>>
 
