@@ -16,7 +16,7 @@
             "allowedCommonJsDependencies": [
               "leaflet"
              ],
-            "outputPath": "FrontAngular_SwapSavvy/SwapSavvy/dist/swap-savvy",
+            "outputPath": "dist/swap-savvy",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
