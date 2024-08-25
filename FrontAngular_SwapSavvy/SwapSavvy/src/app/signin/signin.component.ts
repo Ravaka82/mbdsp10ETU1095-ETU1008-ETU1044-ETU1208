@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router,RouterModule } from '@angular/router';
 import { User } from '../objets/objets.model';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -18,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,],
+    MatButtonModule,
+    RouterModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css'
 })
