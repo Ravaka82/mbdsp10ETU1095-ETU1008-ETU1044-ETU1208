@@ -8,6 +8,18 @@
     tools:context=".objetlist.ObjetListActivity"
     android:padding="16dp">
 
+    <!-- Message de bienvenue -->
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bienvenue !"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp" />
+
     <!-- Titre -->
     <TextView
         android:id="@+id/titleTextView"
@@ -115,7 +127,6 @@
 
     </LinearLayout>
 
-
     <!-- RecyclerView pour afficher la liste des objets -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -124,4 +135,4 @@
         android:padding="16dp"
         android:scrollbars="vertical" />
 
-</LinearLayout >
+</LinearLayout>

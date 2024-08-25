@@ -65,6 +65,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val apiService = APIClient.create(this, ApiService::class.java)
         val utilisateur = Utilisateur(
+
             nom = nom,
             prenom = prenom,
             email = email,
