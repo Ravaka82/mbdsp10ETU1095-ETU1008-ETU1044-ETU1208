@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/")
+            .baseUrl("http://10.0.2.2:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        Greeting("TPT Android")
+                        Greeting("Android")
                     }
                 }
             }
@@ -66,6 +66,6 @@ fun Greeting(name: String) {
 @Composable
 fun GreetingPreview() {
     SwapsavvyTheme {
-        Greeting("TPT Android")
+        Greeting("Android")
     }
 }

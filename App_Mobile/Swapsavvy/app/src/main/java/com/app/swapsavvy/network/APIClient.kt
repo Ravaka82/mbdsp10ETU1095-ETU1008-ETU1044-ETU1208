@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object APIClient {
-    private const val BASE_URL = "https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/"
+    private const val BASE_URL = "http://10.0.2.2:3000/"
 
     fun <T> create(context: Context, service: Class<T>): T {
         val client = OkHttpClient.Builder()

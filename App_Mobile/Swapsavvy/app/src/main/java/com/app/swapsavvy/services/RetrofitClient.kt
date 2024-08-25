@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "https://mbdsp10etu1095-etu1008-etu1044-etu1208.onrender.com/"
+    private const val BASE_URL = "http://10.0.2.2:3000"
 
     private var retrofit: Retrofit? = null
 
