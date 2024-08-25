@@ -15,3 +15,4 @@ data class Objet(
     val valeur_estimee: Double,
     val image_url: String
 )
+

@@ -21,11 +21,12 @@ import com.app.swapsavvy.ui.adapter.ObjectAdapter
 class ObjetListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ObjectAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_objet_list)
-        val welcomeTextView: TextView = findViewById(R.id.welcomeTextView)
 
+        val welcomeTextView: TextView = findViewById(R.id.welcomeTextView)
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val animation = AnimationUtils.loadAnimation(this, R.anim.text_animation)
         titleTextView.startAnimation(animation)
@@ -36,12 +37,10 @@ class ObjetListActivity : AppCompatActivity() {
         adapter = ObjectAdapter(emptyList())
         recyclerView.adapter = adapter
 
-
         val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val userPrenom = sharedPreferences.getString("userPrenom", "Invité") ?: "Invité"
 
         welcomeTextView.text = "Bienvenue $userPrenom"
-
 
         fetchObjectsFromApi()
 
@@ -82,7 +81,6 @@ class ObjetListActivity : AppCompatActivity() {
         btnHistoriqueEchange.setOnClickListener {
             Toast.makeText(this, "Historique échanges Objets clicked", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     private fun fetchObjectsFromApi() {
@@ -100,7 +98,7 @@ class ObjetListActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Objet>>, t: Throwable) {
-                Log.e("ObjectListActivity", "Erreur de réseau : ${t.message}")
+                Log.e("ObjetListActivity", "Erreur de réseau : ${t.message}")
                 Toast.makeText(this@ObjetListActivity, "Échec de la connexion", Toast.LENGTH_SHORT).show()
             }
         })

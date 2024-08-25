@@ -57,8 +57,8 @@ class ObjectAdapter(private var objets: List<Objet>) : RecyclerView.Adapter<Obje
                 imageView.setImageResource(R.drawable.default_image) // Image par défaut
             }
 
-            val utilisateur = objet.utilisateur_id
-            ownerTextView.text = "Propriétaire: ${utilisateur.prenom}"
+            val utilisateur = objet.utilisateur_id.prenom
+            ownerTextView.text = "Propriétaire: ${utilisateur}"
         }
     }
 

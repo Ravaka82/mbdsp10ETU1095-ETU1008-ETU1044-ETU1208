@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +19,6 @@
         android:layout_gravity="center"
         android:paddingBottom="16dp" />
 
-    <!-- Menu horizontal avec des boutons -->
     <LinearLayout
         android:id="@+id/menuLayout1"
         android:layout_width="match_parent"
@@ -120,4 +119,4 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
-</LinearLayout >
+</LinearLayout>
