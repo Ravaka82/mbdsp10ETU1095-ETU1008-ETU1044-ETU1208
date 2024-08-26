@@ -70,10 +70,14 @@ class ObjetListActivity : AppCompatActivity() {
 
         btnObjectEchange.setOnClickListener {
             Toast.makeText(this, "Echanger Objet clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, EchangeActivity::class.java)
+            startActivity(intent)
         }
 
         btnListEchangeSouhait.setOnClickListener {
             Toast.makeText(this, "Liste échanges Objets souhaités clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SouhaiteEchangeActivity::class.java)
+            startActivity(intent)
         }
 
         btnListEchangePropose.setOnClickListener {
