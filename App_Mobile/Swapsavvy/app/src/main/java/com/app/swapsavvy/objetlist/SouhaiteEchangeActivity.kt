@@ -1,7 +1,9 @@
 package com.app.swapsavvy.objetlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,9 +42,53 @@ class SouhaiteEchangeActivity : AppCompatActivity() {
 
         echanges = mutableListOf()
 
-        // Retrieve userId from SharedPreferences
         val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", "Invité") ?: "Invité"
+
+        val btnCreateObject: Button = findViewById(R.id.btnCreateObject)
+        val btnObjectList: Button = findViewById(R.id.btnObjectList)
+        val btnObjectEchange: Button = findViewById(R.id.btnObjectEchange)
+        val btnListEchangeSouhait: Button = findViewById(R.id.btnListEchangeSouhait)
+        val btnListEchangePropose: Button = findViewById(R.id.btnListEchangePropose)
+        val btnHistoriqueEchange: Button = findViewById(R.id.btnHistoriqueEchange)
+
+
+
+        btnCreateObject.setOnClickListener {
+            Toast.makeText(this, "Créer Objet clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        btnObjectList.setOnClickListener {
+            Toast.makeText(this, "Mes Objets clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, OtherObjectActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnObjectEchange.setOnClickListener {
+            Toast.makeText(this, "Echanger Objet clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, EchangeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnListEchangeSouhait.setOnClickListener {
+            Toast.makeText(this, "Liste échanges Objets souhaités clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SouhaiteEchangeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnListEchangePropose.setOnClickListener {
+            Toast.makeText(this, "Liste échanges Objets proposés clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ValidationEchangeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnHistoriqueEchange.setOnClickListener {
+            Toast.makeText(this, "Historique échanges Objets clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HistoriqueEchangeActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         // Fetch and display the exchanges for the user
         fetchEchanges(userId)

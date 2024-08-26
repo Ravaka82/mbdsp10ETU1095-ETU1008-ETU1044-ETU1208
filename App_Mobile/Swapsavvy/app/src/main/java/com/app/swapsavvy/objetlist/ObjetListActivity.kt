@@ -26,7 +26,7 @@ class ObjetListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_objet_list)
 
-        val welcomeTextView: TextView = findViewById(R.id.welcomeTextView)
+
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val animation = AnimationUtils.loadAnimation(this, R.anim.text_animation)
         titleTextView.startAnimation(animation)
@@ -37,6 +37,7 @@ class ObjetListActivity : AppCompatActivity() {
         adapter = ObjectAdapter(emptyList())
         recyclerView.adapter = adapter
 
+        val welcomeTextView: TextView = findViewById(R.id.welcomeTextView)
         val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val userPrenom = sharedPreferences.getString("userPrenom", "Invité") ?: "Invité"
 

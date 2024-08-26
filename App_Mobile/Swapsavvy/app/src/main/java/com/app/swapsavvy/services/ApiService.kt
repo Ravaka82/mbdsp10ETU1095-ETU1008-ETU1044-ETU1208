@@ -4,8 +4,10 @@ import com.app.swapsavvy.data.Echange
 import com.app.swapsavvy.data.EchangeApiResponse
 import com.app.swapsavvy.data.LoginResponse
 import com.app.swapsavvy.data.Objet
+import com.app.swapsavvy.data.ObjetResponse
 import com.app.swapsavvy.data.StatutRequest
 import com.app.swapsavvy.data.Utilisateur
+import com.app.swapsavvy.data.UtilisateurIdRequest
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -90,8 +92,8 @@ interface ApiService {
     @PUT("/api/objets/Modificationobjet/{id}/utilisateur")
     fun updateUtilisateurId(
         @Path("id") id: String,
-        @Body utilisateurIdRequest: String
-    ): Call<Objet>
+        @Body utilisateurIdRequest: UtilisateurIdRequest
+    ): Call<ObjetResponse>
 
     @DELETE("/api/echanges/{echange_id}")
     fun deleteEchange(@Path("echange_id") echangeId: String): Call<Void>
