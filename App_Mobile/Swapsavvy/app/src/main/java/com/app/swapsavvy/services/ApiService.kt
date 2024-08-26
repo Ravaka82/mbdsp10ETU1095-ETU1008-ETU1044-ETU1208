@@ -72,6 +72,9 @@ interface ApiService {
     @GET("api/echanges/EchangePropose/{utilisateur_id}")
     fun getEchangeEnAttente(@Path("utilisateur_id") userId: String): Call<List<EchangeApiResponse>>
 
+    @GET("api/echanges/historique/{utilisateur_id}")
+    fun getHistoriqueEchanges(@Path("utilisateur_id") userId: String): Call<List<EchangeApiResponse>>
+
     @PUT("/api/echanges/statut/{echange_id}")
     fun updateEchangeStatut(
         @Path("echange_id") echangeId: String,

@@ -88,6 +88,8 @@ class ObjetListActivity : AppCompatActivity() {
 
         btnHistoriqueEchange.setOnClickListener {
             Toast.makeText(this, "Historique échanges Objets clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HistoriqueEchangeActivity::class.java)
+            startActivity(intent)
         }
     }
 
