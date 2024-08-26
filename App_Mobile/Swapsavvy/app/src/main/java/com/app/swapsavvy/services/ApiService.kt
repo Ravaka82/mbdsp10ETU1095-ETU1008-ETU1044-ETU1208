@@ -4,13 +4,16 @@ import com.app.swapsavvy.data.Echange
 import com.app.swapsavvy.data.EchangeApiResponse
 import com.app.swapsavvy.data.LoginResponse
 import com.app.swapsavvy.data.Objet
+import com.app.swapsavvy.data.StatutRequest
 import com.app.swapsavvy.data.Utilisateur
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -65,6 +68,17 @@ interface ApiService {
 
     @GET("/api/echanges/lisesobjetsouhaites/{utilisateur_id}")
     fun getEchangesByUtilisateur(@Path("utilisateur_id") userId: String): Call<List<EchangeApiResponse>>
+
+    @PUT("/api/echanges/statut/{echange_id}")
+    fun updateEchangeStatut(
+        @Path("echange_id") echangeId: String,
+        @Body statutRequest: StatutRequest
+    ): Call<Echange>
+
+
+
+    @DELETE("/api/echanges/{echange_id}")
+    fun deleteEchange(@Path("echange_id") echangeId: String): Call<Void>
 }
 
 
