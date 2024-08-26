@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class ObjetCreateComponent implements OnInit {
   utilisateurs: any[] = [];
   categories: any[] = [];
   selectedFile!: File;
+  user:any;
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +44,8 @@ export class ObjetCreateComponent implements OnInit {
     private utilisateurService: UtilisateurService,
     private categorieService: CategorieService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -59,19 +62,8 @@ export class ObjetCreateComponent implements OnInit {
     });
 
 
-    this.fetchUtilisateurs();
+    
     this.fetchCategories();
-  }
-
-  fetchUtilisateurs() {
-    this.utilisateurService.getUtilisateurs().subscribe(
-      data => {
-        this.utilisateurs = data;
-      },
-      error => {
-        console.error('Error fetching utilisateurs:', error);
-      }
-    );
   }
 
   fetchCategories() {
@@ -90,10 +82,17 @@ export class ObjetCreateComponent implements OnInit {
   }
 
   createObjet(): void {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.user = JSON.parse(user);
+      console.log('Utilisateur récupéré :', this.user);
+    } else {
+      console.error('Aucun utilisateur trouvé dans localStorage');
+    }
     this.loading = true;
     if (this.objetForm.valid) {
       const formData = new FormData();
-      formData.append('utilisateur_id', this.objetForm.get('utilisateur_id')?.value);
+      formData.append('utilisateur_id', this.user._id);
       formData.append('categorie_id', this.objetForm.get('categorie_id')?.value);
       formData.append('titre', this.objetForm.get('titre')?.value);
       formData.append('description', this.objetForm.get('description')?.value);
