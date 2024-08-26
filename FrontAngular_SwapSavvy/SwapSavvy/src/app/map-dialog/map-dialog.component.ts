@@ -34,8 +34,8 @@ export class MapDialogComponent implements AfterViewInit {
 
     if (this.data && this.data.objet_utilisateur_proposant && this.data.objet_utilisateur_proposant.position) {
       const proposingCoordinates: [number, number] = [
-        this.data.objet_utilisateur_proposant.position.coordinates[0],
-        this.data.objet_utilisateur_proposant.position.coordinates[1]
+        this.data.objet_utilisateur_proposant.position.coordinates[1],
+        this.data.objet_utilisateur_proposant.position.coordinates[0]
       ];
 
       this.map = L.map('map', {
@@ -54,8 +54,8 @@ export class MapDialogComponent implements AfterViewInit {
 
       if (this.data.objet_utilisateur_acceptant && this.data.objet_utilisateur_acceptant.position) {
         const acceptingCoordinates: [number, number] = [
-          this.data.objet_utilisateur_acceptant.position.coordinates[0],
-          this.data.objet_utilisateur_acceptant.position.coordinates[1]
+          this.data.objet_utilisateur_acceptant.position.coordinates[1],
+          this.data.objet_utilisateur_acceptant.position.coordinates[0]
         ];
         this.addMarker(acceptingCoordinates, this.data.objet_utilisateur_acceptant.nom);
 
@@ -71,7 +71,7 @@ export class MapDialogComponent implements AfterViewInit {
     if (this.map) {
       const marker = L.marker(position)
         .addTo(this.map)
-        .bindPopup(`<b>${name}</b><br>Latitude: ${position[0]}<br>Longitude: ${position[1]}`);
+        .bindPopup(`<b>${name}</b><br>Latitude: ${position[1]}<br>Longitude: ${position[0]}`);
 
       marker.openPopup();
     }
