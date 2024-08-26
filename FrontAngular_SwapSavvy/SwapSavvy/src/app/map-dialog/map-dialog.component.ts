@@ -71,7 +71,7 @@ export class MapDialogComponent implements AfterViewInit {
     if (this.map) {
       const marker = L.marker(position)
         .addTo(this.map)
-        .bindPopup(`<b>${name}</b><br>Latitude: ${position[1]}<br>Longitude: ${position[0]}`);
+        .bindPopup(`<b>${name}</b><br>Longitude: ${position[1]}<br>Latitude: ${position[0]}`);
 
       marker.openPopup();
     }
