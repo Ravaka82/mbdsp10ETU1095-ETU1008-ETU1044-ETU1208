@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.swapsavvy.R
 import com.app.swapsavvy.data.Echange
 import com.app.swapsavvy.data.EchangeApiResponse
+import com.app.swapsavvy.data.Objet
 import com.app.swapsavvy.data.StatutRequest
 import com.app.swapsavvy.services.RetrofitClient
-
 import com.app.swapsavvy.ui.adapter.ValidationEchangeAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -79,7 +80,7 @@ class ValidationEchangeActivity : AppCompatActivity() {
     private fun mapApiResponseToEchange(apiResponse: EchangeApiResponse): EchangeApiResponse? {
         return try {
             EchangeApiResponse(
-                _id=apiResponse._id,
+                _id = apiResponse._id,
                 utilisateur_proposant_id = apiResponse.utilisateur_proposant_id,
                 utilisateur_acceptant_id = apiResponse.utilisateur_acceptant_id,
                 objet_proposant = apiResponse.objet_proposant,
@@ -104,11 +105,19 @@ class ValidationEchangeActivity : AppCompatActivity() {
         }
     }
 
-    fun handleSendExchange(echangeId: String) {
+    fun handleSendExchange(
+        echangeId: String,
+        objetProposantId: String,
+        utilisateurIdAcceptant: String,
+        objetAcceptantId: String,
+        utilisateurIdProposant: String
+    ) {
+        val gson = Gson()
         val statutRequest = StatutRequest(statut = "accepter")
+        val gsonStatutRequest = gson.toJson(statutRequest)
 
+        Log.d("ValidationEchangeActivity", "Updating exchange with echangeId: $echangeId, statut: ${statutRequest.statut}")
         Toast.makeText(this@ValidationEchangeActivity, "Échange ID: $echangeId", Toast.LENGTH_LONG).show()
-        Toast.makeText(this@ValidationEchangeActivity, "Statut: ${statutRequest.statut}", Toast.LENGTH_LONG).show()
 
         // Appel API pour mettre à jour le statut de l'échange
         val call: Call<Echange> = RetrofitClient.apiService.updateEchangeStatutEnValidatation(echangeId, statutRequest)
@@ -116,46 +125,92 @@ class ValidationEchangeActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Echange> {
             override fun onResponse(call: Call<Echange>, response: Response<Echange>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@ValidationEchangeActivity, "Échange valider avec succès", Toast.LENGTH_SHORT).show()
-                    fetchEchanges(userId)
+                    Log.d("ValidationEchangeActivity", "Exchange status updated successfully for echangeId: $echangeId")
+
+                    // Mise à jour du statut réussie, mise à jour des objets
+                    val utilisateurUpdateRequestProposant = gson.toJson(mapOf("utilisateur_id" to utilisateurIdAcceptant))
+                    Log.d("ValidationEchangeActivity", "Updating objet with objetProposantId: $objetProposantId, utilisateurIdAcceptant: $utilisateurIdAcceptant")
+
+                    RetrofitClient.apiService.updateUtilisateurId(objetProposantId, utilisateurUpdateRequestProposant)
+                        .enqueue(object : Callback<Objet> {
+                            override fun onResponse(call: Call<Objet>, response: Response<Objet>) {
+                                if (response.isSuccessful) {
+                                    Log.d("ValidationEchangeActivity", "Objet updated successfully for objetProposantId: $objetProposantId")
+
+                                    val utilisateurUpdateRequestAcceptant = gson.toJson(mapOf("utilisateur_id" to utilisateurIdProposant))
+                                    Log.d("ValidationEchangeActivity", "Updating objet with objetAcceptantId: $objetAcceptantId, utilisateurIdProposant: $utilisateurIdProposant")
+
+                                    RetrofitClient.apiService.updateUtilisateurId(objetAcceptantId, utilisateurUpdateRequestAcceptant)
+                                        .enqueue(object : Callback<Objet> {
+                                            override fun onResponse(call: Call<Objet>, response: Response<Objet>) {
+                                                if (response.isSuccessful) {
+                                                    Log.d("ValidationEchangeActivity", "Objet updated successfully for objetAcceptantId: $objetAcceptantId")
+                                                    Toast.makeText(this@ValidationEchangeActivity, "Vous avez accepté et les objets ont été échangés.", Toast.LENGTH_SHORT).show()
+                                                    fetchEchanges(userId) // Actualiser la liste après acceptation
+                                                } else {
+                                                    handleUpdateError(response)
+                                                }
+                                            }
+
+                                            override fun onFailure(call: Call<Objet>, t: Throwable) {
+                                                handleApiFailure(t)
+                                            }
+                                        })
+                                } else {
+                                    handleUpdateError(response)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<Objet>, t: Throwable) {
+                                handleApiFailure(t)
+                            }
+                        })
+
                 } else {
-                    val errorMessage = response.errorBody()?.string() ?: "Erreur inconnue"
-                    Log.e("ValidationEchangeActivity", "Erreur lors de la mise à jour de l'échange. Code: ${response.code()}, Erreur: $errorMessage")
-                    Toast.makeText(this@ValidationEchangeActivity, "Erreur lors de la mise à jour de l'échange: $errorMessage", Toast.LENGTH_LONG).show()
+                    handleUpdateError(response)
                 }
             }
 
             override fun onFailure(call: Call<Echange>, t: Throwable) {
-                Log.e("ValidationEchangeActivity", "Échec de la connexion : ${t.message}", t)
-                Toast.makeText(this@ValidationEchangeActivity, "Échec de la connexion : ${t.message}", Toast.LENGTH_LONG).show()
+                handleApiFailure(t)
             }
         })
     }
 
+    private fun handleUpdateError(response: Response<*>) {
+        val errorMessage = response.errorBody()?.string() ?: "Erreur inconnue"
+        Log.e("ValidationEchangeActivity", "Erreur lors de la mise à jour : $errorMessage")
+        Toast.makeText(this@ValidationEchangeActivity, "Erreur : $errorMessage", Toast.LENGTH_LONG).show()
+    }
+
+    private fun handleApiFailure(t: Throwable) {
+        Log.e("ValidationEchangeActivity", "Échec de la connexion : ${t.message}", t)
+        Toast.makeText(this@ValidationEchangeActivity, "Échec de la connexion : ${t.message}", Toast.LENGTH_LONG).show()
+    }
+
     fun handleDeleteExchange(echangeId: String) {
         val statutRequest = StatutRequest(statut = "refuser")
+        val gson = Gson()
+        val gsonStatutRequest = gson.toJson(statutRequest)
 
+        Log.d("ValidationEchangeActivity", "Updating exchange with echangeId: $echangeId, statut: ${statutRequest.statut}")
         Toast.makeText(this@ValidationEchangeActivity, "Échange ID: $echangeId", Toast.LENGTH_LONG).show()
-        Toast.makeText(this@ValidationEchangeActivity, "Statut: ${statutRequest.statut}", Toast.LENGTH_LONG).show()
-
 
         val call: Call<Echange> = RetrofitClient.apiService.updateEchangeStatutEnValidatation(echangeId, statutRequest)
 
         call.enqueue(object : Callback<Echange> {
             override fun onResponse(call: Call<Echange>, response: Response<Echange>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@ValidationEchangeActivity, "Échange refuser", Toast.LENGTH_SHORT).show()
-                    fetchEchanges(userId)
+                    Log.d("ValidationEchangeActivity", "Exchange status updated successfully for echangeId: $echangeId")
+                    Toast.makeText(this@ValidationEchangeActivity, "Vous avez refusé l'échange.", Toast.LENGTH_SHORT).show()
+                    fetchEchanges(userId) // Actualiser la liste après refus
                 } else {
-                    val errorMessage = response.errorBody()?.string() ?: "Erreur inconnue"
-                    Log.e("ValidationEchangeActivity", "Erreur lors de la mise à jour de l'échange. Code: ${response.code()}, Erreur: $errorMessage")
-                    Toast.makeText(this@ValidationEchangeActivity, "Erreur lors de la mise à jour de l'échange: $errorMessage", Toast.LENGTH_LONG).show()
+                    handleUpdateError(response)
                 }
             }
 
             override fun onFailure(call: Call<Echange>, t: Throwable) {
-                Log.e("ValidationEchangeActivity", "Échec de la connexion : ${t.message}", t)
-                Toast.makeText(this@ValidationEchangeActivity, "Échec de la connexion : ${t.message}", Toast.LENGTH_LONG).show()
+                handleApiFailure(t)
             }
         })
     }

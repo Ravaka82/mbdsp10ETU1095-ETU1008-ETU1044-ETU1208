@@ -84,7 +84,11 @@ interface ApiService {
         @Body statutRequest: StatutRequest
     ): Call<Echange>
 
-
+    @PUT("/api/objets/Modificationobjet/{id}/utilisateur")
+    fun updateUtilisateurId(
+        @Path("id") id: String,
+        @Body utilisateurIdRequest: String
+    ): Call<Objet>
 
     @DELETE("/api/echanges/{echange_id}")
     fun deleteEchange(@Path("echange_id") echangeId: String): Call<Void>

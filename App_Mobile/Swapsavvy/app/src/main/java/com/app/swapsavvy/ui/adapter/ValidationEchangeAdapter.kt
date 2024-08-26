@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.app.swapsavvy.R
 import com.app.swapsavvy.data.Echange
@@ -110,24 +111,33 @@ class ValidationEchangeAdapter(
             statutTextView.text = "Statut: ${echange.statut ?: "Non spécifié"}"
 
             // Set click listeners for the buttons
-
-
             buttonDelete.setOnClickListener {
                 echange._id?.let {
-                    (itemView.context as? ValidationEchangeActivity)?.handleDeleteExchange(
-                        it
-                    )
-                }
-            }
-            buttonSend.setOnClickListener {
-                echange._id?.let {
-                    (itemView.context as? ValidationEchangeActivity)?.handleSendExchange(
-                        it
-                    )
+                    (itemView.context as? ValidationEchangeActivity)?.handleDeleteExchange(it)
                 }
             }
 
+            buttonSend.setOnClickListener {
+                val objetProposantId = echange.objet_proposant?._id
+                val utilisateurIdAcceptant = echange.utilisateur_acceptant_id?._id
+                val objetAcceptantId = echange.objet_acceptant?._id
+                val utilisateurIdProposant = echange.utilisateur_proposant_id?._id
+
+                if (echange._id != null && objetProposantId != null && utilisateurIdAcceptant != null && objetAcceptantId != null && utilisateurIdProposant != null) {
+                    (itemView.context as? ValidationEchangeActivity)?.handleSendExchange(
+                        echange._id,
+                        objetProposantId,
+                        utilisateurIdAcceptant,
+                        objetAcceptantId,
+                        utilisateurIdProposant
+                    )
+                } else {
+                    // Gérer le cas où un des IDs est null, par exemple afficher un message d'erreur
+                    Toast.makeText(itemView.context, "Informations manquantes pour effectuer l'échange", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
+
     }
 
 

@@ -52,7 +52,7 @@ export class EchangeListProposeComponent {
         }
       );
   }
-  AcceptationEchange(echangeId: string, utilisateurIdProposant: string, utilisateurIdAcceptant: string,objetProposant:string, objetAcceptant: string) {
+ AcceptationEchange(echangeId: string, utilisateurIdProposant: string, utilisateurIdAcceptant: string,objetProposant:string, objetAcceptant: string) {
     // First, update the echange status
     this.echangeService.updateEchangeStatutEnValidation(echangeId, 'accepter').subscribe(
       () => {
@@ -98,8 +98,8 @@ export class EchangeListProposeComponent {
         });
       }
     );
-  }
-  
+  } 
+
 RefuserEchange(id: string){
   this.echangeService.updateEchangeStatutEnValidation(id, 'refuser').subscribe(
     () => {
