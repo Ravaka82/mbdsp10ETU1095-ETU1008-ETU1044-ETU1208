@@ -1,5 +1,7 @@
 package com.app.swapsavvy.services
 
+import com.app.swapsavvy.data.Echange
+import com.app.swapsavvy.data.EchangeApiResponse
 import com.app.swapsavvy.data.LoginResponse
 import com.app.swapsavvy.data.Objet
 import com.app.swapsavvy.data.Utilisateur
@@ -57,4 +59,12 @@ interface ApiService {
     @GET("/api/objets/all")
     fun getObjetsAll(): Call<List<Objet>>
 
+    @POST("/api/echanges")
+    fun createEchange(@Body echange: Echange): Call<Echange>
+
+
+    @GET("/api/echanges/lisesobjetsouhaites/{utilisateur_id}")
+    fun getEchangesByUtilisateur(@Path("utilisateur_id") userId: String): Call<List<EchangeApiResponse>>
 }
+
+
