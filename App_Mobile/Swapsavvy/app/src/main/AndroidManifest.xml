@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Swapsavvy"
         tools:targetApi="31">
         <activity
+            android:name=".objetlist.ValidationEchangeActivity"
+            android:exported="false" />
+        <activity
             android:name=".objetlist.SouhaiteEchangeActivity"
             android:exported="false" />
         <activity
