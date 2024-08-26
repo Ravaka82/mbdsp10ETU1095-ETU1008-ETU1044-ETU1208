@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.swapsavvy.R
 import com.app.swapsavvy.data.Echange
 import com.app.swapsavvy.data.EchangeApiResponse
+import com.app.swapsavvy.data.StatutRequest
 import com.app.swapsavvy.services.RetrofitClient
 import com.app.swapsavvy.ui.adapter.SouhaiteEchangeAdapter
 import retrofit2.Call
@@ -74,12 +75,10 @@ class SouhaiteEchangeActivity : AppCompatActivity() {
         })
     }
 
-
-
     private fun mapApiResponseToEchange(apiResponse: EchangeApiResponse): EchangeApiResponse? {
         return try {
             EchangeApiResponse(
-                 _id=apiResponse._id,
+                _id=apiResponse._id,
                 utilisateur_proposant_id = apiResponse.utilisateur_proposant_id,
                 utilisateur_acceptant_id = apiResponse.utilisateur_acceptant_id,
                 objet_proposant = apiResponse.objet_proposant,
@@ -102,5 +101,49 @@ class SouhaiteEchangeActivity : AppCompatActivity() {
             Log.e("SouhaiteEchangeActivity", "Erreur lors du parsing de la date : ${e.message}")
             null
         }
+    }
+
+    fun handleSendExchange(echangeId: String) {
+
+        val statutRequest = StatutRequest(statut = "en attente")
+
+
+        Toast.makeText(this@SouhaiteEchangeActivity, "Échange ID: $echangeId", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@SouhaiteEchangeActivity, "Statut: ${statutRequest.statut}", Toast.LENGTH_LONG).show()
+
+        // Appel API pour mettre à jour le statut de l'échange
+        val call: Call<Echange> = RetrofitClient.apiService.updateEchangeStatut(echangeId, statutRequest)
+
+        call.enqueue(object : Callback<Echange> {
+            override fun onResponse(call: Call<Echange>, response: Response<Echange>) {
+                    Toast.makeText(this@SouhaiteEchangeActivity, "Échange envoyé avec succès", Toast.LENGTH_SHORT).show()
+                    fetchEchanges(userId)
+            }
+            override fun onFailure(call: Call<Echange>, t: Throwable) {
+                Log.e("SouhaiteEchangeActivity", "Échec de la connexion : ${t.message}", t)
+                Toast.makeText(this@SouhaiteEchangeActivity, "Échec de la connexion : ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    fun handleDeleteExchange(echangeId: String) {
+        // Implement the logic to delete the exchange
+        val call: Call<Void> = RetrofitClient.apiService.deleteEchange(echangeId)
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@SouhaiteEchangeActivity, "Échange supprimé avec succès", Toast.LENGTH_SHORT).show()
+                    fetchEchanges(userId) // Refresh the list
+                } else {
+                    val errorMessage = response.errorBody()?.string() ?: "Erreur inconnue"
+                    Toast.makeText(this@SouhaiteEchangeActivity, "Erreur lors de la suppression de l'échange: $errorMessage", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@SouhaiteEchangeActivity, "Échec de la connexion : ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }

@@ -129,5 +129,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:padding="16dp">
+
+        <Button
+            android:id="@+id/btnEnvoyerEchange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Envoyer "
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_orange_light"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnSupprimerEchange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Supprimer"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_red_light"
+            android:padding="12dp" />
+
     </LinearLayout>
+
+
+</LinearLayout>
 </androidx.cardview.widget.CardView>

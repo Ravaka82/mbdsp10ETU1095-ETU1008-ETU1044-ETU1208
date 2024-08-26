@@ -3,6 +3,7 @@ package com.app.swapsavvy.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import com.app.swapsavvy.R
 import com.app.swapsavvy.data.Echange
 import com.app.swapsavvy.data.EchangeApiResponse
 import com.app.swapsavvy.data.ObjetResponse
+import com.app.swapsavvy.objetlist.SouhaiteEchangeActivity
 import com.bumptech.glide.Glide
 
 class SouhaiteEchangeAdapter(
@@ -49,6 +51,9 @@ class SouhaiteEchangeAdapter(
 
         private val datePropositionTextView: TextView = itemView.findViewById(R.id.datePropositionTextView)
         private val statutTextView: TextView = itemView.findViewById(R.id.statustextView)
+
+        private val buttonSend: Button = itemView.findViewById(R.id.btnEnvoyerEchange)
+        private val buttonDelete: Button = itemView.findViewById(R.id.btnSupprimerEchange)
 
         fun bind(echange: EchangeApiResponse) {
             // Bind the proposing object's details
@@ -102,8 +107,28 @@ class SouhaiteEchangeAdapter(
             // Bind the exchange details
             datePropositionTextView.text = "Date de proposition: ${echange.date_proposition ?: "Non spécifiée"}"
             statutTextView.text = "Statut: ${echange.statut ?: "Non spécifié"}"
+
+            // Set click listeners for the buttons
+
+
+            buttonDelete.setOnClickListener {
+                echange._id?.let {
+                    (itemView.context as? SouhaiteEchangeActivity)?.handleDeleteExchange(
+                        it
+                    )
+                }
+            }
+            buttonSend.setOnClickListener {
+                echange._id?.let {
+                    (itemView.context as? SouhaiteEchangeActivity)?.handleSendExchange(
+                        it
+                    )
+                }
+            }
+
         }
     }
+
 
     // Method to update the list of exchanges and refresh the RecyclerView
     fun updateData(newEchanges: List<EchangeApiResponse>) {
