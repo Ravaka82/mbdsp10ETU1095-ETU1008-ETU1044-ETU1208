@@ -1,6 +1,6 @@
 # **🚀 Project Links**
 
-## **[📱 Kotlin APK Link](https://drive.google.com/drive/folders/1d5VfzjM66iiLsraKEsI2N7-cRVkivoBk)**
+## **[📱 Kotlin APK Link](https://drive.google.com/drive/folders/1fs8Z5_kWvz6fAOSPuaEfdex___tkSoeB?usp=sharing)**
 
 Téléchargez l'application Android développée avec Kotlin à partir de ce lien.
 
@@ -33,4 +33,4 @@ Consultez et suivez les détails du projet dans la feuille de calcul Google Shee
 ## **📜 Cahier des Charges**
 
 Consultez le cahier des charges du projet à l'adresse suivante :
-[📂 Cahier des Charges](https://drive.google.com/drive/folders/181y_5qBQpvcK-uiAOLqjOPXQF8544lfW)
+[📂 Cahier des Charges](https://drive.google.com/file/d/1uZ3fHYNpw00_3dp9-CmayFHyH_MXZRUC/view?usp=sharing)
