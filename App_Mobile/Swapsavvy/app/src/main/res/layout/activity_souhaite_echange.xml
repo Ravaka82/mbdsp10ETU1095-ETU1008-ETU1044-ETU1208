@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context=".objetlist.SouhaiteEchangeActivity">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🛍️ ÉCHANGEZ VOS OBJETS 🛍️"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_purple"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp" />
+
+    <LinearLayout
+        android:id="@+id/menuLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/btnMyObjects"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_500"
+            android:text="Mes Objets"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnCreateObject"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:text="Créer Objet"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnObjectList"
+            android:layout_width="122dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:text="Objets autres"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/btnObjectEchange"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@color/purple_500"
+            android:text="Échanger"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnListEchangeSouhait"
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:text="Souhaités"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnListEchangePropose"
+            android:layout_width="111dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/purple_500"
+            android:text="Proposés"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnHistoriqueEchange"
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_500"
+            android:text="Historiques des échanges"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSouhait"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        android:layout_weight="1" />
+</LinearLayout>

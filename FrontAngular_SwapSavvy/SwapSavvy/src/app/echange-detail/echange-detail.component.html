@@ -1,0 +1,8 @@
+<h2>Détail de l'échange</h2>
+<div *ngIf="echange">
+  <p>Échange entre l'objet {{ echange.objetOffreId }} et l'objet {{ echange.objetDemandeId }}</p>
+  <p>Statut : {{ echange.statut }}</p>
+
+  <button (click)="accepterEchange()" *ngIf="echange.statut === 'En attente'">Accepter</button>
+  <button (click)="refuserEchange()" *ngIf="echange.statut === 'En attente'">Refuser</button>
+</div>

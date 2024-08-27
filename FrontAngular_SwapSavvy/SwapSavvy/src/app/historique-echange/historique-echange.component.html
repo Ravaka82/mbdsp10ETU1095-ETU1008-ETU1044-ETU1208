@@ -1,0 +1,45 @@
+<h1 class="title1"><strong>Historique des objets échanges</strong></h1>
+
+<div class="table-container">
+  <table mat-table [dataSource]="echanges" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="objetProposant">
+      <th mat-header-cell *matHeaderCellDef> Mon ancien objet  </th>
+      <td mat-cell *matCellDef="let echange">
+        <div class="table-cell-content">
+          <img [src]="echange.objet_proposant.image_url" alt="Image de l'objet" class="table-image">
+          <div class="table-text">
+            <p>nouveau propriétaire : {{ echange.utilisateur_acceptant_id.nom }} {{ echange.utilisateur_acceptant_id.prenom }}</p>
+            <p>Titre : {{ echange.objet_proposant.titre }}</p>
+            <p>État : {{ echange.objet_proposant.etat }}</p>
+            <p>Date de proposition: <span class="date-info">{{ echange.date_proposition | date:'dd/MM/yyyy' }}</span></p>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="objetAcceptant">
+      <th mat-header-cell *matHeaderCellDef> Mon nouveau objet</th>
+      <td mat-cell *matCellDef="let echange">
+        <div class="table-cell-content">
+          <img [src]="echange.objet_acceptant.image_url" alt="Image de l'objet" class="table-image">
+          <div class="table-text">
+            <p>Titre : {{ echange.objet_acceptant.titre }}</p>
+            <p>État : {{ echange.objet_acceptant.etat }}</p>
+            <p>Date d'acceptation: <span class="date-info">{{ echange.date_acceptation | date:'dd/MM/yyyy' }}</span></p>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="statut">
+      <th mat-header-cell *matHeaderCellDef> Statut </th>
+      <td mat-cell *matCellDef="let echange">
+        <span class="status-info">{{ echange.statut }}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

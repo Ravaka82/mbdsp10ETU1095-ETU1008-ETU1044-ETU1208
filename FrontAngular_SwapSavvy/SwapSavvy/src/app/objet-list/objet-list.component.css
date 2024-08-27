@@ -1,0 +1,211 @@
+/*
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.title1 {
+  text-align: center;
+}
+
+.example-card {
+  width: 300px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.example-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-background {
+  background-color: #d7e3ff;
+}
+
+.object-image {
+  width: 305px;
+  height: 255px;
+  object-fit: cover;
+}
+
+.button-container {
+  margin-top: 15px;
+}
+
+.title_2 {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.item-value {
+  color: #ff5722;
+}
+
+.bt-action {
+  margin-left: 10px;
+  gap: 20px;
+}
+
+.full-width {
+  height: 54px;
+  margin-left: 20px;
+  width: 150px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-column, .right-column {
+  width: 48%;
+}
+  */
+
+/* Style général pour les titres */
+h1.title1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Style pour le conteneur principal des colonnes */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+/* Style pour chaque colonne */
+.column {
+  flex: 1;
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les rangées dans chaque colonne */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Style pour chaque carte d'objet */
+.example-card {
+  width: 100%;
+}
+
+.card-background {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Style pour les titres à l'intérieur des cartes */
+.title_2 {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+/* Style pour les boutons */
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button[mat-flat-button] {
+  margin-right: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+/* Bouton : survol */
+button[mat-flat-button]:hover {
+  background-color: #303f9f;
+}
+
+/* Style pour les actions de la carte */
+.bt-action {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Style pour les images */
+.object-image {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+/* Transition sur la carte lorsqu'on passe la souris */
+.card-background:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour les valeurs estimées */
+.item-value {
+  color: #3f51b5;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.full-width {
+  height: 54px;
+  margin-left: 20px;
+  width: 150px;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.object-image {
+  width: 100%; 
+  height: auto; 
+  object-fit: contain; 
+  display: block;
+}
+.image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden; 
+}
+
+.object-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+

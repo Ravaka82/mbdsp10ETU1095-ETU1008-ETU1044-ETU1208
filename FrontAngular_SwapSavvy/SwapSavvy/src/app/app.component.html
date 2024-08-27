@@ -1,0 +1,28 @@
+<ng-container *ngIf="!isAdminRoute && !isHomeRoute">
+  <app-toolbar></app-toolbar>
+  <div class="app-layout">
+    <app-sidebar></app-sidebar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isAdminRoute">
+  <app-admin-toolbar></app-admin-toolbar>
+  <div class="admin-layout">
+   
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="isHomeRoute">
+  <app-admin-toolbar></app-admin-toolbar>
+  <div class="admin-layout">
+   
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ng-container>

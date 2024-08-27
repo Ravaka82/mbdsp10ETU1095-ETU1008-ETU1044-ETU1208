@@ -1,0 +1,125 @@
+package com.app.swapsavvy.services
+
+import com.app.swapsavvy.data.Categorie
+import com.app.swapsavvy.data.Echange
+import com.app.swapsavvy.data.EchangeApiResponse
+import com.app.swapsavvy.data.LoginResponse
+import com.app.swapsavvy.data.Objet
+import com.app.swapsavvy.data.ObjetResponse
+import com.app.swapsavvy.data.StatutRequest
+import com.app.swapsavvy.data.Utilisateur
+import com.app.swapsavvy.data.UtilisateurIdRequest
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Path
+
+interface ApiService {
+
+    @POST("/api/auth/register")
+    fun registerUser(@Body utilisateur: Utilisateur): Call<Void>
+
+    @POST("/api/auth/login")
+    fun loginUser(@Body utilisateur: Utilisateur): Call<LoginResponse>
+
+    @GET("/api/auth/me")
+    fun getUserConnected(@Header("Authorization") token: String): Call<Utilisateur>
+
+    @POST("/api/utilisateurs")
+    fun createUtilisateur(@Body utilisateur: Utilisateur): Call<Utilisateur>
+
+    @GET("/api/utilisateurs/{id}")
+    fun getUtilisateurById(@Path("id") id: String): Call<Utilisateur>
+
+
+
+    @GET("/api/objets")
+    fun getObjets(): Call<List<Objet>>
+
+    @GET("/api/objets/{id}")
+    fun getObjetById(@Path("id") id: String): Call<List<Objet>>
+    abstract fun login(email: String, password: String): Response<Utilisateur>
+
+    @GET("/api/objets/utilisateur/{id}")
+    fun getObjetsByUtilisateur(@Path("id") id: String): Call<List<Objet>>
+
+    @GET("/api/objets/utilisateurConnected/{id}")
+    fun getObjetsByUtilisateurConnected(@Path("id") id: String): Call<List<Objet>>
+
+
+    @GET("/api/objets/excluded/{id}")
+    fun getOtherObjets(@Path("id") id: String): Call<List<Objet>>
+
+
+    @GET("/api/objets/excluded/{userId}")
+    fun getObjetsExcludedByUser(@Path("userId") userId: String): Call<List<Objet>>
+
+    @GET("/api/objets/user/{id}")
+    fun getObjetsUser(@Path("id") id: String): Call<List<Objet>>
+
+    @GET("/api/objets/all")
+    fun getObjetsAll(): Call<List<Objet>>
+
+    @POST("/api/echanges")
+    fun createEchange(@Body echange: Echange): Call<Echange>
+
+
+    @GET("/api/echanges/lisesobjetsouhaites/{utilisateur_id}")
+    fun getEchangesByUtilisateur(@Path("utilisateur_id") userId: String): Call<List<EchangeApiResponse>>
+
+    @GET("api/echanges/EchangePropose/{utilisateur_id}")
+    fun getEchangeEnAttente(@Path("utilisateur_id") userId: String): Call<List<EchangeApiResponse>>
+
+    @GET("api/echanges/historique/{utilisateur_id}")
+    fun getHistoriqueEchanges(@Path("utilisateur_id") userId: String): Call<List<EchangeApiResponse>>
+
+    @PUT("/api/echanges/statut/{echange_id}")
+    fun updateEchangeStatut(
+        @Path("echange_id") echangeId: String,
+        @Body statutRequest: StatutRequest
+    ): Call<Echange>
+
+    @PUT("/api/echanges/echange/{echange_id}/statut")
+    fun updateEchangeStatutEnValidatation(
+        @Path("echange_id") echangeId: String,
+        @Body statutRequest: StatutRequest
+    ): Call<Echange>
+
+    @PUT("/api/objets/Modificationobjet/{id}/utilisateur")
+    fun updateUtilisateurId(
+        @Path("id") id: String,
+        @Body utilisateurIdRequest: UtilisateurIdRequest
+    ): Call<ObjetResponse>
+
+    @DELETE("/api/echanges/{echange_id}")
+    fun deleteEchange(@Path("echange_id") echangeId: String): Call<Void>
+
+    @GET("/api/categories")
+    fun getAllCategories(): Call<List<Categorie>>
+
+
+
+    @Multipart
+    @POST("/api/objets")
+    fun createObjet(
+        @Part("utilisateur_id") utilisateurId: RequestBody,
+        @Part("categorie_id") categorieId: RequestBody,
+        @Part("titre") titre: RequestBody,
+        @Part("description") description: RequestBody?,
+        @Part("statut") statut: RequestBody,
+        @Part("etat") etat: RequestBody,
+        @Part("valeur_estimee") valeurEstimee: RequestBody,
+        @Part image: MultipartBody.Part?
+    ): Call<Void>
+}
+
+

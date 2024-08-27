@@ -1,0 +1,48 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="card-container">
+@if(detailsObjet){
+<ng-container>
+    <mat-card class="object-details-card">
+      
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center" class="object-details-content">
+          <div class="object-image" fxFlex="30">
+            <img [src]="detailsObjet.image_url" alt="Image de l'objet" mat-card-image>
+          </div>
+          <div class="object-description" fxFlex="70">
+            <mat-card-header>
+                <mat-card-title>
+                  <h2 style="font-style: bold;">Details de l'objet:   {{ detailsObjet.titre }}</h2>
+                </mat-card-title>
+              </mat-card-header>
+              
+              <div class="description-status-container">
+                <div class="description-item">
+                  <span class="label">Description:</span>
+                  <span class="content">{{ detailsObjet.description }}</span>
+                </div>
+                <div class="description-item">
+                    <span class="label">Categorie:</span>
+                    <span class="content">{{ detailsObjet.categorie_id.nom }}</span>
+                  </div>
+                <div class="description-item">
+                  <span class="label">Statut:</span>
+                  <span class="content">{{ detailsObjet.statut }}</span>
+                </div>
+                <div class="description-item">
+                  <span class="label">Etat:</span>
+                  <span class="content">{{ detailsObjet.etat }}</span>
+                </div>
+                <div class="description-item">
+                  <span class="label">Valeur estimé:</span>
+                  <span class="content">{{ detailsObjet.valeur_estimee }} Ariary</span>
+                </div>
+                
+              </div>
+             
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+}
+</div>

@@ -1,0 +1,50 @@
+<mat-card *ngIf="objetForm" class="example-card">
+  <mat-card-title>Demande d'Échange</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="objetForm" (ngSubmit)="submitExchangeRequest()">
+
+      <!-- Objet de l'utilisateur A -->
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Votre Objet à Échanger</mat-label>
+        <input matInput formControlName="objet_a" [value]="objetA.titre">
+      </mat-form-field>
+
+      <!-- Image de l'objet de l'utilisateur A -->
+      <div class="image-container">
+        <img [src]="objetA.image_url" alt="Votre Objet" style="width:305px;height:255px;">
+      </div>
+
+      <!-- Objet désiré de l'utilisateur B -->
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Objet Désiré</mat-label>
+        <input matInput formControlName="objet_b" [value]="objetB.titre">
+      </mat-form-field>
+
+      <!-- Image de l'objet désiré de l'utilisateur B -->
+      <div class="image-container">
+        <img [src]="objetB.image_url" alt="Objet Désiré" style="width:305px;height:255px;">
+      </div>
+
+      <!-- Message personnalisé -->
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Message Personnalisé</mat-label>
+        <textarea matInput formControlName="message"></textarea>
+      </mat-form-field>
+
+      <!-- Proposition de date d'échange -->
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Date Proposée pour l'Échange</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date_echange">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+          <span *ngIf="!loading">Soumettre la Demande</span>
+          <span *ngIf="loading">Chargement...</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

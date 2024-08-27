@@ -1,0 +1,41 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-title>Mettre à jour l'échange</mat-card-title><br>
+    <mat-card-content>
+      <form [formGroup]="echangeForm" (ngSubmit)="updateEchange()">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Objet proposé</mat-label>
+          <mat-select formControlName="objet_proposant" required>
+            <mat-option *ngFor="let objet of objetsUser" [value]="objet._id">
+              {{ objet.titre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="echangeForm.get('objet_proposant')?.invalid && echangeForm.get('objet_proposant')?.touched">
+            Veuillez sélectionner un objet proposé.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Objet acceptant</mat-label>
+          <mat-select formControlName="objet_acceptant" required>
+            <mat-option *ngFor="let objet of objetsAll" [value]="objet._id">
+              {{ objet.titre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="echangeForm.get('objet_acceptant')?.invalid && echangeForm.get('objet_acceptant')?.touched">
+            Veuillez sélectionner un objet acceptant.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Statut</mat-label>
+          <input matInput formControlName="statut" >
+        </mat-form-field>
+
+        <div class="button-container">
+          <button type="submit" mat-raised-button color="primary">Mettre à jour l'échange</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

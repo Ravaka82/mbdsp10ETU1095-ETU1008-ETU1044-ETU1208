@@ -1,0 +1,73 @@
+<mat-card *ngIf="objetForm" class="example-card">
+  <mat-card-title>Mise à jour de l'objet</mat-card-title>
+  <mat-card-content class="card-content">
+    <form [formGroup]="objetForm" (ngSubmit)="updateObjet()">
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Utilisateur</mat-label>
+        <mat-select formControlName="utilisateur_id" required>
+          <mat-option *ngFor="let utilisateur of utilisateurs" [value]="utilisateur._id">
+            {{ utilisateur.nom }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Catégorie</mat-label>
+        <mat-select formControlName="categorie_id" required>
+          <mat-option *ngFor="let categorie of categories" [value]="categorie._id">
+            {{ categorie.nom }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Titre</mat-label>
+        <input matInput formControlName="titre" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Statut</mat-label>
+        <mat-select formControlName="statut">
+          <mat-option value="disponible">Disponible</mat-option>
+          <mat-option value="réservé">Réservé</mat-option>
+          <mat-option value="échangé">Échangé</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>État</mat-label>
+        <mat-select formControlName="etat" required>
+          <mat-option value="neuf">Neuf</mat-option>
+          <mat-option value="comme neuf">Comme neuf</mat-option>
+          <mat-option value="utilisé">Utilisé</mat-option>
+          <mat-option value="endommagé">Endommagé</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Valeur estimée</mat-label>
+        <input matInput formControlName="valeur_estimee" type="number" required>
+      </mat-form-field>
+
+      <mat-label>Choisi l'image de l'objet : </mat-label><br><br>
+      <div *ngIf="currentImageUrl">
+        <img [src]="currentImageUrl" alt="Image actuelle" style="max-width:250px; height: 200px;">
+      </div>
+
+      <mat-label>Choisi l'image de l'objet : </mat-label><br><br>
+      <input type="file" (change)="onFileSelected($event)">
+
+      <div class="actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+          <span *ngIf="!loading">Mettre à jour</span>
+          <span *ngIf="loading">Chargement...</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
