@@ -1,5 +1,6 @@
 package com.app.swapsavvy.services
 
+import com.app.swapsavvy.data.Categorie
 import com.app.swapsavvy.data.Echange
 import com.app.swapsavvy.data.EchangeApiResponse
 import com.app.swapsavvy.data.LoginResponse
@@ -8,14 +9,18 @@ import com.app.swapsavvy.data.ObjetResponse
 import com.app.swapsavvy.data.StatutRequest
 import com.app.swapsavvy.data.Utilisateur
 import com.app.swapsavvy.data.UtilisateurIdRequest
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
@@ -97,6 +102,24 @@ interface ApiService {
 
     @DELETE("/api/echanges/{echange_id}")
     fun deleteEchange(@Path("echange_id") echangeId: String): Call<Void>
+
+    @GET("/api/categories")
+    fun getAllCategories(): Call<List<Categorie>>
+
+
+
+    @Multipart
+    @POST("/api/objets")
+    fun createObjet(
+        @Part("utilisateur_id") utilisateurId: RequestBody,
+        @Part("categorie_id") categorieId: RequestBody,
+        @Part("titre") titre: RequestBody,
+        @Part("description") description: RequestBody?,
+        @Part("statut") statut: RequestBody,
+        @Part("etat") etat: RequestBody,
+        @Part("valeur_estimee") valeurEstimee: RequestBody,
+        @Part image: MultipartBody.Part?
+    ): Call<Void>
 }
 
 
