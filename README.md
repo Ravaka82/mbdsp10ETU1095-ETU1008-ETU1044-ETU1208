@@ -1,4 +1,4 @@
-# **🚀 Project Transversale links **
+# **🚀 Project Links**
 
 ## **[📱 Kotlin APK Link](https://drive.google.com/drive/folders/1d5VfzjM66iiLsraKEsI2N7-cRVkivoBk)**
 
@@ -27,3 +27,10 @@ Visitez l'interface front-end Angular déployée en cliquant sur ce lien.
 ## **[📊 Google Sheet](https://docs.google.com/spreadsheets/d/1CwGnhPhaVx4_0yEChsjoSQEtL_3N-q_7CsFtyEDRSgg/edit?usp=sharing)**
 
 Consultez et suivez les détails du projet dans la feuille de calcul Google Sheet.
+
+---
+
+## **📜 Cahier des Charges**
+
+Consultez le cahier des charges du projet à l'adresse suivante :
+[📂 Cahier des Charges](https://drive.google.com/drive/folders/181y_5qBQpvcK-uiAOLqjOPXQF8544lfW)
