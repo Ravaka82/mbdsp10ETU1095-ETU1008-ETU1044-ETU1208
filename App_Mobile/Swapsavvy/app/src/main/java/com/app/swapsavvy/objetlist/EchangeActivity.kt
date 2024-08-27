@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.swapsavvy.R
 import com.app.swapsavvy.data.Echange
 import com.app.swapsavvy.data.Objet
+import com.app.swapsavvy.objetlist.CreateObjectActivity
 import com.app.swapsavvy.services.RetrofitClient
 import com.app.swapsavvy.ui.adapter.EchangeSpinnerAdapter
 import retrofit2.Call
@@ -57,6 +58,8 @@ class EchangeActivity : AppCompatActivity() {
 
         btnCreateObject.setOnClickListener {
             Toast.makeText(this, "Créer Objet clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CreateObjectActivity::class.java)
+            startActivity(intent)
         }
 
         btnObjectList.setOnClickListener {

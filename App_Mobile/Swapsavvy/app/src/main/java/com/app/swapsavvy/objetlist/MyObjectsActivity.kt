@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.swapsavvy.R
 import com.app.swapsavvy.data.Objet
+import com.app.swapsavvy.objetlist.CreateObjectActivity
 import com.app.swapsavvy.services.RetrofitClient
 import com.app.swapsavvy.ui.adapter.MyObjectsAdapter
 import retrofit2.Call
@@ -42,6 +43,8 @@ class MyObjectsActivity : AppCompatActivity() {
 
         btnCreateObject.setOnClickListener {
             Toast.makeText(this, "Créer Objet clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CreateObjectActivity::class.java)
+            startActivity(intent)
         }
 
         btnObjectList.setOnClickListener {

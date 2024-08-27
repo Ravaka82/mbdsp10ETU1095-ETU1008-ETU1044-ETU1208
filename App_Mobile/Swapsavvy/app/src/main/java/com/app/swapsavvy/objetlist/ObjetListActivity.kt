@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.swapsavvy.R
 import com.app.swapsavvy.data.Objet
+import com.app.swapsavvy.login.LoginActivity
+import com.app.swapsavvy.objetlist.CreateObjectActivity
+import com.app.swapsavvy.services.AuthService
 import retrofit2.Callback
 import retrofit2.Response
 import com.app.swapsavvy.services.RetrofitClient
@@ -45,6 +48,11 @@ class ObjetListActivity : AppCompatActivity() {
 
         fetchObjectsFromApi()
 
+        val logoutButton: Button = findViewById(R.id.btnLogout)
+        logoutButton.setOnClickListener {
+            logout()
+        }
+
         val btnMyObjects: Button = findViewById(R.id.btnMyObjects)
         val btnCreateObject: Button = findViewById(R.id.btnCreateObject)
         val btnObjectList: Button = findViewById(R.id.btnObjectList)
@@ -61,6 +69,8 @@ class ObjetListActivity : AppCompatActivity() {
 
         btnCreateObject.setOnClickListener {
             Toast.makeText(this, "Créer Objet clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CreateObjectActivity::class.java)
+            startActivity(intent)
         }
 
         btnObjectList.setOnClickListener {
@@ -92,6 +102,14 @@ class ObjetListActivity : AppCompatActivity() {
             val intent = Intent(this, HistoriqueEchangeActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun logout() {
+        AuthService.logout(this)
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun fetchObjectsFromApi() {
