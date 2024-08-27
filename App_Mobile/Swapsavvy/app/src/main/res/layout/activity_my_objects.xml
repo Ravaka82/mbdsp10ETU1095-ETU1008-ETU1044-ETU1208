@@ -21,8 +21,8 @@
 
     <LinearLayout
         android:id="@+id/menuLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -30,29 +30,29 @@
 
         <Button
             android:id="@+id/btnMyObjects"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="128dp"
+            android:layout_height="60dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Mes Objets" />
+            android:text="Mes Objets"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnCreateObject"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="106dp"
+            android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Créer Objet" />
+            android:text="Créer Objet"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnObjectList"
-            android:layout_width="138dp"
-            android:layout_height="38dp"
+            android:layout_width="137dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Objets autres" />
+            android:text="Objets autres"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
@@ -67,51 +67,66 @@
 
         <Button
             android:id="@+id/btnObjectEchange"
-            android:layout_width="wrap_content"
+            android:layout_width="152dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Echanger" />
+            android:text="Echanger"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnListEchangeSouhait"
-            android:layout_width="wrap_content"
+            android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Souhaités" />
+            android:text="Souhaités"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnListEchangePropose"
-            android:layout_width="wrap_content"
+            android:layout_width="107dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Proposés" />
+            android:text="Proposés"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
+    <!-- Bouton de déconnexion -->
     <LinearLayout
         android:id="@+id/menuLayout3"
         android:layout_width="387dp"
-        android:layout_height="39dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="4dp"
-        android:layout_marginBottom="16dp">
+        android:paddingBottom="4dp">
 
         <Button
             android:id="@+id/btnHistoriqueEchange"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
+            android:layout_width="215dp"
+            android:layout_height="62dp"
             android:layout_marginStart="16dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Historiques des échanges" />
+            android:text="Historiques des échanges"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/purple_200"
+        android:padding="12dp"
+        android:text="Déconnexion"
+        style="@style/CustomButtonStyle"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMyObjects"

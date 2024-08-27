@@ -4,34 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/titreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_gravity="center"
         tools:text="Titre de l'objet" />
 
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
+        android:layout_gravity="center"
         tools:text="Description de l'objet" />
 
     <TextView
         android:id="@+id/statutTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="@android:color/black"
+        android:layout_gravity="center"
         android:textSize="14sp"
         tools:text="Statut" />
 
@@ -39,8 +42,9 @@
         android:id="@+id/valeurEstimeeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="@android:color/black"
+        android:layout_gravity="center"
         android:textSize="14sp"
         tools:text="Valeur estimée" />
 
@@ -48,8 +52,9 @@
         android:id="@+id/proprietaireTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="@android:color/black"
+        android:layout_gravity="center"
         android:textSize="14sp"
         tools:text="Propriétaire: Nom de l'utilisateur" />
 
@@ -57,18 +62,22 @@
         android:id="@+id/etatTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="@android:color/black"
+        android:layout_gravity="center"
         android:textSize="14sp"
+        android:layout_marginBottom="16dp"
         tools:text="État: Utilisé" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/objet_image"
         android:scaleType="centerCrop"
+        android:layout_gravity="center"
         android:src="@drawable/default_image"
+        android:layout_marginTop="8dp"
         tools:src="@tools:sample/avatars" />
 
 </LinearLayout>

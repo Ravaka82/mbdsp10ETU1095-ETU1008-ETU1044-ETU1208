@@ -109,6 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
+            android:layout_gravity="center"
             android:contentDescription="@string/objet_image"
             android:layout_marginTop="8dp"/>
 

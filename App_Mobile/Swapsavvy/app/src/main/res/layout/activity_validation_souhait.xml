@@ -29,29 +29,29 @@
 
         <Button
             android:id="@+id/btnMyObjects"
-            android:layout_width="wrap_content"
+            android:layout_width="116dp"
             android:layout_height="wrap_content"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Mes Objets" />
+            android:text="Mes Objets"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnCreateObject"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Créer Objet" />
+            android:text="Créer Objet"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnObjectList"
-            android:layout_width="wrap_content"
+            android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Objets autres" />
+            android:text="Objets autres"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
@@ -65,30 +65,30 @@
 
         <Button
             android:id="@+id/btnObjectEchange"
-            android:layout_width="wrap_content"
+            android:layout_width="136dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Échanger" />
+            android:text="Échanger"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnListEchangeSouhait"
-            android:layout_width="wrap_content"
+            android:layout_width="117dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Souhaités" />
+            android:text="Souhaités"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnListEchangePropose"
-            android:layout_width="wrap_content"
+            android:layout_width="103dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Proposés" />
+            android:text="Proposés"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -101,11 +101,11 @@
 
         <Button
             android:id="@+id/btnHistoriqueEchange"
-            android:layout_width="wrap_content"
+            android:layout_width="236dp"
             android:layout_height="wrap_content"
             android:background="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:text="Historiques des échanges" />
+            android:text="Historiques des échanges"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
