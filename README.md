@@ -37,7 +37,7 @@ Consultez le cahier des charges du projet à l'adresse suivante :
 
 ---
 
-## ** Rapport TPT**
+## **📜 Rapport TPT**
 Consultez le rapport TPT à l'adresse suivante :
 [📂 Rapport TPT](https://drive.google.com/file/d/19iy4JD7LeNrNP5t2rV_JR1fzztjeLqWY/view?usp=drive_link)
 
