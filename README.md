@@ -34,3 +34,9 @@ Consultez et suivez les détails du projet dans la feuille de calcul Google Shee
 
 Consultez le cahier des charges du projet à l'adresse suivante :
 [📂 Cahier des Charges](https://drive.google.com/file/d/1uZ3fHYNpw00_3dp9-CmayFHyH_MXZRUC/view?usp=sharing)
+
+
+## ** Rapport TPT**
+Consultez le rapport TPT à l'adresse suivante :
+[📂 Rapport TPT](https://drive.google.com/file/d/19iy4JD7LeNrNP5t2rV_JR1fzztjeLqWY/view?usp=drive_link)
+
