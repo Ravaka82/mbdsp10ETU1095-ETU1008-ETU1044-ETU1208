@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + "FrontAngular_SwapSavvy/SwapSavvy/dist/swap-savvy/browser"));
+app.use(express.static(path.join(__dirname, "FrontAngular_SwapSavvy/SwapSavvy/dist/swap-savvy/browser")));
 
 app.get("/*", function (req, res) {
  res.sendFile(path.join(__dirname + "FrontAngular_SwapSavvy/SwapSavvy/dist/swap-savvy/browser/index.html"));
