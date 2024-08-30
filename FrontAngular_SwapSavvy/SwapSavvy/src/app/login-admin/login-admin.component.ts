@@ -21,8 +21,8 @@ export class LoginAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      mot_de_passe: ['', Validators.required]
+      email: ['admin@gmail.com', [Validators.required, Validators.email]],
+      mot_de_passe: ['123', Validators.required]
     });
   }
 
