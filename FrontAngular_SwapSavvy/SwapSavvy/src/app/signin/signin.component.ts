@@ -24,8 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './signin.component.css'
 })
 export class SigninComponent {
-  email: string ='';
-  mot_de_passe: string='';
+  email: string ='utilisateur@gmail.com';
+  mot_de_passe: string='123';
   error: any='';
 
   constructor(private loginServ:AuthService,private router:Router) {}
