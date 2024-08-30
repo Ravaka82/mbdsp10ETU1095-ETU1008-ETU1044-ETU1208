@@ -20,7 +20,6 @@ import { AcceuilAdminComponent } from './acceuil-admin/acceuil-admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
-  { path: '**', redirectTo: '' },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'create', component: ObjetCreateComponent },
