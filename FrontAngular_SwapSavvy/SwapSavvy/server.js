@@ -11,4 +11,7 @@ app.get("/*", function (req, res) {
  res.sendFile(path.join(__dirname + "FrontAngular_SwapSavvy/SwapSavvy/dist/swap-savvy/browser/index.html"));
 });
 // Start the app by listening on the default Heroku/Render port
-app.listen(process.env.PORT || 8081);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
