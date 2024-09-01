@@ -10,8 +10,6 @@ const SettingScreen = () => {
   const { isLoggedIn, logout, token } = useContext(AuthContext);
   const [user, setUser] = useState(null);
 
-  const { width: screenWidth } = Dimensions.get('window');
-
   const api_url = process.env.EXPO_PUBLIC_API_URL;
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const SettingScreen = () => {
       .catch(error => {
         console.error('Error fetching data:', error.message);
       });
-    }, []);
+    }, [token]);
 
   return (
     <>
