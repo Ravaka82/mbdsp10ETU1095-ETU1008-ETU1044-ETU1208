@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Dimensions, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Dimensions, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useForm, Controller, set } from 'react-hook-form';
 import { AuthContext } from './../../context/AuthContext';
 import { Text, Input, CheckBox, Button } from '@rneui/themed';
 import { Picker } from '@react-native-picker/picker';
+import * as ImagePicker from 'expo-image-picker';
 
 import axios from 'axios';
 
@@ -13,12 +14,35 @@ const AddObjectScreen = ({ navigation }) => {
   const [isNew, setIsNew] = useState(true);
   const [categories, setCategories] = useState([]);
   // const [selectedValue, setSelectedValue] = useState('');
+  const [image, setImage] = useState(null);
 
   const { isLoggedIn, logout, token } = useContext(AuthContext);
 
   const api_url = process.env.EXPO_PUBLIC_API_URL;
 
   const { control, handleSubmit, formState: { errors } } = useForm();
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result.assets[0].uri.split('/').pop());
+    setImage(result.assets[0]);
+    // formData.append('file', {
+    //   uri: result.assets[0].uri,
+    //   type: result.assets[0].mimeType,
+    //   name: result.assets[0].uri.split('/').pop(),
+    // });
+
+    if (!result.canceled) {
+      setImage(result.assets[0]);
+    }
+  };
 
   const onSubmit = data => {
     // console.log(data);
@@ -27,14 +51,37 @@ const AddObjectScreen = ({ navigation }) => {
         'Authorization': 'Bearer ' + token,
       }})
       .then(response => {
-        axios.post(api_url+'/objets', {
-          "utilisateur_id": response.data._id,
-          "titre": data.titre,
-          "description": data.description,
-          "valeur_estimee": data.valeur_estimee,
-          "etat": isNew ? 'neuf' : 'comme neuf',
-          "categorie_id": data.categorie,
-          "statut": "disponible",
+
+        const formData = new FormData();
+
+        formData.append('utilisateur_id', response.data._id);
+        formData.append('titre', data.titre);
+        formData.append('description', data.description);
+        formData.append('valeur_estimee', data.valeur_estimee);
+        formData.append('etat', isNew ? 'neuf' : 'comme neuf');
+        formData.append('categorie_id', data.categorie);
+        formData.append('statut', 'disponible');
+
+        console.log(image.uri.split('/').pop());
+
+        formData.append('image', {
+          uri: image.uri,
+          type: image.mimeType,
+          name: image.uri.split('/').pop(),
+        });
+
+        // axios.post(api_url+'/objets', {
+        //   "utilisateur_id": response.data._id,
+        //   "titre": data.titre,
+        //   "description": data.description,
+        //   "valeur_estimee": data.valeur_estimee,
+        //   "etat": isNew ? 'neuf' : 'comme neuf',
+        //   "categorie_id": data.categorie,
+        //   "statut": "disponible",
+        // })
+        axios.post(api_url+'/objets', formData, {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + token,
         })
         .then(response => {
           // console.log(response.data);
@@ -150,6 +197,18 @@ const AddObjectScreen = ({ navigation }) => {
                       <Text>Neuf</Text>
                     </View>
 
+                    <Button title="Choisir une image" onPress={pickImage} />
+                    <View style={{ 
+                      alignItems: 'center',
+                      marginVertical: 10,
+                    }}>
+                      {image ? 
+                          <Image source={{ uri: image.uri }} style={styles.image} />
+                          :
+                          <Image source='https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg' style={styles.image} />
+                      }
+                    </View>
+
                     <Controller
                         control={control}
                         rules={{
@@ -207,6 +266,10 @@ const styles = StyleSheet.create({
     marginStart: 10,
     marginTop: 20,
     fontWeight: '300',
+  },
+  image: {
+    width: 200,
+    height: 200,
   },
 });
 
